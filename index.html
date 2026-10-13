@@ -333,6 +333,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-of
 textarea{resize:vertical;min-height:84px}
 .form-note{font-size:.85rem;color:var(--ink-3)}
 .err{color:var(--myth);font-size:.88rem}
+[hidden]{display:none !important}
 .done-box{display:grid;gap:12px}
 .done-box pre{white-space:pre-wrap;word-break:break-word;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px;font:400 .82rem/1.55 var(--f-mono);margin:0;max-height:240px;overflow:auto}
 
@@ -836,8 +837,11 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         </div>
       </div>
 
-      <!-- Form currently opens a pre-filled email to hello@. Replace with Zoho CRM Web-to-Lead once Zoho CRM is set up. -->
-      <form id="lead" novalidate>
+      <!-- Submissions post to a Google Apps Script web app owned by hello@finomenahq.com, which appends to the "Finomena – Website leads" sheet and emails hello@. -->
+      <iframe name="leadSink" title="Form submission" hidden style="display:none"></iframe>
+      <form id="lead" novalidate method="POST" action="https://script.google.com/macros/s/AKfycbzRrAgOYB0xyQOpfJu2RwUmQ6SvkYsQ_iEhGLN_0om9ZUhlOjLKwSw03gVjKDtN3tA/exec" target="leadSink">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <input type="hidden" name="page" id="f-page">
         <div id="formFields" style="display:grid;gap:14px">
           <div class="row">
             <label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required></label>
@@ -861,13 +865,13 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
           <p class="form-note">We reply within one working day.</p>
         </div>
         <div class="done-box" id="doneBox" hidden>
-          <h3>Almost done: send it to us</h3>
-          <p class="form-note">Click <b>Send by email</b> to open your email app with these details filled in, or copy them to <b>hello@finomenahq.com</b>. We'll come back with walkthrough slots.</p>
+          <h3>Thanks, we've got your request</h3>
+          <p class="form-note">We'll reply within one working day with walkthrough slots. Here's what you sent. If you don't hear from us, email it to <a href="mailto:hello@finomenahq.com">hello@finomenahq.com</a>.</p>
           <pre id="summary"></pre>
           <div class="btn-row">
-            <a class="btn btn-primary" id="mailSum" href="#">Send by email →</a>
+            <a class="btn btn-ghost" id="mailSum" href="#">Email it instead</a>
             <button class="btn btn-ghost" type="button" id="copySum">Copy details</button>
-            <button class="btn btn-ghost" type="button" id="editAgain">Edit</button>
+            <button class="btn btn-ghost" type="button" id="editAgain">Send another</button>
           </div>
         </div>
       </form>
@@ -1077,10 +1081,12 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     err.hidden=true;
     sum.textContent=`Walkthrough request\nName: ${d.name}\nEmail: ${d.email}\nCompany: ${d.company}\nInterested in: ${d.interest}\nDocuments / month: ${d.volume}\nERP: ${d.erp}\nNotes: ${d.message||'-'}`;
     document.getElementById('mailSum').href='mailto:hello@finomenahq.com?subject='+encodeURIComponent('Walkthrough request: '+d.company)+'&body='+encodeURIComponent(sum.textContent);
+    document.getElementById('f-page').value=location.href;
+    try{form.submit();}catch(x){}
     fields.hidden=true;done.hidden=false;
   });
   document.getElementById('copySum').addEventListener('click',e=>copy(sum.textContent,e.currentTarget));
-  document.getElementById('editAgain').addEventListener('click',()=>{done.hidden=true;fields.hidden=false;});
+  document.getElementById('editAgain').addEventListener('click',()=>{form.reset();done.hidden=true;fields.hidden=false;});
 })();
 </script>
 </body>
