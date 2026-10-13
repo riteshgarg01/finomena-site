@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Finomena</title>
+<meta name="description" content="Finomena builds AI products that run finance operations: accounts payable today, with compliance, reconciliation, receivables and close on the way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Snow white theme only. Layout: multi-page site in one file (hash routes), 1120px column; teal ledger-ink + amber "posted" accent. */
+:root{
+  color-scheme:light;
+  --bg:#fffafa; --surface:#fffafa; --sunk:#fffafa; --line:#ece4e4;
+  --ink:#0d2326; --ink-2:#3e5559; --ink-3:#6b7f82;
+  --teal:#0f7f82; --teal-deep:#0c4a50; --teal-wash:#e3f2f1;
+  --amber:#c97f1a; --amber-ink:#2a1700; --amber-wash:#fbecd6;
+  --ok:#1f8a5b; --myth:#b8402c;
+  --panel-a:#0f5258; --panel-b:#0a2a2e; --panel-ink:#e6f2f1; --panel-ink-2:#9cc3c2; --panel-hl:#f3b14a;
+  --shadow:0 1px 2px rgba(13,35,38,.06),0 12px 32px -12px rgba(13,35,38,.18);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--f-display);color:var(--ink);margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(2.5rem,6vw,4.4rem);font-weight:800;line-height:1.02}
+h2{font-size:clamp(1.85rem,3.4vw,2.6rem);font-weight:800;line-height:1.08}
+h3{font-size:1.15rem;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:500}
+.lede{color:var(--ink-2);font-size:1.15rem;max-width:60ch}
+.amber{color:var(--amber)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:6px}
+section{padding-block:clamp(60px,8vw,104px)}
+.sec-head{display:grid;gap:16px;margin-bottom:44px;max-width:760px}
+.tint{background:var(--sunk);border-block:1px solid var(--line)}
+.ph{display:inline-block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);border:1px dashed var(--amber);border-radius:6px;padding:1px 6px;vertical-align:middle}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem var(--f-body);padding:13px 24px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s,border-color .15s,color .15s}
+.btn-primary{background:var(--amber);color:var(--amber-ink);box-shadow:0 8px 22px -8px color-mix(in srgb,var(--amber) 70%,transparent)}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+.link{color:var(--teal);font-weight:600;text-decoration:none}
+.link:hover{text-decoration:underline}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em}
+.brand svg{flex:none}
+.nav-links{display:flex;gap:26px;font-size:.95rem;color:var(--ink-2)}
+.nav-links a{text-decoration:none;padding-block:4px;border-bottom:2px solid transparent}
+.nav-links a:hover{color:var(--teal)}
+.nav-links a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--amber)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav .btn{padding:9px 18px;font-size:.92rem}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:42px;height:40px;color:var(--ink);cursor:pointer;place-items:center}
+@media (max-width:900px){
+  .menu-btn{display:grid}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px clamp(16px,4vw,40px) 16px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .nav-links a[aria-current="page"]{border-bottom-color:var(--line);color:var(--teal)}
+  .nav .btn{display:none}
+}
+
+/* page hero (sub pages) */
+.page-hero{padding-block:clamp(48px,7vw,88px) clamp(36px,5vw,56px)}
+.page-hero .wrap{display:grid;gap:20px}
+.page-hero h1{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch}
+.crumbs{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-3)}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{color:var(--teal)}
+
+/* home hero */
+.hero{padding-block:clamp(48px,7vw,88px) clamp(56px,8vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.hero h1 .amber{display:block}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-2);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;display:inline-flex;align-items:center;gap:8px}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+
+.board{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.board-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.board-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);text-decoration:none}
+.board-row:last-of-type{border-bottom:0}
+.board-row:hover{background:var(--sunk)}
+.board-row .ico{width:36px;height:36px}
+.board-row b{font-family:var(--f-display);font-weight:700;font-size:1rem;display:block;line-height:1.2}
+.board-row small{color:var(--ink-3);font-size:.86rem;display:block}
+.board-row div{min-width:0}
+.board-foot{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));color:var(--panel-ink-2);font-family:var(--f-mono);font-size:.74rem;padding:14px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.board-foot b{color:var(--panel-ink);font-weight:500}
+
+.status{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 10px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.status.live{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.status.live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.6s infinite}
+.status.soon{color:var(--ink-3);border:1px dashed var(--line)}
+@keyframes blink{50%{opacity:.3}}
+
+/* icons */
+.ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--teal-wash);color:var(--teal);flex:none}
+.ico.warm{background:var(--amber-wash);color:var(--amber)}
+.ico.mute{background:var(--sunk);color:var(--ink-3)}
+
+/* solution cards */
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.sol-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.sol-grid{grid-template-columns:1fr}}
+.sol{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;gap:14px;grid-template-rows:auto auto 1fr auto;min-width:0}
+.sol-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sol p{color:var(--ink-2);font-size:.98rem}
+.sol ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.93rem;color:var(--ink-2)}
+.sol li{display:flex;gap:8px}
+.sol li::before{content:"·";color:var(--teal);font-weight:800}
+.sol .tag{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.sol.featured{grid-column:1/-1;grid-template-columns:1.2fr 1fr;grid-template-rows:auto;gap:32px;background:linear-gradient(150deg,var(--panel-a),var(--panel-b));border:0;color:var(--panel-ink);padding:clamp(24px,4vw,40px)}
+.sol.featured h3{color:#fff;font-size:clamp(1.5rem,2.6vw,2rem)}
+.sol.featured p{color:var(--panel-ink-2);font-size:1.05rem}
+.sol.featured .tag{color:var(--panel-hl)}
+.sol.featured .status.live{color:#5fd59d;background:rgba(95,213,157,.12)}
+.sol.featured .ico{background:rgba(255,255,255,.1);color:var(--panel-hl)}
+.sol.featured .copy{display:grid;gap:16px;align-content:start;min-width:0}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.12);border-radius:14px;overflow:hidden;align-self:center}
+.mini-stats div{background:rgba(5,25,28,.55);padding:18px;display:grid;gap:4px}
+.mini-stats b{font-family:var(--f-display);font-size:1.8rem;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.mini-stats span{font-size:.88rem;color:var(--panel-ink-2)}
+@media (max-width:760px){.sol.featured{grid-template-columns:1fr}}
+.sol.suggest{border:1.5px dashed var(--line);background:transparent;align-content:start}
+.sol .btn{padding:10px 18px;font-size:.92rem;justify-self:start}
+
+/* principles */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+@media (max-width:900px){.principles{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.principles{grid-template-columns:1fr}}
+.principle{background:var(--surface);padding:26px;display:grid;gap:10px;align-content:start}
+.principle p{color:var(--ink-2);font-size:.97rem}
+
+/* platform flow */
+.flow{display:grid;grid-template-columns:1fr auto 1.3fr auto 1fr;gap:18px;align-items:center}
+.col{display:grid;gap:10px;min-width:0}
+.col .eyebrow{color:var(--ink-3);margin-bottom:4px}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-weight:600;font-size:.97rem;display:flex;gap:10px;align-items:center}
+.node::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);flex:none}
+.col.out .node::before{background:var(--ok)}
+.col.out .node.exc::before{background:var(--amber)}
+.arrow{color:var(--ink-3);font-size:1.4rem;text-align:center}
+.engine{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));color:var(--panel-ink);border-radius:18px;padding:30px 24px;text-align:center;display:grid;gap:12px;box-shadow:var(--shadow)}
+.engine .ai{width:52px;height:52px;margin:0 auto;border-radius:50%;border:2px dashed rgba(255,255,255,.35);display:grid;place-items:center;font-family:var(--f-mono);font-weight:500;animation:spin 14s linear infinite}
+.engine .ai span{animation:spin 14s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.engine strong{font-family:var(--f-display);font-size:1.25rem;line-height:1.3}
+.engine small{font-family:var(--f-mono);font-size:.74rem;color:var(--panel-ink-2)}
+@media (max-width:900px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+
+/* India strip */
+.india{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+@media (max-width:860px){.india{grid-template-columns:1fr}}
+.terms{display:flex;flex-wrap:wrap;gap:10px}
+.term{font-family:var(--f-mono);font-size:.86rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.term b{color:var(--teal);font-weight:500}
+
+/* AP pipeline */
+.pipeline{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:20px 20px 12px;min-width:0}
+.pipe-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.live-dot{color:var(--ok);display:flex;align-items:center;gap:6px;letter-spacing:.04em;text-transform:none}
+.live-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);animation:blink 1.6s infinite}
+.pipeline svg{width:100%;height:auto;display:block}
+.pipeline svg text{font-family:var(--f-mono)}
+.pipe-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px dashed var(--line);margin-top:6px;padding-top:12px;font-family:var(--f-mono);font-size:.76rem;color:var(--ink-3)}
+.pipe-foot b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+.stat{padding:28px 26px;display:grid;gap:6px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat .n{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,3.4vw,2.8rem);line-height:1;color:var(--teal-deep);font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.stat p{color:var(--ink-2);font-size:.98rem}
+.fine{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-3);margin-top:14px}
+@media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:440px){.stats{grid-template-columns:1fr}.stat{border-left:0;border-top:1px solid var(--line)}.stat:first-child{border-top:0}}
+
+/* diagnostic */
+.diag-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+@media (max-width:900px){.diag-grid{grid-template-columns:1fr}}
+.checks{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.check{display:flex;gap:14px;align-items:flex-start;padding:15px 18px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;transition:border-color .15s,background .15s}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.box{flex:none;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--ink-3);display:grid;place-items:center;margin-top:2px;transition:all .15s}
+.box svg{opacity:0;transition:opacity .15s}
+.check .num{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-3);margin-top:4px;font-variant-numeric:tabular-nums}
+.check span.t{min-width:0}
+.check:has(input:checked){border-color:var(--teal);background:var(--teal-wash)}
+.check:has(input:checked) .box{background:var(--teal);border-color:var(--teal)}
+.check:has(input:checked) .box svg{opacity:1}
+.check:has(input:focus-visible){outline:2px solid var(--amber);outline-offset:2px}
+.score{position:sticky;top:96px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow);display:grid;gap:16px}
+.score .big{font-family:var(--f-display);font-weight:800;font-size:4.4rem;line-height:.9;color:var(--amber);font-variant-numeric:tabular-nums}
+.score .big small{font-family:var(--f-mono);font-size:1.2rem;color:var(--ink-3);font-weight:400;margin-left:6px}
+.meter{height:10px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.meter i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .35s ease}
+.verdict{color:var(--ink-2);min-height:4.8em}
+.verdict b{color:var(--ink)}
+
+/* myths */
+.myths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.myths{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.myths{grid-template-columns:1fr}}
+.myth{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--surface);display:grid;gap:12px;align-content:start}
+.myth .lbl{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;color:var(--myth)}
+.myth q{font-family:var(--f-display);font-weight:700;font-size:1.08rem;color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--myth);text-decoration-thickness:2px}
+.myth p{color:var(--ink-2);font-size:.98rem}
+.myth p b{color:var(--teal);font-family:var(--f-display)}
+
+/* rules console */
+.how-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+@media (max-width:900px){.how-grid{grid-template-columns:1fr}}
+.console{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));color:var(--panel-ink);border-radius:20px;padding:24px;box-shadow:var(--shadow);display:grid;gap:18px;min-width:0}
+.console-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:500 .74rem var(--f-mono);color:var(--panel-ink-2);background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 12px;cursor:pointer}
+.tab[aria-selected="true"]{background:rgba(255,255,255,.12);color:var(--panel-ink);border-color:rgba(255,255,255,.3)}
+.compiled{font-family:var(--f-mono);font-size:.72rem;color:#5fd59d;display:flex;align-items:center;gap:6px}
+.compiled::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.rule{font-family:var(--f-mono);font-size:.95rem;line-height:1.75;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;min-height:9.5em}
+.rule em{font-style:normal;color:var(--panel-hl)}
+.caret{display:inline-block;width:.55em;height:1.1em;background:var(--panel-hl);vertical-align:-.2em;margin-left:2px;animation:blink 1s steps(1) infinite}
+.chips{display:flex;flex-wrap:wrap;gap:8px;min-height:34px}
+.chip{font-family:var(--f-mono);font-size:.76rem;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--panel-ink)}
+.chip.done{color:#5fd59d}
+.console-foot{font-size:.95rem;color:var(--panel-ink-2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.replay{font:500 .76rem var(--f-mono);background:none;border:0;color:var(--panel-hl);cursor:pointer;padding:4px 0}
+
+/* features */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:56px}
+@media (max-width:900px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.feat-grid{grid-template-columns:1fr}}
+.feat{background:var(--surface);padding:26px;display:grid;gap:10px;align-content:start}
+.feat p{color:var(--ink-2);font-size:.97rem}
+
+/* outcomes */
+.outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px 40px}
+.out{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.out div{display:grid;gap:6px;min-width:0}
+.out p{color:var(--ink-2);font-size:.98rem}
+
+/* about */
+.split{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr;gap:28px}}
+.prose{display:grid;gap:18px;color:var(--ink-2);font-size:1.08rem;max-width:62ch}
+.prose strong{color:var(--ink)}
+.mission{font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;letter-spacing:-.02em;color:var(--ink);max-width:24ch;text-wrap:balance}
+.mission span{color:var(--amber)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start}
+.step .k{font-family:var(--f-mono);font-size:.78rem;color:var(--amber)}
+.step p{color:var(--ink-2);font-size:.97rem}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}}
+.facts div{background:var(--surface);padding:20px;display:grid;gap:4px}
+.facts span{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.facts b{font-family:var(--f-display);font-size:1.1rem}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.team{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.team{grid-template-columns:1fr}}
+.person{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start}
+.avatar{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--teal-wash);color:var(--teal);font-family:var(--f-display);font-weight:800;font-size:1.4rem;border:2px dashed color-mix(in srgb,var(--teal) 40%,transparent)}
+.person .role{font-family:var(--f-mono);font-size:.76rem;color:var(--amber);letter-spacing:.04em}
+.person p{color:var(--ink-2);font-size:.95rem}
+.person .li{font-size:.88rem;color:var(--ink-3)}
+.person.small{grid-template-columns:auto 1fr;align-items:center;gap:16px}
+.person.small .avatar{width:52px;height:52px;font-size:1rem}
+.person.small div{display:grid;gap:2px;min-width:0}
+.mix{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:760px){.mix{grid-template-columns:1fr}}
+.mix div{border-top:2px solid var(--teal);padding-top:16px;display:grid;gap:8px}
+.mix p{color:var(--ink-2);font-size:.97rem}
+
+/* CTA band + form */
+.cta{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));border-radius:28px;color:var(--panel-ink);padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.3fr auto;gap:32px;align-items:center;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--panel-hl) 22%,transparent),transparent 70%);pointer-events:none}
+.cta > *{position:relative;z-index:1}
+.cta h2{color:#fff}
+.cta .eyebrow{color:var(--panel-hl)}
+.cta .lede{color:var(--panel-ink-2)}
+.cta .copy{display:grid;gap:14px}
+.cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
+.cta .btn-ghost:hover{border-color:#fff;color:#fff}
+@media (max-width:860px){.cta{grid-template-columns:1fr}}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.contact-info{display:grid;gap:22px}
+.contact-info ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:var(--ink-2)}
+.contact-info li{display:flex;gap:10px}
+.contact-info li::before{content:"✓";color:var(--ok);font-weight:700}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
+.info-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.9rem}
+.info-line span:first-child{font-family:var(--f-body);font-size:.85rem;color:var(--ink-3);min-width:72px}
+.copy-btn{font:500 .72rem var(--f-mono);background:var(--sunk);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:4px 10px;cursor:pointer}
+form{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink);border-radius:20px;padding:26px;display:grid;gap:14px;min-width:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:.88rem;font-weight:600;color:var(--ink-2)}
+input,select,textarea{font:400 1rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-offset:0;border-color:transparent}
+textarea{resize:vertical;min-height:84px}
+.form-note{font-size:.85rem;color:var(--ink-3)}
+.err{color:var(--myth);font-size:.88rem}
+.done-box{display:grid;gap:12px}
+.done-box pre{white-space:pre-wrap;word-break:break-word;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px;font:400 .82rem/1.55 var(--f-mono);margin:0;max-height:240px;overflow:auto}
+
+footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp(60px,8vw,104px)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+@media (max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-grid h4{margin:0 0 12px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.95rem}
+.foot-grid a{text-decoration:none;color:var(--ink-2)}
+.foot-grid a:hover{color:var(--teal)}
+.foot-grid p{color:var(--ink-3);font-size:.95rem;max-width:32ch;margin-top:12px}
+.foot-base{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:36px;padding-top:20px;color:var(--ink-3);font-size:.88rem}
+
+[data-page]{animation:fade .35s ease}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Finomena home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="3" width="17" height="23" rx="3.5" fill="var(--teal-deep)"/><rect x="9" y="9" width="9" height="2" rx="1" fill="var(--bg)"/><rect x="9" y="14" width="9" height="2" rx="1" fill="var(--bg)"/><rect x="9" y="19" width="5" height="2" rx="1" fill="var(--bg)"/><circle cx="22.5" cy="23.5" r="6.5" fill="var(--amber)"/><path d="M19.6 23.6l2 2 3.8-4" stroke="var(--amber-ink)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Finomena
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#solutions" data-nav="solutions">Solutions</a>
+      <a href="#about-us" data-nav="about-us">About us</a>
+      <a href="#who-we-are" data-nav="who-we-are">Who we are</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="#contact">Book a walkthrough</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ HOME ============ -->
+<div data-page="home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">AI for finance operations</span>
+        <h1>Your finance back office, <span class="amber">running on its own.</span></h1>
+        <p class="lede">Finomena builds AI products that take over the repetitive work in finance operations: reading documents, matching, posting, reconciling and chasing. You set the rules in plain English. Your team keeps the judgment calls.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#solutions">Explore solutions →</a>
+          <a class="btn btn-ghost" href="#contact">Book a walkthrough</a>
+        </div>
+        <div class="pills">
+          <span class="pill">Configured in plain English</span>
+          <span class="pill">Live in weeks</span>
+          <span class="pill">Built for Indian finance</span>
+        </div>
+      </div>
+      <div class="board" aria-label="Finomena solutions and their status">
+        <div class="board-head"><span>Finomena solutions</span><span id="liveCount"></span></div>
+        <div id="boardRows"></div>
+        <div class="board-foot"><span><b>One engine</b> across every solution</span><span>rules · memory · exceptions</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Solutions</span>
+        <h2>One platform, a growing set of finance products.</h2>
+        <p class="lede">We start with accounts payable, the most manual process in most finance teams. Each new solution runs on the same engine, so whatever you configure once carries over.</p>
+      </div>
+      <div class="sol-grid" id="homeSolutions"></div>
+      <p style="margin-top:28px"><a class="link" href="#solutions">See all solutions →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The Finomena engine</span>
+        <h2>Every solution works the same way.</h2>
+        <p class="lede">Documents arrive wherever your vendors and teams send them. The engine reads, decides and posts. Only real exceptions reach a person.</p>
+      </div>
+      <div class="principles">
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><h3>Plain-English rules</h3><p>Write a rule the way you'd explain it to a new joiner. It goes live in minutes, with no developer.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 3v18"/></svg></span><h3>Organisational memory</h3><p>Every decision is remembered, so the system gets faster and cleaner each month.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h4l3-7 4 14 3-7h2"/></svg></span><h3>You set the comfort level</h3><p>Go fully touchless or keep people on chosen steps. Move the dial as trust builds.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 7H6a4 4 0 000 8h3M15 7h3a4 4 0 010 8h-3M8 11h8"/></svg></span><h3>Plugs into anything</h3><p>Email, WhatsApp, vendor portals, SAP and other ERPs, chosen by configuration instead of API projects.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="flow">
+        <div class="col">
+          <span class="eyebrow">Receive</span>
+          <div class="node">Email inbox</div>
+          <div class="node">WhatsApp</div>
+          <div class="node">Vendor portal / EDI</div>
+          <div class="node">ERP &amp; shared drives</div>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="engine">
+          <div class="ai"><span>AI</span></div>
+          <strong>Read · Classify · Validate · Match · Route · Post</strong>
+          <small>plain-English rules · org memory · exception flows</small>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="col out">
+          <span class="eyebrow">Post &amp; notify</span>
+          <div class="node">SAP / ERP entries</div>
+          <div class="node">GST &amp; TDS data</div>
+          <div class="node">Vendor &amp; team alerts</div>
+          <div class="node exc">Exceptions to your team</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap india">
+      <div class="sec-head" style="margin:0">
+        <span class="eyebrow">Built for Indian finance</span>
+        <h2>Speaks the language of your books.</h2>
+        <p class="lede">Finomena is designed around how finance actually runs in India, from GST matching to MSME payment deadlines.</p>
+      </div>
+      <div class="terms">
+        <span class="term"><b>GSTR</b> 2A / 2B matching</span>
+        <span class="term"><b>TDS</b> returns-ready data</span>
+        <span class="term"><b>MSME</b> 45-day payment tracking</span>
+        <span class="term"><b>E-way bills</b> &amp; delivery challans</span>
+        <span class="term"><b>GSTIN</b> &amp; PAN validation</span>
+        <span class="term"><b>₹</b> lakh / crore formatting</span>
+        <span class="term"><b>WhatsApp</b> vendor bills</span>
+        <span class="term"><b>SAP</b> &amp; Tally posting</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta">
+      <div class="copy">
+        <span class="eyebrow">Ready when you are</span>
+        <h2>See your own documents run through Finomena.</h2>
+        <p class="lede">Bring a handful of real invoices, including the messy ones. We'll show you the full journey in a live walkthrough.</p>
+      </div>
+      <div class="btn-row"><a class="btn btn-primary" href="#contact">Book a walkthrough →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SOLUTIONS ============ -->
+<div data-page="solutions" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / Solutions</span>
+      <span class="eyebrow">Solutions</span>
+      <h1>AI products for every corner of finance operations.</h1>
+      <p class="lede">Accounts payable is live today. The rest of the suite is on the way, all running on the same Finomena engine, so the rules and memory you build carry across products.</p>
+    </div>
+  </div>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sol-grid" id="allSolutions"></div>
+    </div>
+  </section>
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Why one platform</span>
+        <h2>Configure once. Benefit in every product.</h2>
+      </div>
+      <div class="principles">
+        <div class="principle"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></span><h3>Shared vendor master</h3><p>Vendor details, GSTINs and MSME status are kept once and used everywhere.</p></div>
+        <div class="principle"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7z"/></svg></span><h3>Shared memory</h3><p>An edge case learned in payables is already known when the same vendor shows up in reconciliation.</p></div>
+        <div class="principle"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>One view of status</h3><p>See what's processed, pending and stuck across every process in one place.</p></div>
+        <div class="principle"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg></span><h3>One rollout</h3><p>Your integrations and approval matrix are set up once. Each new solution switches on faster.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ACCOUNTS PAYABLE (solution detail) ============ -->
+<div data-page="auto-invoice" hidden>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="crumbs"><a href="#home">Home</a> / <a href="#solutions">Solutions</a> / Auto Invoice</span>
+        <span class="eyebrow">Auto Invoice · Autonomous accounts payable</span>
+        <h1>Invoices in.<br>Posted out.<span class="amber">No hands in between.</span></h1>
+        <p class="lede">Auto Invoice runs the whole accounts payable journey, from invoice receipt to ledger posting, with no one keying in data. You set the rules in plain English. Your team handles only the exceptions.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#contact" data-interest="Auto Invoice · Accounts payable">Book a walkthrough →</a>
+          <button class="btn btn-ghost" type="button" data-scroll="diagnostic">See if it's for you</button>
+        </div>
+        <div class="pills">
+          <span class="pill">100% touchless posting</span>
+          <span class="pill">Go-live in weeks, not months</span>
+          <span class="pill">Email · WhatsApp · SAP</span>
+        </div>
+      </div>
+      <div class="pipeline" aria-label="Illustration of invoices flowing from Email, WhatsApp and SAP through the Finomena engine to posted entries and exceptions">
+        <div class="pipe-head"><span>Live processing pipeline</span><span class="live-dot">running</span></div>
+        <svg id="pipe" viewBox="0 0 520 330" aria-hidden="true">
+          <defs><linearGradient id="eng" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14868a"/><stop offset="1" stop-color="#0b3c42"/></linearGradient></defs>
+          <g fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="5 6">
+            <path id="p1" d="M118 70 C190 70 190 165 230 165"/><path id="p2" d="M118 165 L230 165"/><path id="p3" d="M118 260 C190 260 190 165 230 165"/>
+            <path id="p4" d="M290 165 C340 165 350 90 402 90"/><path id="p5" d="M290 165 C340 165 350 240 402 240"/>
+          </g>
+          <g font-size="13" fill="var(--ink)">
+            <rect x="20" y="50" width="98" height="40" rx="10" fill="var(--sunk)" stroke="var(--line)"/><text x="69" y="75" text-anchor="middle">Email</text>
+            <rect x="20" y="145" width="98" height="40" rx="10" fill="var(--sunk)" stroke="var(--line)"/><text x="69" y="170" text-anchor="middle">WhatsApp</text>
+            <rect x="20" y="240" width="98" height="40" rx="10" fill="var(--sunk)" stroke="var(--line)"/><text x="69" y="265" text-anchor="middle">SAP</text>
+            <rect x="402" y="70" width="100" height="40" rx="10" fill="var(--teal-wash)" stroke="var(--ok)"/><text x="452" y="95" text-anchor="middle" fill="var(--ok)">✓ Posted</text>
+            <rect x="402" y="220" width="100" height="40" rx="10" fill="var(--sunk)" stroke="var(--line)"/><text x="452" y="245" text-anchor="middle">Exceptions</text>
+            <text x="452" y="280" text-anchor="middle" font-size="11" fill="var(--ink-3)">lean human review</text>
+          </g>
+          <rect x="226" y="122" width="68" height="86" rx="16" fill="url(#eng)"/>
+          <circle cx="260" cy="158" r="17" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <text x="260" y="163" text-anchor="middle" fill="#fff" font-size="13" font-weight="500">AI</text>
+          <text x="260" y="196" text-anchor="middle" fill="rgba(255,255,255,.7)" font-size="9" letter-spacing="1.5">ENGINE</text>
+          <g fill="var(--amber)">
+            <rect width="11" height="14" rx="2" x="-5.5" y="-7"><animateMotion dur="2.8s" repeatCount="indefinite" begin="0s"><mpath href="#p1"/></animateMotion></rect>
+            <rect width="11" height="14" rx="2" x="-5.5" y="-7"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.1s"><mpath href="#p2"/></animateMotion></rect>
+            <rect width="11" height="14" rx="2" x="-5.5" y="-7"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.9s"><mpath href="#p3"/></animateMotion></rect>
+            <rect width="11" height="14" rx="2" x="-5.5" y="-7"><animateMotion dur="2.4s" repeatCount="indefinite" begin=".6s"><mpath href="#p4"/></animateMotion></rect>
+            <rect width="11" height="14" rx="2" x="-5.5" y="-7"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.8s"><mpath href="#p4"/></animateMotion></rect>
+          </g>
+          <rect width="11" height="14" rx="2" x="-5.5" y="-7" fill="var(--ink-3)"><animateMotion dur="5s" repeatCount="indefinite" begin="2.4s"><mpath href="#p5"/></animateMotion></rect>
+        </svg>
+        <div class="pipe-foot"><span>posted today <b id="cPosted">1,284</b></span><span>exceptions <b id="cExc">37</b></span><span>avg <b>4m 12s</b> / invoice</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><span class="n">100%</span><p>of the receipt-to-posting journey automated</p></div>
+      <div class="stat"><span class="n">&lt;5 min</span><p>per invoice, down from 24+ hours</p></div>
+      <div class="stat"><span class="n">0</span><p>people in the loop on the happy path</p></div>
+      <div class="stat"><span class="n">24×7</span><p>processing through nights, weekends and month-end</p></div>
+    </div>
+    <p class="fine">Illustrative targets. Actuals depend on volume, invoice mix and the automation level you choose. Pipeline counters above are sample figures.</p>
+  </div>
+
+  <section class="tint" id="diagnostic" style="margin-top:clamp(60px,8vw,104px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The diagnostic</span>
+        <h2>Does this sound like your AP function?</h2>
+        <p class="lede">Tick every statement that's true today. The more you tick, the more manual cost you're carrying, and the more Auto Invoice takes off your team's plate.</p>
+      </div>
+      <div class="diag-grid">
+        <ul class="checks" id="checks"></ul>
+        <aside class="score" aria-live="polite">
+          <span class="eyebrow" style="color:var(--ink-3)">Your pain signal</span>
+          <div class="big"><span id="sc">0</span><small>/ 9</small></div>
+          <div class="meter"><i id="meter"></i></div>
+          <p class="verdict" id="verdict">Tick the statements on the left to see how much of your AP work Finomena could take over.</p>
+          <a class="btn btn-primary" href="#contact" data-interest="Auto Invoice · Accounts payable">Fix this →</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Myth-busting</span>
+        <h2>Six reasons teams hold off on automating AP, and why they no longer apply.</h2>
+      </div>
+      <div class="myths">
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Tools only offer partial automation.</q><p><b>Busted.</b> Auto Invoice runs the whole journey, receipt to posting, with no person needed on the happy path.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Implementation takes 3 to 6 months.</q><p><b>Busted.</b> It's configuration, not coding, so you go live in weeks. New rules go live in minutes.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Maintenance and customisation cost a fortune.</q><p><b>Busted.</b> You change rules yourself, in plain English. No consultants and no change-request queue.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>API integration is slow and complex.</q><p><b>Busted.</b> Inputs and outputs, from email to SAP, are chosen by configuration instead of a months-long API build.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Automating the whole workflow is risky.</q><p><b>Busted.</b> Dial automation up or down per step. Start assisted and go touchless as trust builds.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>We have too many exceptions for a standard tool.</q><p><b>Busted.</b> Build as many exception flows as you need. The engine remembers every edge case, so it never asks twice.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="how-grid">
+        <div class="sec-head" style="margin:0">
+          <span class="eyebrow">How it works</span>
+          <h2>Configure it in plain English. No developer required.</h2>
+          <p class="lede">Write the rule the way you'd explain it to a new joiner. Finomena compiles it into a live workflow with routing and validation.</p>
+        </div>
+        <div class="console">
+          <div class="console-top">
+            <div class="tabs" role="tablist" aria-label="Example rules">
+              <button class="tab" role="tab" id="tab0" aria-selected="true" data-i="0">MSME approval</button>
+              <button class="tab" role="tab" id="tab1" aria-selected="false" data-i="1">WhatsApp bills</button>
+              <button class="tab" role="tab" id="tab2" aria-selected="false" data-i="2">GST mismatch</button>
+            </div>
+            <span class="compiled">compiled</span>
+          </div>
+          <div class="rule" id="rule" role="tabpanel" aria-labelledby="tab0"></div>
+          <div class="chips" id="chips"></div>
+          <div class="console-foot"><span>↳ Live in minutes. No code, no integration ticket, no developer.</span><button class="replay" id="replay" type="button">↻ replay</button></div>
+        </div>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 11h10M4 16h7"/><circle cx="18" cy="16" r="3"/></svg></span><h3>Self-learning OCR</h3><p>Reads any invoice format and learns your organisation's edge cases, so it never asks the same question twice.</p></div>
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span><h3>Classify and branch</h3><p>Split invoices into your own categories and run a separate flow for each, with as many exception paths as you need.</p></div>
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/></svg></span><h3>2-way and 3-way match</h3><p>Matches automatically against PO and GRN, and reads supporting documents when a decision needs extra validation.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Total visibility</h3><p>See at any moment what's processed and what's pending. Spot error patterns and bring turnaround time down.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><h3>Auto-communication</h3><p>Sends the right nudge to vendors and internal teams, driven by your rules instead of someone chasing over email.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><h3>Predict the delays</h3><p>Learns where invoices get stuck and flags them before they slip, so MSME vendors get paid on time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What changes for your organisation</span>
+        <h2>From a data-entry department to a strategic finance function.</h2>
+      </div>
+      <div class="outcomes">
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c0-4 3-6 7-6s7 2 7 6M19 5v6M16 8h6"/></svg></span><div><h3>A lean AP team</h3><p>People manage exceptions and judgment calls instead of keystrokes. Headcount stays flat even as invoice volume grows.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><h3>GST reconciliation, automatic</h3><p>Matches against 2A/2B and reconciles automatically. No month-end spreadsheet marathon.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><div><h3>Insight for decisions</h3><p>Surfaces spend patterns and vendor insight from your invoice data to support strategic decisions.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h3>Cashflow you can plan</h3><p>Predicts invoice timing and payment dates, so treasury can plan cashflow with confidence.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></span><div><h3>Returns-ready data</h3><p>Prepares clean, structured data for TDS and GST return filing, closing the loop from invoice receipt to compliance.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:clamp(60px,8vw,104px)">
+    <div class="cta">
+      <div class="copy">
+        <span class="eyebrow">Ready when you are</span>
+        <h2>See your own invoices run through Auto Invoice.</h2>
+        <p class="lede">Bring a handful of real invoices, including your messiest exceptions. We'll show you the full receipt-to-posting journey, touchless, in a live walkthrough.</p>
+      </div>
+      <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Auto Invoice · Accounts payable">Book a walkthrough →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT US ============ -->
+<div data-page="about-us" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / About us</span>
+      <span class="eyebrow">About us</span>
+      <h1>We're building the finance back office that runs itself.</h1>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap split">
+      <p class="mission">Finance teams should spend their time on <span>judgment</span>, not keystrokes.</p>
+      <div class="prose">
+        <p>In most companies, finance operations still run on people copying numbers from one screen to another. Invoices are keyed in by hand. Matching happens in spreadsheets. Vendors and colleagues are chased over email. Month-end becomes a marathon.</p>
+        <p>The cost shows up everywhere: invoices that take more than a day to process, MSME vendors paid late, GST mismatches found too late to fix, and skilled people stuck doing data entry.</p>
+        <p><strong>Finomena exists to change that.</strong> We build AI products that do the repetitive work end to end and hand people only the decisions that need them. Large language models finally make this possible: software can now read messy documents, follow rules written in plain English, and learn an organisation's edge cases.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we believe</span>
+        <h2>Four principles behind every product.</h2>
+      </div>
+      <div class="principles">
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg></span><h3>Touchless by default</h3><p>Automation should cover the whole process, not just one step of it. People step in only for real exceptions.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><h3>Finance owns the rules</h3><p>The people who understand the process should be able to change it, in plain English, without a ticket.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h4l3-7 4 14 3-7h2"/></svg></span><h3>Trust is earned</h3><p>You choose how much to automate and raise it step by step. Every decision is logged and auditable.</p></div>
+        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><h3>Built for India first</h3><p>GST, TDS, MSME rules and WhatsApp-first vendors are designed in from day one, not bolted on.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">How we work with you</span>
+        <h2>From first walkthrough to live in weeks.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="k">Step 1 · Walkthrough</span><h3>Your documents, live</h3><p>We run a sample of your real documents through Finomena so you see the result before you commit.</p></div>
+        <div class="step"><span class="k">Step 2 · Configure</span><h3>Your rules, your systems</h3><p>Together we write your rules in plain English and connect your inboxes and ERP by configuration.</p></div>
+        <div class="step"><span class="k">Step 3 · Go live and expand</span><h3>Start assisted, go touchless</h3><p>Begin with review on chosen steps, then raise the automation level and add more solutions as they launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="facts">
+        <div><span>Founded</span><b>2026</b></div>
+        <div><span>Headquarters</span><b>[City], India <span class="ph">edit</span></b></div>
+        <div><span>Focus</span><b>AI for finance operations</b></div>
+        <div><span>Live solution</span><b>Auto Invoice</b></div>
+      </div>
+      <p style="margin-top:28px"><a class="link" href="#who-we-are">Meet the people behind Finomena →</a></p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ WHO WE ARE ============ -->
+<div data-page="who-we-are" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / Who we are</span>
+      <span class="eyebrow">Who we are</span>
+      <h1>Finance operators and engineers, building together.</h1>
+      <p class="lede">We've lived the problem we're solving: the invoice backlogs, the reconciliations, the month-end crunch. Now we're building the products we wished we had.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:28px">
+        <span class="eyebrow">Founding team</span>
+      </div>
+      <!-- Replace each placeholder card with a real name, role, two-line bio and LinkedIn. Add or remove cards as needed. -->
+      <div class="team">
+        <article class="person"><div class="avatar">FN</div><div><h3>Founder name <span class="ph">edit</span></h3><span class="role">Co-founder &amp; CEO</span></div><p>Two-line bio: background, previous roles, and what they lead at Finomena.</p><span class="li">LinkedIn profile link</span></article>
+        <article class="person"><div class="avatar">FN</div><div><h3>Founder name <span class="ph">edit</span></h3><span class="role">Co-founder &amp; CTO</span></div><p>Two-line bio: background, previous roles, and what they lead at Finomena.</p><span class="li">LinkedIn profile link</span></article>
+        <article class="person"><div class="avatar">FN</div><div><h3>Founder name <span class="ph">edit</span></h3><span class="role">Co-founder · Finance &amp; Product</span></div><p>Two-line bio: background, previous roles, and what they lead at Finomena.</p><span class="li">LinkedIn profile link</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we bring</span>
+        <h2>Three kinds of expertise in one team.</h2>
+      </div>
+      <div class="mix">
+        <div><h3>Finance operations</h3><p>Hands-on experience running payables, tax and compliance, so the product follows how finance teams really work.</p></div>
+        <div><h3>AI engineering</h3><p>Building on large language models, document understanding and workflow automation that holds up in production.</p></div>
+        <div><h3>Enterprise systems</h3><p>Integrating with SAP and other ERPs, GST platforms and the tools finance teams already use.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:28px">
+        <span class="eyebrow">Advisors</span>
+        <h2>Guided by people who've done it before.</h2>
+      </div>
+      <div class="team">
+        <article class="person small"><div class="avatar">AD</div><div><h3>Advisor name <span class="ph">edit</span></h3><span class="role">Former CFO, Company</span></div></article>
+        <article class="person small"><div class="avatar">AD</div><div><h3>Advisor name <span class="ph">edit</span></h3><span class="role">Technology leader, Company</span></div></article>
+        <article class="person small"><div class="avatar">AD</div><div><h3>Advisor name <span class="ph">edit</span></h3><span class="role">Indirect tax expert, Firm</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta">
+      <div class="copy">
+        <span class="eyebrow">Join us</span>
+        <h2>We're hiring people who want to rebuild finance operations.</h2>
+        <p class="lede">Engineers, product people and finance specialists. Write to us at <b style="color:#fff">careers@finomena.in</b> with a note about what you'd like to build.</p>
+      </div>
+      <div class="btn-row"><a class="btn btn-ghost" href="#contact">Get in touch</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div data-page="contact" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / Contact</span>
+      <span class="eyebrow">Contact</span>
+      <h1>Book a walkthrough or ask us anything.</h1>
+    </div>
+  </div>
+  <section style="padding-top:0">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <p class="lede">Bring a handful of real documents, including your messiest exceptions. We'll run them through Finomena in a live session.</p>
+        <ul>
+          <li>45-minute session with your own documents</li>
+          <li>Your rules written live, in plain English</li>
+          <li>A go-live plan measured in weeks</li>
+        </ul>
+        <div class="info-card">
+          <div class="info-line"><span>Sales</span><span>hello@finomena.in</span><button type="button" class="copy-btn" data-copy="hello@finomena.in">Copy</button></div>
+          <div class="info-line"><span>Careers</span><span>careers@finomena.in</span><button type="button" class="copy-btn" data-copy="careers@finomena.in">Copy</button></div>
+          <div class="info-line"><span>Office</span><span style="font-family:var(--f-body)">Office address, City, India <span class="ph">edit</span></span></div>
+        </div>
+      </div>
+
+      <!-- Connect to your form backend (GoDaddy PHP mail, Formspree, HubSpot, etc.) in the submit handler at the bottom of this file. -->
+      <form id="lead" novalidate>
+        <div id="formFields" style="display:grid;gap:14px">
+          <div class="row">
+            <label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required></label>
+            <label for="f-email">Work email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+          </div>
+          <div class="row">
+            <label for="f-co">Company<input id="f-co" name="company" autocomplete="organization" required></label>
+            <label for="f-int">Interested in<select id="f-int" name="interest"></select></label>
+          </div>
+          <div class="row">
+            <label for="f-vol">Documents per month
+              <select id="f-vol" name="volume"><option>Under 500</option><option selected>500 – 2,000</option><option>2,000 – 10,000</option><option>10,000+</option></select>
+            </label>
+            <label for="f-erp">ERP
+              <select id="f-erp" name="erp"><option>SAP</option><option>Oracle</option><option>Tally</option><option>Microsoft Dynamics</option><option>Other</option></select>
+            </label>
+          </div>
+          <label for="f-msg">What would you like to see?<textarea id="f-msg" name="message" placeholder="e.g. 3-way match for plant invoices, MSME payment tracking"></textarea></label>
+          <p class="err" id="err" hidden></p>
+          <button class="btn btn-primary" type="submit">Send request →</button>
+          <p class="form-note">We reply within one working day.</p>
+        </div>
+        <div class="done-box" id="doneBox" hidden>
+          <h3>Your request is ready</h3>
+          <p class="form-note">Copy the details below and email them to <b>hello@finomena.in</b>. We'll come back with walkthrough slots.</p>
+          <pre id="summary"></pre>
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button" id="copySum">Copy details</button>
+            <button class="btn btn-ghost" type="button" id="editAgain">Edit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#home">
+          <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="3" width="17" height="23" rx="3.5" fill="var(--teal-deep)"/><rect x="9" y="9" width="9" height="2" rx="1" fill="var(--bg)"/><rect x="9" y="14" width="9" height="2" rx="1" fill="var(--bg)"/><circle cx="22.5" cy="23.5" r="6.5" fill="var(--amber)"/><path d="M19.6 23.6l2 2 3.8-4" stroke="var(--amber-ink)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Finomena
+        </a>
+        <p>AI products for finance operations, configured in plain English.</p>
+      </div>
+      <div><h4>Solutions</h4><ul id="footSolutions"></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about-us">About us</a></li><li><a href="#who-we-are">Who we are</a></li><li><a href="#who-we-are">Careers</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="#contact">Book a walkthrough</a></li><li>hello@finomena.in</li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Finomena. All rights reserved.</span><span>finomena.in</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== SOLUTIONS CATALOGUE =====
+     Add a new product by adding an entry here. It appears on the home page board,
+     the Solutions page, the footer and the contact form automatically.
+     status: "live" or "soon". page: the route of its detail page (only for live products). */
+  const SOLUTIONS = [
+    { id:'ap', name:'Auto Invoice', area:'Accounts payable', status:'live', page:'auto-invoice',
+      blurb:'Invoice receipt to ledger posting with no hands in between. Plain-English rules, self-learning OCR, 2- and 3-way matching.',
+      points:['Email, WhatsApp and SAP inputs','Automatic PO and GRN matching','MSME payment-delay prediction'],
+      icon:'<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/>' },
+    { id:'tax', name:'Finomena Tax', area:'GST & TDS compliance', status:'soon',
+      blurb:'GSTR-2A/2B reconciliation, TDS deduction checks and returns-ready data, prepared continuously instead of at month-end.',
+      icon:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/>' },
+    { id:'recon', name:'Finomena Recon', area:'Bank & ledger reconciliation', status:'soon',
+      blurb:'Matches bank statements, ledgers and intercompany balances automatically and explains every open item.',
+      icon:'<path d="M7 7h11l-3-3M17 17H6l3 3"/>' },
+    { id:'ar', name:'Finomena AR', area:'Receivables & collections', status:'soon',
+      blurb:'Applies customer receipts to invoices and follows up on overdue payments by email and WhatsApp, in your tone.',
+      icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 10h4.5a1.5 1.5 0 010 3H10"/>' },
+    { id:'close', name:'Finomena Close', area:'Month-end close', status:'soon',
+      blurb:'Runs accruals, checklists and variance commentary so the books close in days, with a full audit trail.',
+      icon:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>' },
+    { id:'vendor', name:'Finomena Vendor', area:'Vendor onboarding & KYC', status:'soon',
+      blurb:'Collects and verifies PAN, GSTIN, MSME status and bank details before a vendor ever sends a bill.',
+      icon:'<circle cx="10" cy="8" r="4"/><path d="M3 20c0-4 3-6 7-6M16 15l2 2 4-4"/>' }
+  ];
+  const svg = p => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const statusPill = s => s.status==='live' ? '<span class="status live">Live</span>' : '<span class="status soon">Coming soon</span>';
+  const live = SOLUTIONS.filter(s=>s.status==='live'), soon = SOLUTIONS.filter(s=>s.status!=='live');
+
+  document.getElementById('liveCount').textContent = `${live.length} live · ${soon.length} coming`;
+  document.getElementById('boardRows').innerHTML = SOLUTIONS.map(s=>`
+    <a class="board-row" href="#${s.page||'solutions'}">
+      <span class="ico ${s.status==='live'?'':'mute'}">${svg(s.icon)}</span>
+      <div><b>${s.area}</b><small>${s.name}</small></div>
+      ${statusPill(s)}
+    </a>`).join('');
+
+  function featuredCard(s){
+    return `<article class="sol featured">
+      <div class="copy">
+        <div class="sol-top"><span class="ico">${svg(s.icon)}</span>${statusPill(s)}</div>
+        <span class="tag">${s.area}</span>
+        <h3>${s.name}: invoices in, posted out, no hands in between.</h3>
+        <p>${s.blurb}</p>
+        <div class="btn-row"><a class="btn btn-primary" href="#${s.page}">Explore ${s.name} →</a></div>
+      </div>
+      <div class="mini-stats">
+        <div><b>100%</b><span>receipt-to-posting automated</span></div>
+        <div><b>&lt;5 min</b><span>per invoice</span></div>
+        <div><b>0</b><span>people on the happy path</span></div>
+        <div><b>24×7</b><span>processing</span></div>
+      </div>
+    </article>`;
+  }
+  function card(s){
+    return `<article class="sol">
+      <div class="sol-top"><span class="ico ${s.status==='live'?'':'mute'}">${svg(s.icon)}</span>${statusPill(s)}</div>
+      <div style="display:grid;gap:4px"><span class="tag">${s.area}</span><h3>${s.name}</h3></div>
+      <p>${s.blurb}</p>
+      ${s.status==='live'
+        ? `<a class="btn btn-primary" href="#${s.page}">Explore →</a>`
+        : `<a class="btn btn-ghost" href="#contact" data-interest="${s.name} · ${s.area}">Join early access</a>`}
+    </article>`;
+  }
+  const suggest = `<article class="sol suggest">
+      <div class="sol-top"><span class="ico warm">${svg('<path d="M12 5v14M5 12h14"/>')}</span></div>
+      <div style="display:grid;gap:4px"><span class="tag">Your process</span><h3>What should we automate next?</h3></div>
+      <p>Tell us which finance process eats the most of your team's time. It helps decide what we build next.</p>
+      <a class="btn btn-ghost" href="#contact" data-interest="Suggest a process">Suggest a process</a>
+    </article>`;
+  document.getElementById('homeSolutions').innerHTML = live.map(featuredCard).join('') + soon.slice(0,3).map(card).join('');
+  document.getElementById('allSolutions').innerHTML = live.map(featuredCard).join('') + soon.map(card).join('') + suggest;
+  document.getElementById('footSolutions').innerHTML = SOLUTIONS.map(s=>`<li><a href="#${s.page||'solutions'}">${s.area}${s.status==='live'?'':' <span style="color:var(--ink-3);font-size:.8em">· soon</span>'}</a></li>`).join('');
+  const intSel = document.getElementById('f-int');
+  intSel.innerHTML = SOLUTIONS.map(s=>`<option>${s.name} · ${s.area}</option>`).join('') + '<option>Suggest a process</option><option>Something else</option>';
+
+  /* ===== ROUTER ===== */
+  const pages=[...document.querySelectorAll('[data-page]')];
+  const routes=pages.map(p=>p.dataset.page);
+  const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
+  const navFor={'auto-invoice':'solutions'};
+  function route(){
+    let r=location.hash.slice(1);
+    let scrollTarget=null;
+    if(!routes.includes(r)){ const el=r&&document.getElementById(r); if(el){ const pg=el.closest('[data-page]'); r=pg?pg.dataset.page:'home'; scrollTarget=el; } else r='home'; }
+    pages.forEach(p=>p.hidden=p.dataset.page!==r);
+    const n=navFor[r]||r;
+    navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','contact':'Contact · Finomena'};
+    document.title=titles[r]||'Finomena';
+    if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
+  }
+  addEventListener('hashchange',route); route();
+  menuBtn.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);});
+
+  /* pre-select interest when a button points to contact */
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('[data-interest]'); if(a){ const v=a.dataset.interest; [...intSel.options].forEach(o=>{if(o.text===v)intSel.value=o.text;}); }
+    const s=e.target.closest('[data-scroll]'); if(s){ const t=document.getElementById(s.dataset.scroll); t&&t.scrollIntoView({behavior:reduce?'auto':'smooth'}); }
+  });
+
+  /* ===== AP PAGE ===== */
+  if(reduce){ const s=document.getElementById('pipe'); s&&s.pauseAnimations&&s.pauseAnimations(); }
+  const cP=document.getElementById('cPosted'), cE=document.getElementById('cExc');
+  let posted=1284, exc=37, tick=0;
+  if(!reduce) setInterval(()=>{posted+=1+Math.floor(Math.random()*2);tick++;if(tick%9===0)exc++;cP.textContent=posted.toLocaleString('en-IN');cE.textContent=exc;},1300);
+
+  const items=[
+    "We have an accounts payable team of more than 2 people.",
+    "Employees manually key in invoice data, hundreds of hours every month.",
+    "It takes us more than 24 hours to process an invoice.",
+    "Our invoice processing is prone to human error.",
+    "We can't reliably predict which invoices will be delayed.",
+    "We struggle to pay MSME vendors on time because of invoice delays.",
+    "We chase vendors and internal teams manually whenever there's an invoice issue.",
+    "We do 2-way and 3-way matching by hand.",
+    "We have no single platform to receive and monitor invoices centrally."
+  ];
+  const ul=document.getElementById('checks');
+  ul.innerHTML=items.map((t,i)=>`<li><label class="check" for="c${i}"><input type="checkbox" id="c${i}"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${t}</span></label></li>`).join('');
+  const sc=document.getElementById('sc'),meter=document.getElementById('meter'),verdict=document.getElementById('verdict');
+  ul.addEventListener('change',()=>{
+    const n=ul.querySelectorAll('input:checked').length;
+    sc.textContent=n; meter.style.width=(n/9*100)+'%';
+    verdict.innerHTML = n===0 ? "Tick the statements on the left to see how much of your AP work Finomena could take over."
+      : n<=3 ? "<b>Early signs.</b> A few manual steps are costing you time. Auto Invoice can remove them without changing how your team works."
+      : n<=6 ? "<b>Strong fit.</b> Much of your AP effort is data entry and chasing. Auto Invoice takes that over and leaves your team the exceptions."
+      : "<b>Textbook case for autonomous AP.</b> Nearly everything here disappears with Auto Invoice. Your team moves from data entry to managing exceptions only.";
+  });
+
+  const rules=[
+    {parts:['"If the invoice is from an ',['MSME vendor'],' and the amount is over ',['₹1,00,000'],', route approval to ',['the plant finance head'],', run a ',['3-way match'],' against the PO and GRN, then post to ',['SAP'],' and notify the vendor."'],
+     chips:['classify: MSME','route: Plant Finance','match: 3-way','post: SAP','✓ vendor notified']},
+    {parts:['"When a vendor sends a bill on ',['WhatsApp'],', read it, check the ',['GSTIN'],' against the vendor master, and if the ',['PO number'],' is missing, reply asking for it before ',['posting'],'."'],
+     chips:['source: WhatsApp','validate: GSTIN','check: PO present','auto-reply: vendor','✓ queued to post']},
+    {parts:['"If the invoice GST does not match ',['GSTR-2B'],' for the month, ',['hold the ITC'],', tag it for ',['tax review'],' and remind the vendor every ',['3 days'],' until it is fixed."'],
+     chips:['match: GSTR-2B','hold: ITC','route: Tax review','nudge: every 3 days','✓ recon updated']}
+  ];
+  const ruleEl=document.getElementById('rule'),chipsEl=document.getElementById('chips'),tabs=[...document.querySelectorAll('.tab')];
+  let timer=null,cur=0;
+  const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  function render(r,chars){let left=chars,html='';for(const p of r.parts){const txt=Array.isArray(p)?p[0]:p;if(left<=0)break;const piece=txt.slice(0,left);left-=txt.length;html+=Array.isArray(p)?`<em>${esc(piece)}</em>`:esc(piece);}return html;}
+  const total=r=>r.parts.reduce((a,p)=>a+(Array.isArray(p)?p[0]:p).length,0);
+  const chipHtml=c=>`<span class="chip${c[0]==='✓'?' done':''}">${c}</span>`;
+  function showFull(i){const r=rules[i];ruleEl.innerHTML=render(r,1e9)+'<span class="caret"></span>';chipsEl.innerHTML=r.chips.map(chipHtml).join('');}
+  function play(i){
+    clearInterval(timer);cur=i;
+    tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));
+    ruleEl.setAttribute('aria-labelledby','tab'+i);
+    if(reduce){showFull(i);return;}
+    const r=rules[i],T=total(r);let c=0;chipsEl.innerHTML='';
+    timer=setInterval(()=>{c+=2;ruleEl.innerHTML=render(r,c)+'<span class="caret"></span>';
+      if(c>=T){clearInterval(timer);let k=0;const ct=setInterval(()=>{if(k>=r.chips.length||cur!==i){clearInterval(ct);return;}chipsEl.insertAdjacentHTML('beforeend',chipHtml(r.chips[k]));k++;},220);}
+    },28);
+  }
+  showFull(0);
+  tabs.forEach(t=>t.addEventListener('click',()=>play(+t.dataset.i)));
+  document.getElementById('replay').addEventListener('click',()=>play(cur));
+
+  /* ===== COPY + FORM ===== */
+  function copy(text,btn){
+    const orig=btn.textContent;
+    try{navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent=orig,1500);},()=>{btn.textContent='Select and copy';});}catch(e){btn.textContent='Select and copy';}
+  }
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy,b)));
+
+  const form=document.getElementById('lead'),err=document.getElementById('err'),fields=document.getElementById('formFields'),done=document.getElementById('doneBox'),sum=document.getElementById('summary');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const d=Object.fromEntries(new FormData(form));
+    const miss=[];
+    if(!d.name.trim())miss.push('your name');
+    if(!/^\S+@\S+\.\S+$/.test(d.email.trim()))miss.push('a valid work email');
+    if(!d.company.trim())miss.push('your company');
+    if(miss.length){err.textContent='Please add '+miss.join(', ')+'.';err.hidden=false;return;}
+    err.hidden=true;
+    sum.textContent=`Walkthrough request\nName: ${d.name}\nEmail: ${d.email}\nCompany: ${d.company}\nInterested in: ${d.interest}\nDocuments / month: ${d.volume}\nERP: ${d.erp}\nNotes: ${d.message||'-'}`;
+    fields.hidden=true;done.hidden=false;
+  });
+  document.getElementById('copySum').addEventListener('click',e=>copy(sum.textContent,e.currentTarget));
+  document.getElementById('editAgain').addEventListener('click',()=>{done.hidden=true;fields.hidden=false;});
+})();
+</script>
+</body>
+</html>
