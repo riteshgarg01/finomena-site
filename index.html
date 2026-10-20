@@ -347,6 +347,117 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
 .foot-grid p{color:var(--ink-3);font-size:.95rem;max-width:32ch;margin-top:12px}
 .foot-base{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:36px;padding-top:20px;color:var(--ink-3);font-size:.88rem}
 
+.hero-mission{font-size:1.06rem;line-height:1.7;max-width:62ch}
+.tagline-band{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));padding-block:clamp(44px,6vw,72px)}
+.tagline{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.025em;color:#fff;text-wrap:balance}
+.tagline span{color:var(--panel-hl)}
+.mission-block{display:grid;gap:22px;max-width:820px}
+.mission-block .mission-text{font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.7;color:var(--ink-2)}
+.mission-block .mission-text strong{color:var(--ink)}
+/* case studies */
+.case{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.case-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:clamp(22px,3.5vw,36px);border-bottom:1px solid var(--line)}
+.logo-ph{width:84px;height:84px;border-radius:16px;border:2px dashed var(--line);display:grid;place-items:center;font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3);text-align:center;line-height:1.3}
+.case-head h2{font-size:clamp(1.4rem,2.6vw,2rem)}
+.case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.case-tag{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.case-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+.case-body > div{background:var(--surface);padding:clamp(20px,3vw,30px);display:grid;gap:10px;align-content:start}
+.case-body p,.case-body li{color:var(--ink-2);font-size:.97rem}
+.case-body ul{margin:0;padding-left:18px;display:grid;gap:6px}
+@media (max-width:860px){.case-body{grid-template-columns:1fr}.case-head{grid-template-columns:1fr}}
+.case-results{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.case-results div{padding:22px clamp(18px,3vw,28px);display:grid;gap:4px;border-left:1px solid var(--line)}
+.case-results div:first-child{border-left:0}
+.case-results b{font-family:var(--f-display);font-weight:800;font-size:2rem;line-height:1;color:var(--teal-deep);font-variant-numeric:tabular-nums}
+.case-results span{font-size:.9rem;color:var(--ink-2)}
+@media (max-width:760px){.case-results{grid-template-columns:1fr 1fr}.case-results div:nth-child(3){border-left:0}.case-results div:nth-child(n+3){border-top:1px solid var(--line)}}
+.case-quote{padding:clamp(22px,3.5vw,36px);border-top:1px solid var(--line);display:grid;gap:10px}
+.case-quote blockquote{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.35;color:var(--ink)}
+.case-quote cite{font-style:normal;font-size:.9rem;color:var(--ink-3)}
+.cs-stage{border-top:1px solid var(--line);padding:clamp(20px,3vw,30px) clamp(20px,3.5vw,36px)}
+.cs-stage-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.cs-num{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.cs-row{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:20px;padding:14px 0;border-top:1px solid var(--line);font-size:.97rem}
+.cs-row > div{min-width:0;color:var(--ink-2)}
+.cs-row > div:first-child{color:var(--ink);font-weight:600}
+.cs-row > div:last-child{color:var(--teal-deep);font-weight:600}
+.cs-labels{border-top:0;padding-top:0;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+.cs-labels > div,.cs-labels > div:first-child,.cs-labels > div:last-child{color:var(--ink-3);font-weight:500}
+@media (max-width:760px){
+  .cs-labels{display:none}
+  .cs-row{grid-template-columns:1fr;gap:6px}
+  .cs-row > div::before{content:attr(data-l);display:block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+}
+.fl-wrap{border-top:1px solid var(--line);padding:clamp(20px,3vw,30px) clamp(20px,3.5vw,36px);display:grid;gap:26px}
+.fl-lane{display:grid;gap:12px}
+.fl-label{font-family:var(--f-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;font-weight:500}
+.fl-dot{width:9px;height:9px;border-radius:50%}
+.fl-manual .fl-label{color:var(--myth)} .fl-manual .fl-dot{background:var(--myth)}
+.fl-fino .fl-label{color:var(--ok)} .fl-fino .fl-dot{background:var(--ok)}
+.fl-track{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr 26px 1fr 26px 1.1fr;align-items:stretch}
+.fl-node{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:8px;align-content:start;background:var(--surface);min-width:0}
+.fl-manual .fl-node{border-top:3px solid var(--myth)}
+.fl-fino .fl-node{border-top:3px solid var(--ok)}
+.fl-step{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.fl-node b{font-family:var(--f-display);font-size:1rem;line-height:1.2}
+.fl-node dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.86rem}
+.fl-node dt{color:var(--ink-3)}
+.fl-node dd{margin:0;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.fl-total{background:var(--sunk)}
+.fl-manual .fl-total{background:color-mix(in srgb,var(--myth) 7%,var(--surface))}
+.fl-fino .fl-total{background:color-mix(in srgb,var(--ok) 8%,var(--surface))}
+.fl-arrow{position:relative}
+.fl-arrow::before{content:"";position:absolute;left:4px;right:8px;top:50%;height:2px;background:var(--ink-3)}
+.fl-arrow::after{content:"";position:absolute;right:3px;top:calc(50% - 5px);border:6px solid transparent;border-left:7px solid var(--ink-3);border-right:0}
+@media (max-width:980px){
+  .fl-track{grid-template-columns:1fr}
+  .fl-arrow{height:24px}
+  .fl-arrow::before{left:50%;right:auto;top:2px;bottom:8px;width:2px;height:auto}
+  .fl-arrow::after{left:calc(50% - 5px);right:auto;top:auto;bottom:2px;border:6px solid transparent;border-top:7px solid var(--ink-3);border-bottom:0}
+}
+.case-results b{font-size:clamp(1.3rem,2.2vw,1.7rem)}
+.case-results b.q{font-size:1.5rem}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media (max-width:760px){.case-grid{grid-template-columns:1fr}}
+.case-mini{border:1.5px dashed var(--line);border-radius:18px;padding:24px;display:grid;gap:10px;align-content:start}
+.case-mini p{color:var(--ink-2);font-size:.97rem}
+.wd-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:980px){.wd-row{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.wd-row{grid-template-columns:1fr}}
+.wd-step{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:16px;padding:20px;display:grid;gap:10px;align-content:start}
+.wd-step.last{background:linear-gradient(150deg,var(--panel-a),var(--panel-b));border-top-color:var(--panel-hl);border-color:transparent}
+.wd-step.last h3{color:#fff}.wd-step.last p{color:var(--panel-ink-2)}.wd-step.last .ico{background:rgba(255,255,255,.1);color:var(--panel-hl)}
+.wd-top{display:flex;justify-content:space-between;align-items:center}
+.wd-n{font-family:var(--f-mono);font-size:.8rem;color:var(--amber);font-weight:500}
+.wd-step p{color:var(--ink-2);font-size:.95rem}
+.journey{border-top:1px solid var(--line);padding:clamp(20px,3vw,30px) clamp(20px,3.5vw,36px);display:grid;gap:18px}
+.jl,.jr{display:grid;grid-template-columns:1fr 22px 1.25fr 22px 1fr;gap:8px}
+.jl{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.jl .c{color:var(--myth)}.jl .s{color:var(--teal)}.jl .i{color:var(--ok)}
+.jstage{display:grid;gap:8px}
+.jhead{display:flex;align-items:center;gap:12px;background:linear-gradient(150deg,var(--panel-a),var(--panel-b));border-radius:12px;padding:10px 16px}
+.jhead h3{color:#fff;font-size:1.05rem}
+.jn{width:26px;height:26px;border-radius:50%;background:var(--panel-hl);color:#1f1200;display:grid;place-items:center;font-weight:800;font-size:.85rem;flex:none}
+.jcount{margin-left:auto;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--panel-ink-2)}
+.jr{align-items:stretch}
+.jc,.js,.ji{border-radius:11px;padding:10px 12px;font-size:.93rem;line-height:1.35;display:flex;align-items:center;gap:10px;min-width:0}
+.jc{background:color-mix(in srgb,var(--myth) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--myth) 22%,var(--surface));color:#7a2b1e;font-weight:600}
+.js{background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+.js .ico{width:32px;height:32px;border-radius:8px}
+.ji{background:color-mix(in srgb,var(--ok) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--ok) 25%,var(--surface));color:#145c3c;font-weight:700}
+.jx,.jk{width:20px;height:20px;border-radius:50%;color:#fff;font-size:.7rem;display:grid;place-items:center;flex:none}
+.jx{background:var(--myth)}.jk{background:var(--ok)}
+.jl-m{display:none}
+.ja{position:relative}
+.ja::before{content:"";position:absolute;left:2px;right:7px;top:50%;height:2px;background:var(--ink-3)}
+.ja::after{content:"";position:absolute;right:0;top:calc(50% - 5px);border:5px solid transparent;border-left:7px solid var(--ink-3);border-right:0}
+@media (max-width:760px){
+  .jl{display:none}
+  .jr{grid-template-columns:1fr;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .ja{display:none}
+  .jl-m{display:block;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;font-weight:500}
+}
 [data-page]{animation:fade .35s ease}
 @keyframes fade{from{opacity:.4}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -363,6 +474,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="#home" data-nav="home">Home</a>
       <a href="#solutions" data-nav="solutions">Solutions</a>
+      <a href="#case-studies" data-nav="case-studies">Case studies</a>
       <a href="#about-us" data-nav="about-us">About us</a>
       <a href="#who-we-are" data-nav="who-we-are">Who we are</a>
       <a href="#contact" data-nav="contact">Contact</a>
@@ -384,7 +496,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <div class="hero-copy">
         <span class="eyebrow">AI for finance operations</span>
         <h1>Your finance back office, <span class="amber">running on its own.</span></h1>
-        <p class="lede">Finomena builds AI products that take over the repetitive work in finance operations: reading documents, matching, posting, reconciling and chasing. You set the rules in plain English. Your team keeps the judgment calls.</p>
+        <p class="lede hero-mission">At Finomena, we believe finance teams should spend their time thinking, not processing. Our mission is to run finance operations without human hands, letting machines handle the mechanical work of receiving, checking, matching, posting and reconciling, so people can focus on judgement, analysis and decisions.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#solutions">Explore solutions →</a>
           <a class="btn btn-ghost" href="#contact">Book a walkthrough</a>
@@ -403,15 +515,27 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </section>
 
-  <section class="tint">
+  <div class="tagline-band">
+    <div class="wrap">
+      <p class="tagline">Machines take over the <span>mechanical</span>.<br>People still own the <span>meaningful</span>.</p>
+    </div>
+  </div>
+
+  <section>
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">Solutions</span>
-        <h2>One platform, a growing set of finance products.</h2>
-        <p class="lede">We start with accounts payable, the most manual process in most finance teams. Each new solution runs on the same engine, so whatever you configure once carries over.</p>
+        <span class="eyebrow">What Auto Invoice does</span>
+        <h2>From invoice receipt to ERP posting, untouched.</h2>
+        <p class="lede">Five steps, no hands. Only real exceptions go to your team.</p>
       </div>
-      <div class="sol-grid" id="homeSolutions"></div>
-      <p style="margin-top:28px"><a class="link" href="#solutions">See all solutions →</a></p>
+      <div class="wd-row">
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="wd-n">01</span></div><h3>Receive</h3><p>Invoices arrive by email, WhatsApp, vendor portal or ERP into one inbox.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="wd-n">02</span></div><h3>Acknowledge</h3><p>Each invoice is date and time stamped and the vendor is notified.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h10M4 16h7"/><circle cx="18" cy="16" r="3"/></svg></span><span class="wd-n">03</span></div><h3>Read (OCR)</h3><p>Self-learning OCR extracts every field from any invoice format.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><span class="wd-n">04</span></div><h3>Validate &amp; match</h3><p>Checks GSTIN and duplicates, runs 2- and 3-way match, applies your rules.</p></div>
+        <div class="wd-step last"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><span class="wd-n">05</span></div><h3>Approve &amp; post</h3><p>Routes approvals, then posts the entry to SAP or your ERP in real time.</p></div>
+      </div>
+      <p style="margin-top:24px"><a class="link" href="#auto-invoice">Explore Auto Invoice →</a> &nbsp;·&nbsp; <a class="link" href="#case-studies">See the case studies →</a></p>
     </div>
   </section>
 
@@ -696,7 +820,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
 
   <section style="padding-top:0">
     <div class="wrap split">
-      <p class="mission">Finance teams should spend their time on <span>judgment</span>, not keystrokes.</p>
+      <p class="mission">Machines take over the <span>mechanical</span>. People still own the <span>meaningful</span>.</p>
       <div class="prose">
         <p>In most companies, finance operations still run on people copying numbers from one screen to another. Invoices are keyed in by hand. Matching happens in spreadsheets. Vendors and colleagues are chased over email. Month-end becomes a marathon.</p>
         <p>The cost shows up everywhere: invoices that take more than a day to process, MSME vendors paid late, GST mismatches found too late to fix, and skilled people stuck doing data entry.</p>
@@ -706,6 +830,14 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   </section>
 
   <section class="tint">
+    <div class="wrap mission-block">
+      <span class="eyebrow">Our mission</span>
+      <h2>Finance that runs itself, with people in charge of what matters.</h2>
+      <p class="mission-text">At Finomena, we believe finance teams should spend their time thinking, not processing. Our mission is to run finance operations without human hands, letting machines handle the mechanical work of receiving, checking, matching, posting and reconciling, so people can focus on judgement, analysis and decisions. We make this possible in weeks, not years: finance leaders describe how their operations should run in plain English, and Finomena turns those instructions into a working, autonomous programme. No code, no long implementations, no armies of consultants. Just finance that runs itself, with people in charge of what matters.</p>
+    </div>
+  </section>
+
+  <section>
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">What we believe</span>
@@ -720,7 +852,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </section>
 
-  <section>
+  <section class="tint">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">How we work with you</span>
@@ -734,7 +866,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section>
     <div class="wrap">
       <div class="facts">
         <div><span>Founded</span><b>2026</b></div>
@@ -745,6 +877,198 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <p style="margin-top:28px"><a class="link" href="#who-we-are">Meet the people behind Finomena →</a></p>
     </div>
   </section>
+</div>
+
+<!-- ============ CASE STUDIES ============ -->
+<div data-page="case-studies" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / Case studies</span>
+      <span class="eyebrow">Case studies</span>
+      <h1>How finance teams put Finomena to work.</h1>
+      <p class="lede">The problems finance teams bring to us, what Finomena changes, and the impact on their operations.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <article class="case">
+        <div class="case-head" style="grid-template-columns:1fr">
+          <div>
+            <span class="eyebrow">Case study · Auto Invoice</span>
+            <h2 style="margin-top:8px">One invoice, end to end: manual process vs Finomena</h2>
+            <p class="lede" style="margin-top:12px;font-size:1.05rem">We followed a single invoice through four steps: receipt, accounting and two levels of approval. Manually, each step takes minutes when everything is right, and days or weeks when an invoice is rejected and has to go back. With Finomena, every step takes about a minute, with or without a rejection.</p>
+            <div class="case-tags">
+              <span class="case-tag">Solution: Auto Invoice</span>
+              <span class="case-tag">Process: Receipt → Accounting → Approval L1 → Approval L2</span>
+            </div>
+          </div>
+        </div>
+        <div class="fl-wrap">
+        <div class="fl-lane fl-manual">
+          <div class="fl-label"><span class="fl-dot"></span>Manual process</div>
+          <div class="fl-track">
+            <div class="fl-node"><span class="fl-step">Step 1</span><b>Invoice receipt</b>
+              <dl><dt>Time</dt><dd>5 min</dd><dt>If rejected</dt><dd>30 days</dd><dt>Cost impact</dt><dd>Up to 1% of invoice value</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 2</span><b>Invoice accounting</b>
+              <dl><dt>Time</dt><dd>15 min</dd><dt>If rejected</dt><dd>7 days</dd><dt>Cost impact</dt><dd>Up to 1% of invoice value</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 3</span><b>Approval level 1</b>
+              <dl><dt>Time</dt><dd>5 min</dd><dt>If rejected</dt><dd>7 days</dd><dt>Cost impact</dt><dd>Up to 1% of invoice value</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 4</span><b>Approval level 2</b>
+              <dl><dt>Time</dt><dd>5 min</dd><dt>If rejected</dt><dd>7 days</dd><dt>Cost impact</dt><dd>Up to 1% of invoice value</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node fl-total"><span class="fl-step">Total</span><b>End to end</b>
+              <dl><dt>Time</dt><dd>25 min</dd><dt>If rejected</dt><dd>45 days</dd><dt>Cost impact</dt><dd>Up to 1% of invoice value</dd></dl></div>
+          </div>
+        </div>
+        <div class="fl-lane fl-fino">
+          <div class="fl-label"><span class="fl-dot"></span>With Finomena</div>
+          <div class="fl-track">
+            <div class="fl-node"><span class="fl-step">Step 1</span><b>Invoice receipt</b>
+              <dl><dt>Time</dt><dd>1 min</dd><dt>If rejected</dt><dd>1 min</dd><dt>Cost impact</dt><dd>Nil</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 2</span><b>Invoice accounting</b>
+              <dl><dt>Time</dt><dd>1 min</dd><dt>If rejected</dt><dd>1 min</dd><dt>Cost impact</dt><dd>Nil</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 3</span><b>Approval level 1</b>
+              <dl><dt>Time</dt><dd>1 min</dd><dt>If rejected</dt><dd>1 min</dd><dt>Cost impact</dt><dd>Nil</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node"><span class="fl-step">Step 4</span><b>Approval level 2</b>
+              <dl><dt>Time</dt><dd>1 min</dd><dt>If rejected</dt><dd>1 min</dd><dt>Cost impact</dt><dd>Nil</dd></dl></div>
+            <span class="fl-arrow" aria-hidden="true"></span>
+            <div class="fl-node fl-total"><span class="fl-step">Total</span><b>End to end</b>
+              <dl><dt>Time</dt><dd>4 min</dd><dt>If rejected</dt><dd>4 min</dd><dt>Cost impact</dt><dd>Nil</dd></dl></div>
+          </div>
+        </div>
+        </div>
+        <div class="case-results">
+          <div><b>25 → 4 min</b><span>time per invoice, 84% less</span></div>
+          <div><b>45 days → 4 min</b><span>when an invoice is rejected and reworked</span></div>
+          <div><b>1% → Nil</b><span>cost impact, from up to 1% of invoice value</span></div>
+          <div><b>4 steps</b><span>receipt to final approval, all handled by Auto Invoice</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-head" style="grid-template-columns:1fr">
+          <div>
+            <span class="eyebrow">Case study · Auto Invoice</span>
+            <h2 style="margin-top:8px">From invoice receipt to accounting, without manual handling</h2>
+            <p class="lede" style="margin-top:12px;font-size:1.05rem">Eleven everyday AP problems, and what Auto Invoice does about each one. An accounts payable team was receiving invoices across many channels with no central record or proof of receipt, keying data in by hand and chasing follow-ups over email.</p>
+            <div class="case-tags">
+              <span class="case-tag">Solution: Auto Invoice</span>
+              <span class="case-tag">Process: Receipt, acknowledgement, reading and accounting</span>
+              <span class="case-tag">Channels: WhatsApp · Email · Website · ERP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey">
+          <div class="jl" aria-hidden="true"><span class="c">Challenge</span><span></span><span class="s">Auto Invoice</span><span></span><span class="i">Impact</span></div>
+        <div class="jstage">
+          <div class="jhead"><span class="jn">1</span><h3>Invoice receipt and acknowledgement</h3><span class="jcount">5 fixes</span></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>No single repository</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><span class="jl-m">Auto Invoice</span>One platform for WhatsApp, email, website and ERP</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Full visibility, faster acknowledgement</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>No acknowledgement process</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><span class="jl-m">Auto Invoice</span>Date and time stamp on every invoice</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>MSME and vendor timelines met</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Late entry into accounts</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span><span class="jl-m">Auto Invoice</span>Transactions created in real time</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>No accounting delays</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Incorrect invoices accepted</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span class="jl-m">Auto Invoice</span>Sent back to the vendor automatically</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Never become due for payment</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Invoices arrive late</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span><span class="jl-m">Auto Invoice</span>Rules expect invoices and nudge vendors</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Accurate, real-time accounting</span></div></div>
+        </div>
+        <div class="jstage">
+          <div class="jhead"><span class="jn">2</span><h3>Invoice reading and accounting</h3><span class="jcount">6 fixes</span></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Manual reading errors</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h10M4 16h7"/><circle cx="18" cy="16" r="3"/></svg></span><span><span class="jl-m">Auto Invoice</span>Error-free reading of good-quality invoices</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Fewer mistakes, less rework</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Talent on unskilled work</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c0-4 3-6 7-6s7 2 7 6M19 5v6M16 8h6"/></svg></span><span><span class="jl-m">Auto Invoice</span>Manual data entry no longer needed</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>People on judgement work</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Hiring and training staff</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span><span><span class="jl-m">Auto Invoice</span>No longer needed for this work</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Cost savings</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Manual punching into ERP</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><span><span class="jl-m">Auto Invoice</span>Posted directly through the ERP's API</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Real time, lower cost</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Rules get forgotten</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 3v18"/></svg></span><span><span class="jl-m">Auto Invoice</span>Organisational memory applies every rule</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Consistent and efficient</span></div></div>
+          <div class="jr"><div class="jc"><span class="jx" aria-hidden="true">✕</span><span><span class="jl-m">Challenge</span>Follow-ups by email</span></div><span class="ja" aria-hidden="true"></span><div class="js"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span><span class="jl-m">Auto Invoice</span>Reminders built into the system</span></div><span class="ja" aria-hidden="true"></span><div class="ji"><span class="jk" aria-hidden="true">✓</span><span><span class="jl-m">Impact</span>Time and cost saved</span></div></div>
+        </div>
+        </div>
+
+        <div class="case-results">
+          <div><b class="q">One</b><span>central repository for every invoice, from every channel</span></div>
+          <div><b class="q">Stamped</b><span>date and time of receipt, for MSME payment timelines</span></div>
+          <div><b class="q">Real time</b><span>accounting entries posted straight into the ERP</span></div>
+          <div><b class="q">Redeployed</b><span>people moved from data entry to judgement work</span></div>
+        </div>
+      </article>
+
+      <!-- CASE STUDY TEMPLATE (hidden). To add a client case study, copy this block out of the comment and fill in each "edit" field.
+       CASE STUDY TEMPLATE: replace every field marked "edit" with approved client details.
+           Copy the whole <article class="case"> block to add another case study. 
+      <article class="case">
+        <div class="case-head">
+          <div class="logo-ph">Client<br>logo</div>
+          <div>
+            <span class="eyebrow">Auto Invoice · Accounts payable</span>
+            <h2 style="margin-top:8px">Client name <span class="ph">edit</span> moves invoice processing from days to minutes</h2>
+            <div class="case-tags">
+              <span class="case-tag">Industry: <span class="ph">edit</span></span>
+              <span class="case-tag">Invoices / month: <span class="ph">edit</span></span>
+              <span class="case-tag">ERP: <span class="ph">edit</span></span>
+              <span class="case-tag">Go-live: <span class="ph">edit</span> weeks</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div>
+            <span class="eyebrow">The challenge</span>
+            <p>Describe the situation before Finomena: team size, how invoices arrived, turnaround time, error rates, MSME payment delays. <span class="ph">edit</span></p>
+          </div>
+          <div>
+            <span class="eyebrow">What we set up</span>
+            <ul>
+              <li>Input channels connected (e.g. email, WhatsApp) <span class="ph">edit</span></li>
+              <li>Key rules written in plain English <span class="ph">edit</span></li>
+              <li>Matching and approval flows <span class="ph">edit</span></li>
+              <li>Posting into the client's ERP <span class="ph">edit</span></li>
+            </ul>
+          </div>
+          <div>
+            <span class="eyebrow">What changed</span>
+            <p>Describe the outcome in the client's terms: time saved, team redeployed, vendors paid on time, month-end impact. <span class="ph">edit</span></p>
+          </div>
+        </div>
+        <div class="case-results">
+          <div><b>—</b><span>invoices processed touchless <span class="ph">edit</span></span></div>
+          <div><b>—</b><span>average processing time <span class="ph">edit</span></span></div>
+          <div><b>—</b><span>hours saved per month <span class="ph">edit</span></span></div>
+          <div><b>—</b><span>weeks to go live <span class="ph">edit</span></span></div>
+        </div>
+        <div class="case-quote">
+          <blockquote>Client quote, approved by the client, about what changed for their team. <span class="ph">edit</span></blockquote>
+          <cite>Name, Title, Company <span class="ph">edit</span></cite>
+        </div>
+      </article>
+      -->
+
+      <div class="case-grid">
+        <div class="case-mini">
+          <span class="eyebrow">Next case study</span>
+          <h3>Coming soon</h3>
+          <p>Add the next customer story here as it goes live, using the same format as above.</p>
+        </div>
+        <div class="case-mini">
+          <span class="eyebrow">Next case study</span>
+          <h3>Coming soon</h3>
+          <p>Stories for new solutions will appear here as each one launches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta">
+      <div class="copy">
+        <span class="eyebrow">Be our next story</span>
+        <h2>See what Finomena would change for your team.</h2>
+        <p class="lede">Bring a handful of your real invoices and we'll run them through Auto Invoice in a live walkthrough.</p>
+      </div>
+      <div class="btn-row"><a class="btn btn-primary" href="#contact">Book a walkthrough →</a></div>
+    </div>
+  </div>
 </div>
 
 <!-- ============ WHO WE ARE ============ -->
@@ -888,10 +1212,10 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
           <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="3" width="17" height="23" rx="3.5" fill="var(--teal-deep)"/><rect x="9" y="9" width="9" height="2" rx="1" fill="var(--bg)"/><rect x="9" y="14" width="9" height="2" rx="1" fill="var(--bg)"/><circle cx="22.5" cy="23.5" r="6.5" fill="var(--amber)"/><path d="M19.6 23.6l2 2 3.8-4" stroke="var(--amber-ink)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Finomena
         </a>
-        <p>AI products for finance operations, configured in plain English.</p>
+        <p>Machines take over the mechanical. People still own the meaningful.</p>
       </div>
       <div><h4>Solutions</h4><ul id="footSolutions"></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#about-us">About us</a></li><li><a href="#who-we-are">Who we are</a></li><li><a href="#who-we-are">Careers</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about-us">About us</a></li><li><a href="#case-studies">Case studies</a></li><li><a href="#who-we-are">Who we are</a></li><li><a href="#who-we-are">Careers</a></li></ul></div>
       <div><h4>Get in touch</h4><ul><li><a href="#contact">Book a walkthrough</a></li><li><a href="mailto:hello@finomenahq.com">hello@finomenahq.com</a></li></ul></div>
     </div>
     <div class="foot-base"><span>© 2026 Finomena. All rights reserved.</span><span>finomenahq.com</span></div>
@@ -972,7 +1296,6 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <p>Tell us which finance process eats the most of your team's time. It helps decide what we build next.</p>
       <a class="btn btn-ghost" href="#contact" data-interest="Suggest a process">Suggest a process</a>
     </article>`;
-  document.getElementById('homeSolutions').innerHTML = live.map(featuredCard).join('') + soon.slice(0,3).map(card).join('');
   document.getElementById('allSolutions').innerHTML = live.map(featuredCard).join('') + soon.map(card).join('') + suggest;
   document.getElementById('footSolutions').innerHTML = SOLUTIONS.map(s=>`<li><a href="#${s.page||'solutions'}">${s.area}${s.status==='live'?'':' <span style="color:var(--ink-3);font-size:.8em">· soon</span>'}</a></li>`).join('');
   const intSel = document.getElementById('f-int');
@@ -991,7 +1314,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     const n=navFor[r]||r;
     navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
-    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','contact':'Contact · Finomena'};
+    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena'};
     document.title=titles[r]||'Finomena';
     if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
   }
