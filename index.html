@@ -468,6 +468,30 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
 .recon-board .rs-row.on{opacity:1}
 .recon-board .rs-status{min-width:84px;text-align:center}
 .recon-board .rs-status.pending{color:var(--ink-3);background:var(--sunk)}
+
+/* navigation sub-menus */
+.nav-links{align-items:center}
+.nav-group{position:relative;display:flex;align-items:center}
+.nav-links .chev{vertical-align:-1px;margin-left:2px;transition:transform .2s ease}
+.nav-group:hover .chev,.nav-group:focus-within .chev{transform:rotate(180deg)}
+.submenu{display:none;position:absolute;top:100%;left:-18px;z-index:40;min-width:290px;padding:14px 8px 8px;background:transparent}
+.submenu::before{content:"";position:absolute;inset:8px 0 0;background:var(--bg);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px -20px rgba(13,35,38,.35);z-index:-1}
+.nav-group:hover .submenu,.nav-group:focus-within .submenu{display:grid;gap:2px}
+.nav-links .submenu a{display:grid;gap:2px;padding:10px 12px;border:0;border-radius:10px;color:var(--ink)}
+.nav-links .submenu a:hover,.nav-links .submenu a[aria-current="page"]{background:var(--sunk);color:var(--ink)}
+.submenu b{font-weight:600;font-size:.95rem}
+.submenu small{color:var(--ink-3);font-size:.8rem;line-height:1.35}
+.submenu .sub-all{border-top:1px solid var(--line);border-radius:0 0 10px 10px;margin-top:4px}
+.submenu .live-tag{font:500 .66rem var(--f-mono,monospace);letter-spacing:.06em;color:var(--ok);text-transform:uppercase;margin-left:6px}
+@media (max-width:900px){
+  .nav-links{align-items:stretch}
+  .nav-group{display:grid}
+  .nav-links .chev{display:none}
+  .submenu{display:grid;position:static;min-width:0;padding:0 0 6px 14px}
+  .submenu::before{display:none}
+  .nav-links .submenu a{padding:10px 0;border-radius:0;border-bottom:1px solid var(--line)}
+  .submenu small{display:none}
+}
 </style>
 </head>
 <body>
@@ -480,10 +504,18 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="#home" data-nav="home">Home</a>
-      <a href="#solutions" data-nav="solutions">Solutions</a>
+      <div class="nav-group">
+        <a href="#solutions" data-nav="solutions" aria-haspopup="true">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="submenu" id="solutionsMenu" aria-label="Solutions"></div>
+      </div>
       <a href="#case-studies" data-nav="case-studies">Case studies</a>
-      <a href="#about-us" data-nav="about-us">About us</a>
-      <a href="#who-we-are" data-nav="who-we-are">Who we are</a>
+      <div class="nav-group">
+        <a href="#about-us" data-nav="about-us" aria-haspopup="true">About us <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="submenu" aria-label="About us">
+          <a href="#about-us" data-sub="about-us"><b>Our mission</b><small>Why Finomena exists and how we work with you</small></a>
+          <a href="#who-we-are" data-sub="who-we-are"><b>Who we are</b><small>The team and advisors behind Finomena</small></a>
+        </div>
+      </div>
       <a href="#contact" data-nav="contact">Contact</a>
     </nav>
     <div class="nav-right">
@@ -1438,6 +1470,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </article>`;
   document.getElementById('allSolutions').innerHTML = live.map(featuredCard).join('') + soon.map(card).join('') + suggest;
   document.getElementById('footSolutions').innerHTML = SOLUTIONS.map(s=>`<li><a href="#${s.page||'solutions'}">${s.area}${s.status==='live'?'':' <span style="color:var(--ink-3);font-size:.8em">· soon</span>'}</a></li>`).join('');
+  document.getElementById('solutionsMenu').innerHTML = live.map(x=>`<a href="#${x.page}" data-sub="${x.page}"><b>${x.name}<span class="live-tag">live</span></b><small>${x.area}: ${x.headline.split(': ').slice(1).join(': ') || x.blurb}</small></a>`).join('')
+    + `<a class="sub-all" href="#solutions" data-sub="solutions"><b>All solutions</b><small>${soon.length} more on the way: ${soon.map(x=>x.area.split(' & ')[0]).join(', ')}</small></a>`;
   const intSel = document.getElementById('f-int');
   intSel.innerHTML = SOLUTIONS.map(s=>`<option>${s.name} · ${s.area}</option>`).join('') + '<option>Suggest a process</option><option>Something else</option>';
 
@@ -1445,14 +1479,15 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   const pages=[...document.querySelectorAll('[data-page]')];
   const routes=pages.map(p=>p.dataset.page);
   const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
-  const navFor={'auto-invoice':'solutions','auto-recon':'solutions'};
+  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','who-we-are':'about-us'};
   function route(){
     let r=location.hash.slice(1);
     let scrollTarget=null;
     if(!routes.includes(r)){ const el=r&&document.getElementById(r); if(el){ const pg=el.closest('[data-page]'); r=pg?pg.dataset.page:'home'; scrollTarget=el; } else r='home'; }
     pages.forEach(p=>p.hidden=p.dataset.page!==r);
     const n=navFor[r]||r;
-    navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n || a.dataset.sub===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    if(document.activeElement && navLinks.contains(document.activeElement)) document.activeElement.blur();  // close the sub-menu after a choice
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
     const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena'};
     document.title=titles[r]||'Finomena';
