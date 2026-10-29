@@ -462,6 +462,12 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
 [data-page]{animation:fade .35s ease}
 @keyframes fade{from{opacity:.4}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Auto Recon: statement that fills in */
+.recon-board .rs-row{opacity:.28;transition:opacity .45s ease}
+.recon-board .rs-row.on{opacity:1}
+.recon-board .rs-status{min-width:84px;text-align:center}
+.recon-board .rs-status.pending{color:var(--ink-3);background:var(--sunk)}
 </style>
 </head>
 <body>
@@ -531,7 +537,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       </div>
       <div class="wd-row">
         <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="wd-n">01</span></div><h3>Receive</h3><p>Invoices arrive by email, WhatsApp, vendor portal or ERP into one inbox.</p></div>
-        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="wd-n">02</span></div><h3>Acknowledge</h3><p>Each invoice is date and time stamped and the vendor is notified.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="wd-n">02</span></div><h3>Acknowledge</h3><p>Each invoice is date and time stamped, checked for duplicates and logged in the audit trail.</p></div>
         <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h10M4 16h7"/><circle cx="18" cy="16" r="3"/></svg></span><span class="wd-n">03</span></div><h3>Read</h3><p>Agents read every field from any invoice format, including scans, photos and multi-invoice PDFs.</p></div>
         <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><span class="wd-n">04</span></div><h3>Validate &amp; match</h3><p>Checks GSTIN and duplicates, runs 2- and 3-way match, applies your rules.</p></div>
         <div class="wd-step last"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><span class="wd-n">05</span></div><h3>Approve &amp; post</h3><p>Routes approvals, then posts the entry to SAP or your ERP in real time.</p></div>
@@ -655,8 +661,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="crumbs"><a href="#home">Home</a> / <a href="#solutions">Solutions</a> / Auto Invoice</span>
-        <span class="eyebrow">Auto Invoice · Autonomous accounts payable</span>
-        <h1>Invoices in.<br>Posted out.<span class="amber">No hands in between.</span></h1>
+        <span class="eyebrow">Auto Invoice · Agentic accounts payable</span>
+        <h1>Invoices in.<br>Posted out.<span class="amber">People on exceptions.</span></h1>
         <p class="lede">Auto Invoice runs the whole accounts payable journey, from invoice receipt to ledger posting, with no one keying in data. You set the rules in plain English. Your team handles only the exceptions and approvals.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#contact" data-interest="Auto Invoice · Accounts payable">Book a walkthrough →</a>
@@ -739,12 +745,12 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <h2>Six reasons teams hold off on automating AP, and why they no longer apply.</h2>
       </div>
       <div class="myths">
-        <article class="myth"><span class="lbl">THE MYTH</span><q>Tools only offer partial automation.</q><p><b>Busted.</b> Auto Invoice runs the whole journey, receipt to posting, with no person needed on the happy path.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Tools only offer partial automation.</q><p><b>Busted.</b> Agents run the whole journey, receipt to posting. People step in for exceptions and approvals, not data entry.</p></article>
         <article class="myth"><span class="lbl">THE MYTH</span><q>Implementation takes 3 to 6 months.</q><p><b>Busted.</b> It's configuration, not coding, so you go live in weeks. New rules go live in minutes.</p></article>
         <article class="myth"><span class="lbl">THE MYTH</span><q>Maintenance and customisation cost a fortune.</q><p><b>Busted.</b> You change rules yourself, in plain English. No consultants and no change-request queue.</p></article>
         <article class="myth"><span class="lbl">THE MYTH</span><q>API integration is slow and complex.</q><p><b>Busted.</b> Inputs and outputs, from email to SAP, are chosen by configuration instead of a months-long API build.</p></article>
         <article class="myth"><span class="lbl">THE MYTH</span><q>Automating the whole workflow is risky.</q><p><b>Busted.</b> Dial automation up or down per step. Start assisted and go touchless as trust builds.</p></article>
-        <article class="myth"><span class="lbl">THE MYTH</span><q>We have too many exceptions for a standard tool.</q><p><b>Busted.</b> Build as many exception flows as you need. The engine remembers every edge case, so it never asks twice.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>We have too many exceptions for a standard tool.</q><p><b>Busted.</b> Build as many exception flows as you need. Every decision becomes memory, so the same question rarely comes back.</p></article>
       </div>
     </div>
   </section>
@@ -777,8 +783,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></span><h3>Classify and branch</h3><p>Split invoices into your own categories and run a separate flow for each, with as many exception paths as you need.</p></div>
         <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/></svg></span><h3>2-way and 3-way match</h3><p>Matches automatically against PO and GRN, and reads supporting documents when a decision needs extra validation.</p></div>
         <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Total visibility</h3><p>See at any moment what's processed and what's pending. Spot error patterns and bring turnaround time down.</p></div>
-        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><h3>Auto-communication</h3><p>Sends the right nudge to vendors and internal teams, driven by your rules instead of someone chasing over email.</p></div>
-        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><h3>Predict the delays</h3><p>Learns where invoices get stuck and flags them before they slip, so MSME vendors get paid on time.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><h3>Vendor communication</h3><p>Drafts the right message to vendors when an invoice is returned or held, for a person to check and send.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><h3>MSME dates tracked</h3><p>Every MSME invoice carries its 45-day pay-by date, so a delay is visible before it becomes a disallowance.</p></div>
       </div>
     </div>
   </section>
@@ -790,11 +796,11 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <h2>From a data-entry department to a strategic finance function.</h2>
       </div>
       <div class="outcomes">
-        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c0-4 3-6 7-6s7 2 7 6M19 5v6M16 8h6"/></svg></span><div><h3>A lean AP team</h3><p>People manage exceptions and judgment calls instead of keystrokes. Headcount stays flat even as invoice volume grows.</p></div></div>
-        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><h3>GST reconciliation, automatic</h3><p>Matches against 2A/2B and reconciles automatically. No month-end spreadsheet marathon.</p></div></div>
-        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><div><h3>Insight for decisions</h3><p>Surfaces spend patterns and vendor insight from your invoice data to support strategic decisions.</p></div></div>
-        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h3>Cashflow you can plan</h3><p>Predicts invoice timing and payment dates, so treasury can plan cashflow with confidence.</p></div></div>
-        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></span><div><h3>Returns-ready data</h3><p>Prepares clean, structured data for TDS and GST return filing, closing the loop from invoice receipt to compliance.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c0-4 3-6 7-6s7 2 7 6M19 5v6M16 8h6"/></svg></span><div><h3>A lean AP team</h3><p>People handle exceptions, approvals and judgement calls instead of keystrokes, even as invoice volume grows.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><h3>GST checked on every invoice</h3><p>GSTIN, e-invoice IRN, tax type and rate are checked before posting, so mismatches are caught at the door.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><div><h3>Clean data for decisions</h3><p>Every invoice is coded with GL, cost centre and category, ready for spend analysis.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h3>Payables you can see</h3><p>What is received, waiting for review, approved and posted, in one view, with the reason for every hold.</p></div></div>
+        <div class="out"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></span><div><h3>Compliance-ready data</h3><p>GST and TDS details are captured per invoice in a structured form, ready for returns.</p></div></div>
       </div>
     </div>
   </section>
@@ -822,7 +828,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <p class="lede">Auto Recon reconciles your vendor ledger against the vendor's books or statement, in whatever format they send it. Agents work out how to match the two, match line by line, and explain every open item with the action needed. Your team reviews and signs off.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#contact" data-interest="Auto Recon · Vendor reconciliation">Book a walkthrough →</a>
-          <a class="btn btn-ghost" href="#solutions">All solutions</a>
+          <button class="btn btn-ghost" type="button" data-scroll="rdiagnostic">See if it's for you</button>
         </div>
         <div class="pills">
           <span class="pill">SAP · Tally · Excel · PDF</span>
@@ -830,16 +836,18 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
           <span class="pill">Plan saved per vendor</span>
         </div>
       </div>
-      <div class="board" aria-label="Example reconciliation statement">
-        <div class="board-head"><span>Reconciliation statement (example)</span><span>our view</span></div>
+      <div class="board recon-board" id="reconBoard" aria-label="Sample reconciliation statement: matched lines, four explained differences, nothing left unexplained">
+        <div class="board-head"><span>Reconciliation statement (sample)</span><span class="live-dot" id="rsState">reconciling</span></div>
         <div>
-          <div class="board-row"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><div><b>Balance as per our books</b><small>−₹4,32,800</small></div><span class="status live">Start</span></div>
-          <div class="board-row"><span class="ico mute"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><div><b>Not in the vendor's books</b><small>1 invoice · ₹25,000 · vendor to book</small></div><span class="status soon">Open</span></div>
-          <div class="board-row"><span class="ico mute"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M18 6L6 18"/></svg></span><div><b>Tax difference</b><small>₹18,000 = 18% of ₹1,00,000 · GST not booked</small></div><span class="status soon">Open</span></div>
-          <div class="board-row"><span class="ico mute"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><div><b>Booked in different periods</b><small>payment of 31 Mar vs receipt of 2 Apr</small></div><span class="status soon">Timing</span></div>
-          <div class="board-row"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><b>Balance as per the vendor's books</b><small>−₹5,71,700</small></div><span class="status live">Explained</span></div>
+          <div class="board-row rs-row" data-step="1"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><div><b>Balance as per our books</b><small>−₹4,32,800 · SAP vendor ledger</small></div><span class="status rs-status" data-final="Start" data-kind="live">…</span></div>
+          <div class="board-row rs-row" data-step="2"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><b>Matched: <span id="rsMatched">0</span> lines</b><small>reference · TDS · payments · combinations</small></div><span class="status rs-status" data-final="Matched" data-kind="live">…</span></div>
+          <div class="board-row rs-row" data-step="3"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Booked in different periods</b><small>payment of 31 Mar vs receipt of 2 Apr · −₹92,800</small></div><span class="status rs-status" data-final="Timing" data-kind="soon">…</span></div>
+          <div class="board-row rs-row" data-step="4"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><div><b>Not in our books</b><small>vendor invoice of 28 Mar · −₹53,100 · get the copy</small></div><span class="status rs-status" data-final="Open" data-kind="soon">…</span></div>
+          <div class="board-row rs-row" data-step="5"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M18 6L6 18"/></svg></span><div><b>Tax difference</b><small>−₹18,000 = 18% of ₹1,00,000 · GST not booked</small></div><span class="status rs-status" data-final="Open" data-kind="soon">…</span></div>
+          <div class="board-row rs-row" data-step="6"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><div><b>Not in the vendor's books</b><small>1 invoice · +₹25,000 · vendor to book</small></div><span class="status rs-status" data-final="Open" data-kind="soon">…</span></div>
+          <div class="board-row rs-row" data-step="7"><span class="ico"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><div><b>Balance as per the vendor's books</b><small>−₹5,71,700 · Tally ledger</small></div><span class="status rs-status" data-final="Explained" data-kind="live">…</span></div>
         </div>
-        <div class="board-foot"><span><b>₹0</b> unexplained</span><span>every line accounted for</span></div>
+        <div class="board-foot"><span>differences explained <b id="rsExplained">0</b> of 4</span><span>unexplained <b id="rsLeft">₹1,38,900</b></span></div>
       </div>
     </div>
   </section>
@@ -853,6 +861,43 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
     <p class="fine">Measured in testing on real vendor ledgers of a large Indian enterprise, against its finance team's finished reconciliations. Results depend on the data.</p>
   </div>
+
+  <section class="tint" id="rdiagnostic" style="margin-top:clamp(60px,8vw,104px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The diagnostic</span>
+        <h2>Does this sound like your reconciliation?</h2>
+        <p class="lede">Tick every statement that's true today. The more you tick, the more of your month goes into spreadsheets, and the more Auto Recon takes off your team's plate.</p>
+      </div>
+      <div class="diag-grid">
+        <ul class="checks" id="rchecks"></ul>
+        <aside class="score" aria-live="polite">
+          <span class="eyebrow" style="color:var(--ink-3)">Your pain signal</span>
+          <div class="big"><span id="rsc">0</span><small>/ 9</small></div>
+          <div class="meter"><i id="rmeter"></i></div>
+          <p class="verdict" id="rverdict">Tick the statements on the left to see how much of your reconciliation work Finomena could take over.</p>
+          <a class="btn btn-primary" href="#contact" data-interest="Auto Recon · Vendor reconciliation">Fix this →</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Myth-busting</span>
+        <h2>Six reasons teams still reconcile in Excel, and why they no longer apply.</h2>
+      </div>
+      <div class="myths">
+        <article class="myth"><span class="lbl">THE MYTH</span><q>You can't automate when the two sides use different systems.</q><p><b>Busted.</b> Auto Recon reads SAP, Tally, Excel and PDF statements and works out how the two books map, from what the columns actually hold.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Every vendor needs a template built by IT.</q><p><b>Busted.</b> Agents design the plan on first sight. A reviewer corrects it in plain words, and it is saved for that vendor.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Only exact one-to-one matches can be automated.</q><p><b>Busted.</b> TDS, lump-sum payments, split invoices, timing and internal postings are matched or explained, and lines still reconcile only when the amounts agree.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Scanned statements mean retyping them.</q><p><b>Busted.</b> PDFs and photos are read page by page into a table you can download and check against the original.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>Automation will hide differences.</q><p><b>Busted.</b> Nothing is forced. Every match shows why, every open item gets a reason and an action, and the statement ends at ₹0 unexplained.</p></article>
+        <article class="myth"><span class="lbl">THE MYTH</span><q>It only pays off for the biggest vendors.</q><p><b>Busted.</b> Each vendor's plan is reused every period at near-zero cost, so every vendor can be reconciled, not just the top ten.</p></article>
+      </div>
+    </div>
+  </section>
 
   <section>
     <div class="wrap">
@@ -1428,6 +1473,55 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   let posted=1284, exc=37, tick=0;
   if(!reduce) setInterval(()=>{posted+=1+Math.floor(Math.random()*2);tick++;if(tick%9===0)exc++;cP.textContent=posted.toLocaleString('en-IN');cE.textContent=exc;},1300);
 
+  /* ===== AUTO RECON PAGE: the statement fills in, then starts again ===== */
+  (function(){
+    const board=document.getElementById('reconBoard'); if(!board) return;
+    const rows=[...board.querySelectorAll('.rs-row')], matched=document.getElementById('rsMatched'),
+          explained=document.getElementById('rsExplained'), left=document.getElementById('rsLeft'), state=document.getElementById('rsState');
+    const leftAfter=['₹1,38,900','₹1,38,900','₹1,38,900','₹46,100','₹7,000','₹25,000','₹0','₹0'];
+    const settle=(r,final)=>{const st=r.querySelector('.rs-status'); r.classList.add('on');
+      st.textContent=final?st.dataset.final:'…'; st.className='status rs-status '+(final?st.dataset.kind:'pending');};
+    const finish=()=>{rows.forEach(r=>settle(r,true)); matched.textContent='46'; explained.textContent='4'; left.textContent='₹0'; state.textContent='reconciled';};
+    if(reduce){finish();return;}
+    function run(){
+      rows.forEach(r=>{r.classList.remove('on');settle(r,false);r.classList.remove('on');});
+      matched.textContent='0'; explained.textContent='0'; left.textContent=leftAfter[0]; state.textContent='reconciling';
+      rows.forEach((r,i)=>setTimeout(()=>{
+        settle(r,false);
+        if(i===1){let n=0;const t=setInterval(()=>{n+=2;matched.textContent=Math.min(n,46);if(n>=46)clearInterval(t);},45);}
+        setTimeout(()=>{settle(r,true); if(i>=2&&i<=5) explained.textContent=String(i-1); left.textContent=leftAfter[i+1];
+          if(i===rows.length-1){state.textContent='reconciled'; setTimeout(run,4200);} },900);
+      },300+i*1250));
+    }
+    run();
+  })();
+
+  /* ===== DIAGNOSTICS (Auto Invoice and Auto Recon share one checklist) ===== */
+  function diagnostic(ids, items, verdicts){
+    const ul=document.getElementById(ids.list); if(!ul) return;
+    ul.innerHTML=items.map((t,i)=>`<li><label class="check" for="${ids.prefix}${i}"><input type="checkbox" id="${ids.prefix}${i}"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${t}</span></label></li>`).join('');
+    const sc=document.getElementById(ids.score), meter=document.getElementById(ids.meter), verdict=document.getElementById(ids.verdict);
+    ul.addEventListener('change',()=>{
+      const n=ul.querySelectorAll('input:checked').length, k=items.length;
+      sc.textContent=n; meter.style.width=(n/k*100)+'%';
+      verdict.innerHTML = n===0 ? verdicts[0] : n<=k/3 ? verdicts[1] : n<=2*k/3 ? verdicts[2] : verdicts[3];
+    });
+  }
+  diagnostic({list:'rchecks', prefix:'rc', score:'rsc', meter:'rmeter', verdict:'rverdict'}, [
+    "A single vendor reconciliation takes us more than a day.",
+    "We rebuild SUMIFs and lookups in Excel for every reconciliation.",
+    "Vendor statements arrive in different formats: Tally, Excel, PDF, scans.",
+    "Payments without references are matched by hand, month by month.",
+    "TDS differences are worked out line by line.",
+    "We reconcile only our largest vendors, not all of them.",
+    "Open items are chased over long email threads.",
+    "We can't see which vendors were reconciled, and when.",
+    "What we learned last quarter lives in one person's spreadsheet."
+  ], ["Tick the statements on the left to see how much of your reconciliation work Finomena could take over.",
+      "<b>Early signs.</b> A few manual steps are costing you time each month. Auto Recon removes them without changing how your team signs off.",
+      "<b>Strong fit.</b> Much of your reconciliation effort is matching and rebuilding spreadsheets. Auto Recon takes that over and leaves your team the open items.",
+      "<b>Textbook case for agentic reconciliation.</b> Most of this moves to Auto Recon. Your team reviews the open items and signs off."]);
+
   const items=[
     "We have an accounts payable team of more than 2 people.",
     "Employees manually key in invoice data, hundreds of hours every month.",
@@ -1439,17 +1533,11 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     "We do 2-way and 3-way matching by hand.",
     "We have no single platform to receive and monitor invoices centrally."
   ];
-  const ul=document.getElementById('checks');
-  ul.innerHTML=items.map((t,i)=>`<li><label class="check" for="c${i}"><input type="checkbox" id="c${i}"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${t}</span></label></li>`).join('');
-  const sc=document.getElementById('sc'),meter=document.getElementById('meter'),verdict=document.getElementById('verdict');
-  ul.addEventListener('change',()=>{
-    const n=ul.querySelectorAll('input:checked').length;
-    sc.textContent=n; meter.style.width=(n/9*100)+'%';
-    verdict.innerHTML = n===0 ? "Tick the statements on the left to see how much of your AP work Finomena could take over."
-      : n<=3 ? "<b>Early signs.</b> A few manual steps are costing you time. Auto Invoice can remove them without changing how your team works."
-      : n<=6 ? "<b>Strong fit.</b> Much of your AP effort is data entry and chasing. Auto Invoice takes that over and leaves your team the exceptions."
-      : "<b>Textbook case for autonomous AP.</b> Nearly everything here disappears with Auto Invoice. Your team moves from data entry to managing exceptions only.";
-  });
+  diagnostic({list:'checks', prefix:'c', score:'sc', meter:'meter', verdict:'verdict'}, items,
+    ["Tick the statements on the left to see how much of your AP work Finomena could take over.",
+     "<b>Early signs.</b> A few manual steps are costing you time. Auto Invoice can remove them without changing how your team works.",
+     "<b>Strong fit.</b> Much of your AP effort is data entry and chasing. Auto Invoice takes that over and leaves your team the exceptions.",
+     "<b>Textbook case for agentic AP.</b> Most of this moves to Auto Invoice. Your team moves from data entry to exceptions and approvals."]);
 
   const rules=[
     {parts:['"If the invoice is from an ',['MSME vendor'],' and the amount is over ',['₹1,00,000'],', route approval to ',['the plant finance head'],', run a ',['3-way match'],' against the PO and GRN, then post to ',['SAP'],' and notify the vendor."'],
