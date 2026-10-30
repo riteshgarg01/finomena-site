@@ -24,8 +24,9 @@
 .fm-seg{display:inline-flex;border:1px solid var(--fm-line);border-radius:10px;overflow:hidden}
 .fm-seg button{font:600 .82rem inherit;padding:7px 12px;border:0;background:var(--fm-bg);color:var(--fm-ink2);cursor:pointer}
 .fm-seg button[aria-pressed="true"]{background:var(--fm-deep);color:#fff}
-.fm-map{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(150px,.45fr) minmax(0,1fr);
-  grid-template-areas:"top top top" "left center right" "bottom bottom bottom";gap:30px 26px;align-items:center;position:relative;z-index:1}
+.fm-map{display:grid;grid-template-columns:minmax(0,1.45fr) 210px minmax(0,1fr);
+  grid-template-areas:"top top top" "left center right" "bottom bottom bottom";gap:44px 0;align-items:center;position:relative;z-index:1}
+.fm-quiet .fm-flow:not(.hot),.fm-quiet .fm-flow-label:not(.hot){display:none}
 .fm-slot{display:flex;gap:16px;align-items:flex-start;min-width:0}
 .fm-slot:empty{display:none}
 .fm-slot.top{grid-area:top;justify-content:center}.fm-slot.bottom{grid-area:bottom;justify-content:center}
@@ -52,6 +53,8 @@
 .fm-card{position:relative;text-align:left;border:1px solid var(--fm-line);border-left:5px solid var(--fm-pri,#ccc);border-radius:12px;background:var(--fm-bg);padding:10px 11px 9px;cursor:pointer;display:grid;gap:6px;align-content:start;font:inherit;color:inherit;transition:transform .15s ease,box-shadow .15s ease,opacity .2s ease}
 .fm-card:hover,.fm-card:focus-visible,.fm-card.sel{transform:translateY(-1px);box-shadow:0 10px 24px -16px rgba(13,35,38,.45);outline:none}
 .fm-card.sel{border-color:var(--fm-deep)}
+.fm-card.linked{border-color:var(--fm-amber);box-shadow:0 0 0 2px color-mix(in srgb,var(--fm-amber) 30%,transparent)}
+.fm-linknote{font:600 .7rem ui-sans-serif,system-ui,sans-serif;color:#8a5410;background:color-mix(in srgb,var(--fm-amber) 12%,transparent);border-radius:6px;padding:3px 7px;justify-self:start}
 .fm-card b{font-size:.88rem;line-height:1.25}
 .fm-card .fm-sub{font-size:.74rem;color:var(--fm-ink3);line-height:1.35}
 .fm-card.unconfirmed{border-style:dashed}
@@ -70,11 +73,11 @@
 .fm-svg.top{z-index:2}
 .fm-flow{fill:none;stroke:var(--fm-teal);stroke-width:1.6;opacity:.7;transition:opacity .2s ease,stroke-width .2s ease}
 .fm-flow.hot{opacity:1;stroke-width:2.4}
-.fm-flow-label{font:600 10.5px ui-sans-serif,system-ui,sans-serif;fill:var(--fm-deep);paint-order:stroke;stroke:var(--fm-bg);stroke-width:4px;opacity:0;transition:opacity .2s ease}
-.fm-flow-label.hot{opacity:1}
+.fm-flow-label{font:600 11px ui-sans-serif,system-ui,sans-serif;fill:var(--fm-deep);paint-order:stroke;stroke:var(--fm-bg);stroke-width:5px;stroke-linejoin:round;opacity:0;transition:opacity .2s ease}
+.fm-flow-label,.fm-flow-label.hot{display:none}  /* the connected cards carry the label instead */
 .fm-link{stroke:var(--fm-ink3);stroke-width:1.2;fill:none;opacity:.6}
 .fm-link.adjacent{stroke-dasharray:5 5}
-.fm-panel{position:sticky;bottom:12px;margin-top:18px;border:1px solid var(--fm-line);border-radius:16px;background:var(--fm-bg);box-shadow:0 22px 50px -28px rgba(13,35,38,.55);padding:16px 18px;display:none;z-index:3}
+.fm-panel{position:sticky;bottom:12px;max-height:46vh;overflow:auto;margin-top:18px;border:1px solid var(--fm-line);border-radius:16px;background:var(--fm-bg);box-shadow:0 22px 50px -28px rgba(13,35,38,.55);padding:16px 18px;display:none;z-index:3}
 .fm-panel.open{display:block}
 .fm-panel h3{margin:0 0 4px;font-size:1.05rem}
 .fm-panel .fm-close{position:absolute;top:10px;right:12px;border:0;background:none;font-size:1.3rem;cursor:pointer;color:var(--fm-ink3)}
@@ -162,7 +165,7 @@
       <div class="fm-panel" role="dialog" aria-live="polite"></div></div>`;
 
     const fm = mount.querySelector('.fm'), stage = mount.querySelector('.fm-stage'), panel = mount.querySelector('.fm-panel');
-    let svg, showFlows = true, onlyFin = false, hidden = new Set(), selected = null;
+    let hoverId = null, svg, showFlows = true, onlyFin = false, hidden = new Set(), selected = null;
 
     function layout(v) {
       view = v;
@@ -170,6 +173,11 @@
       fm.classList.toggle('as-map', v === 'map');
       fm.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
       stage.innerHTML = views[v]() + '<svg class="fm-svg" aria-hidden="true"></svg>';
+      showFlows = v === 'org';  // the map view starts quiet: flows show for the card in focus
+      fm.classList.toggle('fm-quiet', !showFlows);
+      const ft = fm.querySelector('[data-mode="flows"]');
+      ft.setAttribute('aria-pressed', String(showFlows));
+      ft.textContent = v === 'map' ? 'Show all flows' : 'Show flows';
       svg = stage.querySelector('.fm-svg');
       applyFilters();
       if (selected) stage.querySelectorAll('.fm-card').forEach(c => c.classList.toggle('sel', c.dataset.id === selected));
@@ -190,11 +198,12 @@
         let d;
         if (view === 'map' && c.dataset.slot === 'left') d = `M${root.x} ${cy}H${r.x + r.w}`;
         else if (view === 'map' && c.dataset.slot === 'right') d = `M${root.x + root.w} ${cy}H${r.x}`;
-        else if (view === 'map' && c.dataset.slot === 'top') { const ym = (r.y + r.h + root.y) / 2; d = `M${cx} ${root.y}V${ym}H${r.x + r.w / 2}V${r.y + r.h}`; }
+        else if (view === 'map' && c.dataset.slot === 'top') { const ym = r.y + r.h + 22; d = `M${cx} ${root.y}V${ym}H${r.x + r.w / 2}V${r.y + r.h}`; }
+        else if (view === 'map') { const ym = r.y - 22; d = `M${cx} ${root.y + root.h}V${ym}H${r.x + r.w / 2}V${r.y}`; }
         else { const y1 = root.y + root.h, ym = (y1 + r.y) / 2; d = `M${cx} ${y1}V${ym}H${r.x + r.w / 2}V${r.y}`; }
         out += `<path class="${cls}" d="${d}"/>`;
       });
-      if (showFlows) flows.forEach((f, i) => {
+      flows.forEach((f, i) => {
         const a = stage.querySelector(`[data-id="${f.from}"]`), b = stage.querySelector(`[data-id="${f.to}"]`);
         if (!a || !b) return;
         const A = rel(a), B = rel(b);
@@ -213,12 +222,23 @@
       });
       svg.innerHTML = `<defs><marker id="fm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0 0L10 5L0 10z" fill="var(--fm-teal)"/></marker></defs>${out}`;
-      if (selected) heat(selected);
+      heat(hoverId || selected);
     }
 
     function heat(id) {
+      // the card in focus: its lines light up behind the cards, and every connected card says how it is connected
       svg.querySelectorAll('[data-flow]').forEach(el => {
         const f = flows[+el.dataset.flow]; el.classList.toggle('hot', !!id && (f.from === id || f.to === id));
+      });
+      stage.querySelectorAll('.fm-linknote').forEach(n => n.remove());
+      stage.querySelectorAll('.fm-card.linked').forEach(c => c.classList.remove('linked'));
+      if (!id) return;
+      flows.forEach(f => {
+        if (f.from !== id && f.to !== id) return;
+        const other = f.from === id ? f.to : f.from, c = stage.querySelector(`[data-id="${other}"]`);
+        if (!c) return;
+        c.classList.add('linked');
+        c.insertAdjacentHTML('beforeend', `<span class="fm-linknote">${f.from === id ? '← receives' : '→ feeds it'}: ${esc(f.label || '')}</span>`);
       });
     }
 
@@ -250,8 +270,8 @@
     }
 
     stage.addEventListener('click', e => { const c = e.target.closest('.fm-card'); if (c) open(c.dataset.id); });
-    stage.addEventListener('mouseover', e => { const c = e.target.closest('.fm-card'); if (c) heat(c.dataset.id); });
-    stage.addEventListener('mouseout', e => { const c = e.target.closest('.fm-card'); if (c) heat(selected); });
+    stage.addEventListener('mouseover', e => { const c = e.target.closest('.fm-card'); if (c) { hoverId = c.dataset.id; heat(hoverId); } });
+    stage.addEventListener('mouseout', e => { const c = e.target.closest('.fm-card'); if (c) { hoverId = null; heat(selected); } });
     fm.querySelectorAll('[data-pri-filter]').forEach(ch => {
       const flip = () => { const k = ch.dataset.priFilter, on = ch.getAttribute('aria-pressed') !== 'true';
         ch.setAttribute('aria-pressed', String(on)); on ? hidden.delete(k) : hidden.add(k); applyFilters(); };
@@ -261,7 +281,7 @@
       onlyFin = !onlyFin; e.currentTarget.setAttribute('aria-pressed', String(onlyFin)); applyFilters(); });
     fm.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => layout(b.dataset.view)));
     fm.querySelector('[data-mode="flows"]').addEventListener('click', e => {
-      showFlows = !showFlows; e.currentTarget.setAttribute('aria-pressed', String(showFlows)); draw(); });
+      showFlows = !showFlows; e.currentTarget.setAttribute('aria-pressed', String(showFlows)); fm.classList.toggle('fm-quiet', !showFlows); });
     addEventListener('resize', draw);
     new ResizeObserver(() => draw()).observe(stage);
     layout(view);
