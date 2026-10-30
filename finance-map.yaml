@@ -5,6 +5,7 @@
 #   priority     – where agentic AI pays off first: high / medium / low / skip (served by existing tools)
 #   finomena     – live (product running) / next / idea (agentic opportunity)
 #   product_name, product_link, finomena_note – shown on the card and in its detail panel
+#   position     – map view: which side of the CFO the domain sits on (left / right / top / bottom)
 #   reports      – "adjacent": drawn with a dashed line (works alongside finance)
 #   flows        – connectors between areas (from → to)
 
@@ -12,6 +13,7 @@ meta:
   title: "Agentic AI across the finance function"
   org_context: "A typical Indian mid-to-large enterprise"
   pilot_focus: controllership
+  default_view: org        # org (org chart) or map (CFO at the centre); people can switch
   focus_label: "Where to start"
 
 root:
@@ -22,6 +24,7 @@ domains:
 
   - id: controllership
     name: Controllership
+    position: left
     priority: high
     children:
       - id: accounting_close
@@ -79,6 +82,7 @@ domains:
 
   - id: shared_services
     name: Finance Ops (Shared Services)
+    position: right
     priority: medium
     children:
       - id: ap
@@ -106,6 +110,7 @@ domains:
 
   - id: analyst
     name: Analysis / FP&A
+    position: top
     priority: low
     children:
       - id: business_finance
@@ -119,6 +124,7 @@ domains:
 
   - id: procurement
     name: Procurement
+    position: bottom
     priority: low
     reports: adjacent
     children:
@@ -128,6 +134,7 @@ domains:
 
   - id: crm_ticketing
     name: CRM + Ticketing
+    position: bottom
     priority: low
     reports: adjacent
     activities: [leads, proposals, quotes, negotiation]
