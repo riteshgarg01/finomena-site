@@ -662,12 +662,21 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <span class="eyebrow">Solutions</span>
       <h1>AI products for every corner of finance operations.</h1>
       <p class="lede">Accounts payable and vendor reconciliation are live today. More of the back office is on the way, all on one platform, so the rules and memory you build carry across every solution.</p>
-      <p style="margin-top:14px"><a class="link" href="#finance-map">See the whole finance function on one map, and where agents fit →</a></p>
     </div>
   </div>
+  <section style="padding-top:0" id="finance-map">
+    <div class="wrap">
+      <span class="eyebrow">The finance back office on one map</span>
+      <h2 style="margin:8px 0 6px">Six flows, one ledger, and where agents fit.</h2>
+      <p class="lede" style="margin:0 0 22px">Six end-to-end flows run through every finance back office, and all of them land in the general ledger the CFO answers for. Follow a flow, or click any stop to see where an agent can take the work off the team.</p>
+      <div data-finance-landscape></div>
+      <p style="margin-top:18px">Want this for your own team, systems and volumes? <a class="link" href="#contact" data-interest="Finance back-office map workshop">Book a mapping session →</a></p>
+    </div>
+  </section>
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="sol-grid" id="allSolutions"></div>
+      <span class="eyebrow">Our solutions</span>
+      <div class="sol-grid" id="allSolutions" style="margin-top:14px"></div>
     </div>
   </section>
   <section class="tint">
@@ -974,33 +983,6 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <p class="lede">Bring your ledger and the vendor's statement, in any format. We'll reconcile them live and walk through every open item.</p>
       </div>
       <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Auto Recon · Vendor reconciliation">Book a walkthrough →</a></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ FINANCE MAP (conceptual; content and renderer: finance-landscape.js) ============ -->
-<div data-page="finance-map" hidden>
-  <div class="page-hero">
-    <div class="wrap">
-      <span class="crumbs"><a href="#home">Home</a> / <a href="#solutions">Solutions</a> / Finance map</span>
-      <span class="eyebrow">For CFOs and controllers</span>
-      <h1>Your finance function on one map, and where agents fit.</h1>
-      <p class="lede">Six end-to-end flows run through every finance back office, and all of them land in the general ledger the CFO answers for. Follow a flow, or click any stop to see where an agent can take the work off the team.</p>
-    </div>
-  </div>
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div data-finance-landscape></div>
-    </div>
-  </section>
-  <div class="wrap">
-    <div class="cta">
-      <div class="copy">
-        <span class="eyebrow">Map your own function</span>
-        <h2>We'll map your finance back office with you.</h2>
-        <p class="lede">In one working session we map your teams, systems and volumes, and mark where agents would take work off the team first.</p>
-      </div>
-      <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Finance back-office map workshop">Book a mapping session →</a></div>
     </div>
   </div>
 </div>
@@ -1508,7 +1490,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   const pages=[...document.querySelectorAll('[data-page]')];
   const routes=pages.map(p=>p.dataset.page);
   const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
-  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','finance-map':'solutions','who-we-are':'about-us'};
+  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','who-we-are':'about-us'};
   function route(){
     let r=location.hash.slice(1);
     let scrollTarget=null;
@@ -1518,7 +1500,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n || a.dataset.sub===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
     if(document.activeElement && navLinks.contains(document.activeElement)) document.activeElement.blur();  // close the sub-menu after a choice
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
-    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','finance-map':'Finance back-office map · Finomena','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena'};
+    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena'};
     document.title=titles[r]||'Finomena';
     if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
   }
