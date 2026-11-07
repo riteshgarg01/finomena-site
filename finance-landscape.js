@@ -72,15 +72,7 @@
 .fl-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--fl-line);background:#fff;border-radius:99px;padding:6px 14px;font-family:inherit;font-weight:600;font-size:.9rem;line-height:1.2;color:var(--fl-ink);cursor:pointer}
 .fl-chip i{width:22px;height:6px;border-radius:3px;background:var(--c)}
 .fl-chip[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 25%,transparent)}
-.fl-board{position:relative;background:#fff;border:1px solid var(--fl-line);border-radius:16px;padding:8px;box-shadow:var(--shadow,none)}
-.fl-pop{position:absolute;z-index:2;width:300px;background:#fff;border:1px solid var(--fl-line);border-top:4px solid var(--c);border-radius:12px;box-shadow:0 12px 32px -12px rgba(13,35,38,.35);padding:12px 14px 10px;font-size:.92rem;line-height:1.45}
-.fl-pop[hidden]{display:none}
-.fl-pop .k{font:500 .68rem var(--f-mono,monospace);letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
-.fl-pop h4{margin:2px 0 6px;font-size:1.02rem}
-.fl-pop p{margin:0 0 6px;color:var(--fl-ink2)}
-.fl-pop .agent{color:var(--fl-ink)}
-.fl-pop .agent b{color:var(--teal,#0f7f82)}
-.fl-pop .x{position:absolute;top:6px;right:8px;border:0;background:none;font-size:1.1rem;color:var(--fl-ink3);cursor:pointer}
+.fl-board{background:#fff;border:1px solid var(--fl-line);border-radius:16px;padding:8px;box-shadow:var(--shadow,none)}
 .fl svg{display:block;width:100%;height:auto}
 .fl-track{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;transition:opacity .25s}
 .fl-flow{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-dasharray:1 22;animation:fl-move 1.6s linear infinite;opacity:.9}
@@ -161,28 +153,9 @@
     }
     el.classList.add('fl');
     el.innerHTML = `<div class="fl-legend">${LINES.map(l => `<button class="fl-chip" data-line="${l.id}" aria-pressed="false" style="--c:${l.color}"><i></i>${esc(l.name)}</button>`).join('')}</div>
-      <div class="fl-board">${svg()}<div class="fl-pop" role="dialog" hidden></div></div><div class="fl-strips">${strips()}</div>
+      <div class="fl-board">${svg()}</div><div class="fl-strips">${strips()}</div>
       <div class="fl-panel" aria-live="polite"></div>`;
-    const panel = el.querySelector('.fl-panel'), pop = el.querySelector('.fl-pop'), board = el.querySelector('.fl-board');
-    let popId = null;
-    const hidePop = () => { pop.hidden = true; popId = null; };
-    const placePop = id => {
-      // a short explanation right beside the stop, on the side with more room
-      const p = S[id], l = lineOf[id], dot = board.querySelector(`.fl-stop[data-stop="${id}"] circle`);
-      if (!dot || !board.getClientRects().length) return;
-      popId = id;
-      pop.style.setProperty('--c', l.color);
-      pop.innerHTML = `<button class="x" aria-label="Close">×</button><span class="k">${esc(l.name)}</span><h4>${esc(p.name)}</h4>
-        <p>${esc(p.does)}</p><p class="agent"><b>Agent:</b> ${esc(p.agent)}</p>`;
-      pop.hidden = false;
-      const b = board.getBoundingClientRect(), d = dot.getBoundingClientRect();
-      const cx = d.left + d.width / 2 - b.left, cy = d.top + d.height / 2 - b.top, w = pop.offsetWidth, h = pop.offsetHeight;
-      let x = cx < b.width / 2 ? cx + 22 : cx - w - 22;
-      let y = Math.min(Math.max(cy - h / 2, 8), b.height - h - 8);
-      x = Math.min(Math.max(x, 8), b.width - w - 8);
-      pop.style.left = `${x}px`;
-      pop.style.top = `${y}px`;
-    };
+    const panel = el.querySelector('.fl-panel');
 
     const intro = () => {
       el.style.removeProperty('--c');
@@ -198,7 +171,6 @@
     };
     const showLine = id => {
       const l = LINES.find(x => x.id === id);
-      hidePop();
       el.querySelectorAll('.fl-stop.on, .fl-stop.linked').forEach(s => s.classList.remove('on', 'linked'));
       el.querySelectorAll('.fl-g.has-linked').forEach(g => g.classList.remove('has-linked'));
       focusLine(id);
@@ -219,12 +191,9 @@
       panel.innerHTML = `<span class="k">${esc(l.name)}</span><h3>${esc(p.name)}</h3><p>${esc(p.does)}</p>
         <p class="agent"><b>Where an agent can act:</b> ${esc(p.agent)}</p>` +
         (links.length ? `<p class="links">Hands work to and from: ${links.map(k => `<button data-stop="${k}">${esc(S[k].name)}</button>`).join(', ')}</p>` : '');
-      placePop(id);
     };
 
     el.addEventListener('click', e => {
-      if (e.target.closest('.fl-pop .x')) return hidePop();
-      if (e.target.closest('.fl-pop')) return;
       const stop = e.target.closest('[data-stop]');
       if (stop) {
         showStop(stop.dataset.stop);
@@ -233,10 +202,8 @@
       }
       const chip = e.target.closest('.fl-chip');
       if (chip) return chip.getAttribute('aria-pressed') === 'true' ? (focusLine(null), intro()) : showLine(chip.dataset.line);
-      if (e.target.closest('svg') && !e.target.closest('.fl-g')) { hidePop(); focusLine(null); intro(); }
+      if (e.target.closest('svg') && !e.target.closest('.fl-g')) { focusLine(null); intro(); }
     });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') hidePop(); });
-    window.addEventListener('resize', () => { if (popId) placePop(popId); });
     el.addEventListener('keydown', e => {
       const stop = e.target.closest('.fl-stop');
       if (stop && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); showStop(stop.dataset.stop); }
