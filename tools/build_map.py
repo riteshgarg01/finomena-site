@@ -1,7 +1,8 @@
 """Build a self-contained finance back-office map (one HTML file) from a finance-map.yaml.
 
-The website renders finance-map.yaml live; this makes a single file for a client workshop, a meeting without
-internet, or an email: the YAML, the renderer (finance-map.js) and js-yaml are all inlined.
+Client workshop maps (org chart and map views, priorities, the Finomena layer) are built from a client's YAML into one
+file for a meeting without internet or an email: the YAML, finance-map.js and js-yaml are inlined. The public
+website map is conceptual and lives in finance-landscape.js.
 
     python3 tools/build_map.py "<path>/finance-map.yaml" "<path>/finance-map.html"
 
