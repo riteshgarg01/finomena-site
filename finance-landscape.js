@@ -49,15 +49,15 @@
     r_consol: { x: 280, y: 190, lab: 'b', name: 'Consolidation & reporting', does: 'Entities combined; P&L, balance sheet and cash flow.', agent: 'Eliminates intercompany items, drafts the statements and notes.', links: ['f_mis'] },
     r_audit: { x: 170, y: 190, lab: 'a', name: 'Audit & filings', does: 'Statutory and internal audit; ROC / MCA filings.', agent: 'Assembles PBC lists and evidence, answers auditor queries.' },
     // plan to perform (top, out of the ledger)
-    f_mis: { x: 600, y: 300, lab: 'r', name: 'Management reporting', does: 'The monthly MIS for leadership and the board.', agent: 'Builds the MIS pack from the ledger and explains what moved.' },
+    f_mis: { x: 600, y: 280, lab: 'r', name: 'MIS reporting', does: 'The monthly MIS for leadership and the board.', agent: 'Builds the MIS pack from the ledger and explains what moved.' },
     f_var: { x: 600, y: 210, lab: 'r', name: 'Variance & performance', does: 'Actuals against budget, by business unit and cost centre.', agent: 'Finds the drivers behind each variance and says them in plain words.' },
     f_plan: { x: 600, y: 120, lab: 'r', name: 'Budget & forecast', does: 'The annual budget and rolling forecasts.', agent: 'Drafts the forecast from run-rates and plans and tests scenarios.' },
     f_partner: { x: 600, y: 40, lab: 'r', name: 'Business partnering', does: 'Finance answers for business heads.', agent: 'Answers ad-hoc questions on finance data, citing the source rows.' },
     // treasury (bottom, into the ledger)
-    t_forecast: { x: 600, y: 760, lab: 'r', name: 'Cash forecasting', does: 'Expected receipts and payments by day and week.', agent: 'Builds the forecast from open receivables, payables and payroll, and explains variances.' },
-    t_funding: { x: 600, y: 670, lab: 'r', name: 'Funding, investments & FX', does: 'Borrowing, deposits, FX exposure and hedges.', agent: 'Watches limits and exposures and suggests moves within policy.' },
-    t_position: { x: 600, y: 580, lab: 'r', name: 'Cash position & payments', does: 'Daily bank balances and payment releases.', agent: 'Assembles the daily position across banks and releases approved payments.' },
-    t_bank: { x: 600, y: 500, lab: 'r', name: 'Bank reconciliation', does: 'Bank statements matched to the books.', agent: 'Matches bank lines, explains what is open, proposes the entries.', links: ['r_recon'] },
+    t_forecast: { x: 600, y: 780, lab: 'r', name: 'Cash forecasting', does: 'Expected receipts and payments by day and week.', agent: 'Builds the forecast from open receivables, payables and payroll, and explains variances.' },
+    t_funding: { x: 600, y: 710, lab: 'r', name: 'Funding, investments & FX', does: 'Borrowing, deposits, FX exposure and hedges.', agent: 'Watches limits and exposures and suggests moves within policy.' },
+    t_position: { x: 600, y: 640, lab: 'l', name: 'Cash position & payments', does: 'Daily bank balances and payment releases.', agent: 'Assembles the daily position across banks and releases approved payments.' },
+    t_bank: { x: 600, y: 560, lab: 'l', name: 'Bank reconciliation', does: 'Bank statements matched to the books.', agent: 'Matches bank lines, explains what is open, proposes the entries.', links: ['r_recon'] },
     // tax & compliance (lower left, into the ledger)
     x_notice: { x: 170, y: 610, lab: 'b', name: 'Notices & litigation', does: 'GST and income-tax notices, replies and hearings.', agent: 'Logs notices, tracks deadlines, gathers evidence and drafts replies.' },
     x_income: { x: 280, y: 610, lab: 'a', name: 'Income tax', does: 'Advance tax, returns, tax audit and transfer pricing.', agent: 'Assembles schedules and disallowances, such as Sec 43B(h), from the books.' },
