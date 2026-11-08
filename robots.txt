@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://finomenahq.com/sitemap.xml

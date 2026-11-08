@@ -1780,6 +1780,29 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   </div>
 </footer>
 
+<script type="application/json" id="pageMeta">
+{
+ "home": ["Finomena: AI agents for finance operations in India", "Finomena runs finance back-office work with AI agents: accounts payable, vendor reconciliation and GSTR-2B reconciliation, with your team only on the exceptions."],
+ "solutions": ["Solutions: AI for accounts payable, reconciliation and GST · Finomena", "Auto Invoice, Auto Recon and Auto GST are live today, on one platform, so the rules and memory you build carry across every solution."],
+ "auto-invoice": ["Auto Invoice: accounts payable automation for India · Finomena", "Invoices in by email, WhatsApp or SAP, matched to the PO and GRN, GST and TDS checked, posted to SAP. Your team handles only the exceptions."],
+ "auto-recon": ["Auto Recon: vendor ledger reconciliation with AI · Finomena", "Your vendor ledger against the vendor's statement in any format: SAP, Tally, Excel or PDF. Every open item explained, TDS included, and the vendor email drafted."],
+ "auto-gst": ["Auto GST: GSTR-2B reconciliation for every GSTIN · Finomena", "Purchase register against GSTR-2B, invoice by invoice, for every GSTIN. Differences shown side by side, blocked and time-barred credit flagged, suppliers to chase listed."],
+ "industries": ["Finance automation by industry · Finomena", "How Finomena runs accounts payable, vendor reconciliation and GSTR-2B for coworking, retail, manufacturing and logistics finance teams."],
+ "industries/coworking": ["Finance automation for coworking and real estate · Finomena", "Many centres, a GSTIN in every state, landlord rent and fit-outs, hundreds of facility vendors: how Finomena takes over the invoices, reconciliations and GSTR-2B."],
+ "industries/retail": ["Finance automation for retail chains · Finomena", "Store expenses, three-way matching with distribution centres, schemes and credit notes, suppliers in every state: how Finomena takes over retail finance operations."],
+ "industries/manufacturing": ["Finance automation for manufacturers · Finomena", "PO and GRN matching across plants, MSME payments under section 43B(h), freight under reverse charge: how Finomena takes over manufacturing finance operations."],
+ "industries/logistics": ["Finance automation for logistics companies · Finomena", "Freight bills from transporters, TDS under section 194C, lorry receipts billed twice, vendor disputes: how Finomena takes over logistics finance operations."],
+ "insights": ["Insights: GST, payables and reconciliation guides · Finomena", "Practical guides for finance teams in India on GSTR-2B, input tax credit, MSME payments and vendor reconciliation."],
+ "insights/gstr-2b-itc-leaks": ["Six places input tax credit quietly leaks, and the monthly routine that catches them · Finomena", "Missing from GSTR-2B, the 30 November time limit, the 180-day payment rule, blocked credits, invoices booked twice and credit the 2B marks unavailable."],
+ "insights/msme-43bh": ["MSME payments and section 43B(h): avoiding the year-end surprise · Finomena", "Pay a micro or small supplier after 45 days and the expense moves to the year you pay. Where it goes wrong, and a weekly routine that prevents it."],
+ "insights/vendor-reconciliation": ["Vendor reconciliation: the seven differences behind almost every gap · Finomena", "When your ledger and the vendor's statement disagree, the reason is nearly always one of seven. Work through them in order and the gap explains itself."],
+ "case-studies": ["Case studies · Finomena", "How finance teams put Finomena to work: one invoice followed end to end, the manual process against Finomena."],
+ "about-us": ["About Finomena: the finance back office that runs itself", "Finomena builds AI agents that do the mechanical work of finance operations and leave people the judgement. Our mission, and the finance back office on one map."],
+ "who-we-are": ["Who we are · Finomena", "The team and advisors behind Finomena, building AI for finance operations from Bengaluru."],
+ "contact": ["Book a walkthrough · Finomena", "See your own invoices, vendor ledgers or GSTR-2B run through Finomena in a 45-minute session."],
+ "privacy": ["Privacy notice · Finomena", "How Finomena handles information from finomenahq.com and the emails we send."]
+}
+</script>
 <script>
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2031,8 +2054,12 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   const routes=pages.map(p=>p.dataset.page);
   const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
   const navFor={'auto-invoice':'solutions','auto-recon':'solutions','auto-gst':'solutions','industries':'solutions','case-studies':'resources','insights':'resources','who-we-are':'about-us'};
+  const PAGE_META=JSON.parse(document.getElementById('pageMeta').textContent);
+  function where(){ return location.hash.slice(1) || decodeURI(location.pathname).replace(/^\/+|\/+$/g,'') || 'home'; }  // #route (old links, emails) or /route/
+  const isRoute=h=>routes.includes(h.split('/')[0].split('#')[0]);
+  function setMeta(sel,attr,val){ const m=document.querySelector(sel); if(m) m.setAttribute(attr,val); }
   function route(){
-    let r=location.hash.slice(1), sub='';
+    let r=where(), sub='';
     const slash=r.indexOf('/'); if(slash>0){ sub=r.slice(slash+1); r=r.slice(0,slash); }  // #insights/<article>, #industries/<id>
     let scrollTarget=null;
     if(!routes.includes(r)){ const el=r&&document.getElementById(r); if(el){ const pg=el.closest('[data-page]'); r=pg?pg.dataset.page:'home'; scrollTarget=el; } else r='home'; }
@@ -2043,9 +2070,35 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
     const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','auto-gst':'Auto GST · GSTR-2B reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena','privacy':'Privacy · Finomena'};
     document.title=subPages[r]?subPages[r](sub):(titles[r]||'Finomena');
+    const key=sub?r+'/'+sub:r, m=PAGE_META[key];
+    if(m){ document.title=m[0]; setMeta('meta[name="description"]','content',m[1]); }
+    setMeta('link[rel="canonical"]','href','https://finomenahq.com'+(key==='home'?'/':'/'+key+'/'));
+    pathLinks();
     if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
+    dispatchEvent(new Event('finoroute'));
   }
-  addEventListener('hashchange',route); route();
+  /* Real URLs: in-site #links become /route/ (crawlable, shareable) and open without a reload.
+     A link to an element (#finance-map) points at the page that holds it. */
+  function pathLinks(){
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      const h=a.getAttribute('href').slice(1); if(!h) return;
+      if(isRoute(h)){ a.setAttribute('href', h==='home'?'/':'/'+h+'/'); return; }
+      const el=document.getElementById(h), pg=el&&el.closest('[data-page]');
+      if(pg) a.setAttribute('href', (pg.dataset.page==='home'?'/':'/'+pg.dataset.page+'/')+'#'+h);
+    });
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="/"]');
+    if(!a||a.target||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.getAttribute('href').startsWith('//')) return;
+    const p=a.getAttribute('href').split('#')[0].replace(/^\/+|\/+$/g,'');
+    if(p&&!isRoute(p)) return;
+    e.preventDefault(); history.pushState(null,'',a.getAttribute('href')); route();
+  });
+  addEventListener('popstate',route);
+  addEventListener('hashchange',route);
+  { const h=location.hash.slice(1);  // an old /#route link moves to its real URL, keeping campaign tags
+    if(h&&isRoute(h)&&location.pathname==='/') history.replaceState(null,'',(h==='home'?'/':'/'+h+'/')+location.search); }
+  route();
   menuBtn.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);});
 
   /* pre-select interest when a button points to contact */
@@ -2216,13 +2269,13 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   const logged=new Set();
   function logVisit(){
     if(!VISIT_LOG||!tags.c) return;
-    const pg=location.hash.slice(1)||'home'; if(logged.has(pg)) return; logged.add(pg);
+    const pg=where(); if(logged.has(pg)) return; logged.add(pg);
     try{ navigator.sendBeacon(form.action,new URLSearchParams({type:'visit',ref:tags.c,for:tags.for||'',page:pg,utm_campaign:tags.utm_campaign||'',utm_content:tags.utm_content||''})); }catch(x){}
   }
-  addEventListener('hashchange',logVisit); logVisit();
+  addEventListener('finoroute',logVisit); logVisit();
   document.getElementById('editAgain').addEventListener('click',()=>{form.reset();done.hidden=true;fields.hidden=false;});
 })();
 </script>
-<script src="finance-landscape.js"></script>
+<script src="/finance-landscape.js"></script>
 </body>
 </html>
