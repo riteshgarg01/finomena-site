@@ -492,7 +492,29 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   .nav-links .submenu a{padding:10px 0;border-radius:0;border-bottom:1px solid var(--line)}
   .submenu small{display:none}
 }
+
+/* campaign bar, industries, insights, privacy */
+.forbar{background:var(--teal-wash);border-bottom:1px solid var(--line);font-size:.95rem}
+.forbar .wrap{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;justify-content:space-between;padding-block:9px}
+.forbar b{color:var(--teal-deep)}
+.post-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.post-list{grid-template-columns:1fr}}
+.post-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start;text-decoration:none}
+.post-card:hover{border-color:var(--teal)}
+.post-card .k,.meta{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-3)}
+.post-card .k{color:var(--amber)}
+.post-card p{color:var(--ink-2);font-size:.97rem}
+.article{max-width:720px}
+.article .prose{max-width:none}
+.article h2{font-size:clamp(1.35rem,2.4vw,1.75rem);margin-top:14px}
+.article ol,.article ul{margin:0;padding-left:1.3em;display:grid;gap:8px}
+.callout{background:var(--amber-wash);border-radius:14px;padding:16px 20px;color:var(--ink)}
+.ind-fit{display:grid;gap:12px}
+.ind-fit div{border-left:3px solid var(--amber);padding-left:14px}
+.ind-fit p{color:var(--ink-2);font-size:.97rem}
 </style>
+<!-- Leadfeeder: paste the tracker snippet from Leadfeeder (Settings → Website tracking) on the line below.
+     It names the companies that visit, from their IP address; the privacy notice (#privacy) covers it. -->
 </head>
 <body>
 
@@ -509,6 +531,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <div class="submenu" id="solutionsMenu" aria-label="Solutions"></div>
       </div>
       <a href="#case-studies" data-nav="case-studies">Case studies</a>
+      <a href="#insights" data-nav="insights">Insights</a>
       <div class="nav-group">
         <a href="#about-us" data-nav="about-us" aria-haspopup="true">About us <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="submenu" aria-label="About us">
@@ -526,6 +549,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </div>
 </header>
+<div class="forbar" id="forBar" hidden><div class="wrap"><span>Prepared for <b id="forName"></b></span><a class="link" href="#contact">Book a walkthrough for your team →</a></div></div>
 
 <main>
 <!-- ============ HOME ============ -->
@@ -1345,6 +1369,9 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <form id="lead" novalidate method="POST" action="https://script.google.com/macros/s/AKfycbzRrAgOYB0xyQOpfJu2RwUmQ6SvkYsQ_iEhGLN_0om9ZUhlOjLKwSw03gVjKDtN3tA/exec" target="leadSink">
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <input type="hidden" name="page" id="f-page">
+        <input type="hidden" name="ref" data-tag="c"><input type="hidden" name="for" data-tag="for">
+        <input type="hidden" name="utm_source" data-tag="utm_source"><input type="hidden" name="utm_medium" data-tag="utm_medium">
+        <input type="hidden" name="utm_campaign" data-tag="utm_campaign"><input type="hidden" name="utm_content" data-tag="utm_content">
         <div id="formFields" style="display:grid;gap:14px">
           <div class="row">
             <label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required></label>
@@ -1381,6 +1408,223 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </section>
 </div>
+
+<!-- ============ INDUSTRIES ============
+     #industries lists the INDUSTRIES catalogue (in the script); #industries/<id> shows one. -->
+<div data-page="industries" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs" id="indCrumbs"></span>
+      <span class="eyebrow" id="indEyebrow"></span>
+      <h1 id="indTitle"></h1>
+      <p class="lede" id="indLede"></p>
+    </div>
+  </div>
+  <section style="padding-top:0"><div class="wrap" id="indBody"></div></section>
+</div>
+
+<!-- ============ INSIGHTS ============
+     #insights lists the articles below; #insights/<data-article> shows one. Add an article by adding an <article class="post">. -->
+<div data-page="insights" hidden>
+  <div id="postIndex">
+    <div class="page-hero">
+      <div class="wrap">
+        <span class="crumbs"><a href="#home">Home</a> / Insights</span>
+        <span class="eyebrow">Insights</span>
+        <h1>Notes for finance teams who'd rather not do it by hand.</h1>
+        <p class="lede">Practical guides on GST, payables and reconciliation in India: where money and time leak, and the routines that stop it.</p>
+      </div>
+    </div>
+    <section style="padding-top:0"><div class="wrap post-list" id="postList"></div></section>
+  </div>
+
+  <article class="post" data-article="gstr-2b-itc-leaks" data-tag="GST · Input tax credit" data-date="8 November 2026" data-read="6 min"
+    data-title="Six places input tax credit quietly leaks, and how to catch them before 30 November"
+    data-summary="Missing from 2B, the time limit, the 180-day payment rule, blocked credits, invoices booked twice and credit the 2B itself marks unavailable." hidden>
+    <div class="page-hero">
+      <div class="wrap">
+        <span class="crumbs"><a href="#home">Home</a> / <a href="#insights">Insights</a> / GST</span>
+        <span class="eyebrow">GST · Input tax credit</span>
+        <h1>Six places input tax credit quietly leaks, and how to catch them before 30 November</h1>
+        <p class="meta">8 November 2026 · 6 min read</p>
+      </div>
+    </div>
+    <section style="padding-top:0">
+      <div class="wrap"><div class="article prose">
+        <p class="lede">Most finance teams match the purchase register to GSTR-2B once a month, in a spreadsheet, close to the filing date. The credit that slips through rarely shows up as one big number. It leaks a few invoices at a time, in six predictable places.</p>
+
+        <h2>1. Invoices your supplier never reported</h2>
+        <p>You can take credit only for invoices that appear in your GSTR-2B (section 16(2)(aa)). If a supplier files GSTR-1 late, reports the invoice under the wrong GSTIN, or does not report it at all, the credit is not available to you, even though you paid the full invoice including tax. Companies with several registrations see a variant of this: the supplier reports the invoice against another of your GSTINs, so the credit lands in the wrong state.</p>
+        <p><strong>Catch it:</strong> every month, list the booked invoices missing from 2B, grouped by supplier, and send each supplier one reminder with all their invoice numbers.</p>
+
+        <h2>2. The 30 November time limit</h2>
+        <p>Under section 16(4), credit for a financial year's invoices can be taken only until 30 November of the following year, or the date you file the annual return if that is earlier. For FY 2025-26 invoices, that is <strong>30 November 2026</strong>. An invoice still missing from 2B after that date stays lost, even if the supplier reports it later.</p>
+        <p><strong>Catch it:</strong> in October and November, sort the missing-from-2B list by tax amount and chase the largest suppliers first.</p>
+
+        <h2>3. Invoices unpaid for more than 180 days</h2>
+        <p>If you do not pay a supplier the invoice value and tax within 180 days of the invoice date, the credit you took must be added back to your tax liability, with interest. You can take it again once you pay. Disputed and on-hold invoices are where this hides, because nobody is looking at them.</p>
+        <p><strong>Catch it:</strong> each month, list invoices where credit has been taken, payment is still open and the 180 days are close.</p>
+
+        <h2>4. Blocked credits booked as eligible</h2>
+        <p>Section 17(5) blocks credit on items such as food and beverages, club memberships, gifts, most motor vehicles, and construction of a building on your own account, each with specific exceptions. When these sit in a general expense ledger, the credit is often taken by default and then reversed, with interest, when the auditor finds it.</p>
+        <p><strong>Catch it:</strong> check the description of what was bought, not just the expense ledger it was posted to.</p>
+
+        <h2>5. The same invoice booked twice</h2>
+        <p>Duplicates come from re-sent PDFs, an email copy and a courier copy, or invoice numbers written differently ("INV/123" and "INV-0123"). Your 2B shows the invoice once; your books show it twice. Worse, the second copy appears as "missing from 2B", and the team chases a supplier who already reported it.</p>
+        <p><strong>Catch it:</strong> match on supplier GSTIN, invoice number with punctuation and leading zeros ignored, date and amount, not on the exact invoice number alone. Fix duplicates in the books instead of chasing the supplier.</p>
+
+        <h2>6. Credit the 2B itself marks as not available</h2>
+        <p>GSTR-2B lists some invoices as "ITC not available", for example where the place of supply makes the transaction ineligible for your registration, or where the section 16(4) time limit has passed. These are easy to sweep into the claim when the 2B is read as one total.</p>
+        <p><strong>Catch it:</strong> read the not-available section separately and keep those invoices out of the claim.</p>
+
+        <h2>Why this matters more now</h2>
+        <p>The GST network compares the credit you claim in GSTR-3B with your GSTR-2B. When the excess crosses a set threshold, it sends an intimation (DRC-01C) asking you to pay or explain. And with the Invoice Management System, invoices you take no action on are treated as accepted when your 2B is generated. Reviewing supplier invoices before the cut-off now matters as much as matching afterwards.</p>
+
+        <h2>A monthly routine that catches all six</h2>
+        <ol>
+          <li>Match the purchase register to 2B invoice by invoice, allowing for rounding and different ways of writing invoice numbers.</li>
+          <li>Sort what is left into: missing from 2B (chase the supplier), in 2B but not in the books (check and book), and booked twice (fix the books).</li>
+          <li>Check blocked-credit purchases and 2B's not-available section before you claim.</li>
+          <li>Watch the 180-day payment clock and the 30 November time limit.</li>
+          <li>Record what was decided on each difference and why. Your auditor will ask.</li>
+        </ol>
+
+        <div class="callout">Finomena Tax runs this routine every month: it pairs your purchase register with GSTR-2B, explains each difference, and drafts one reminder per supplier. It is in early access.</div>
+        <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Finomena Tax · GST &amp; TDS compliance">Join early access →</a><a class="btn btn-ghost" href="#insights">More insights</a></div>
+        <p class="fine">General information, not tax advice. Rules as of November 2026; confirm specifics with your tax adviser.</p>
+      </div></div>
+    </section>
+  </article>
+
+  <article class="post" data-article="msme-43bh" data-tag="Payables · MSME" data-date="8 November 2026" data-read="5 min"
+    data-title="MSME payments and section 43B(h): avoiding the year-end surprise"
+    data-summary="Pay a micro or small supplier late and the expense moves to the year you pay. Where it goes wrong, and a weekly routine that prevents it." hidden>
+    <div class="page-hero">
+      <div class="wrap">
+        <span class="crumbs"><a href="#home">Home</a> / <a href="#insights">Insights</a> / Payables</span>
+        <span class="eyebrow">Payables · MSME</span>
+        <h1>MSME payments and section 43B(h): avoiding the year-end surprise</h1>
+        <p class="meta">8 November 2026 · 5 min read</p>
+      </div>
+    </div>
+    <section style="padding-top:0">
+      <div class="wrap"><div class="article prose">
+        <p class="lede">Since FY 2023-24, paying a micro or small supplier late does more than earn you an unhappy vendor. It can move a genuine expense out of the year you incurred it, and the extra tax shows up at year-end, when it is too late to fix.</p>
+
+        <h2>What the rule says</h2>
+        <p>Section 43B(h) of the Income-tax Act allows a deduction for amounts owed to micro and small enterprises in the year they are incurred only if they are paid within the time set by section 15 of the MSMED Act: by the agreed date, but not more than 45 days from accepting the goods or services, or within 15 days where there is no written agreement. Pay later, and the expense is deductible only in the year you actually pay.</p>
+        <p>On top of that, the MSMED Act charges interest on late payments, compounded monthly at three times the bank rate notified by the RBI, and that interest is not deductible at all.</p>
+
+        <h2>Who it covers</h2>
+        <p>Micro and small enterprises registered on Udyam. Medium enterprises are outside it. Traders' registrations are widely treated as outside it too; confirm with your adviser. What counts is the supplier's status when you buy, so a classification captured once at onboarding can go stale.</p>
+
+        <h2>Where it goes wrong</h2>
+        <ul>
+          <li><strong>The vendor master doesn't know.</strong> MSME status is missing, out of date, or recorded without the micro, small or medium classification.</li>
+          <li><strong>Payment terms longer than the law allows.</strong> A 60- or 90-day term in the PO doesn't extend the 45-day limit.</li>
+          <li><strong>The clock starts at acceptance, not at posting.</strong> An invoice that sits in someone's inbox or an approval queue for three weeks has used half its time before AP sees it.</li>
+          <li><strong>Disputes left open.</strong> Held invoices quietly pass their due date.</li>
+        </ul>
+
+        <h2>Reporting that depends on it</h2>
+        <p>Companies with dues to micro and small suppliers outstanding for more than 45 days file MSME Form I with the MCA every half-year, and the tax audit report asks for these amounts too. Both are hard to prepare without the due date of every invoice.</p>
+
+        <h2>A weekly routine that prevents it</h2>
+        <ol>
+          <li>Capture the Udyam number and classification when a vendor is onboarded, and re-check them every year.</li>
+          <li>Work out each invoice's due date from the date the goods or services were accepted, not the posting date.</li>
+          <li>Every week, list MSME invoices due in the next seven days and those already overdue, and put them first in the payment run.</li>
+          <li>Before 31 March, list everything that will be disallowed if it stays unpaid, so the CFO can decide while there is still time.</li>
+        </ol>
+
+        <div class="callout">Auto Invoice flags MSME invoices as they arrive, routes them by your own rules and predicts which ones are at risk of being paid late.</div>
+        <div class="btn-row"><a class="btn btn-primary" href="#auto-invoice">Explore Auto Invoice →</a><a class="btn btn-ghost" href="#insights">More insights</a></div>
+        <p class="fine">General information, not tax advice. Rules as of November 2026; confirm specifics with your tax adviser.</p>
+      </div></div>
+    </section>
+  </article>
+
+  <article class="post" data-article="vendor-reconciliation" data-tag="Reconciliation" data-date="8 November 2026" data-read="5 min"
+    data-title="Vendor reconciliation: the seven differences behind almost every gap"
+    data-summary="When your ledger and the vendor's statement disagree, the reason is nearly always one of seven. Find them in order and the gap explains itself." hidden>
+    <div class="page-hero">
+      <div class="wrap">
+        <span class="crumbs"><a href="#home">Home</a> / <a href="#insights">Insights</a> / Reconciliation</span>
+        <span class="eyebrow">Reconciliation</span>
+        <h1>Vendor reconciliation: the seven differences behind almost every gap</h1>
+        <p class="meta">8 November 2026 · 5 min read</p>
+      </div>
+    </div>
+    <section style="padding-top:0">
+      <div class="wrap"><div class="article prose">
+        <p class="lede">The vendor's statement says you owe one amount; your ledger says another. Teams often spend days on this line by line. In practice nearly every gap comes down to seven kinds of difference, and working through them in order makes the gap explain itself.</p>
+
+        <h2>The seven differences</h2>
+        <ol>
+          <li><strong>TDS.</strong> You deducted tax at source; the vendor hasn't recorded it yet, or records it only when it appears in their Form 26AS.</li>
+          <li><strong>Invoices in transit.</strong> The vendor has billed; you haven't received the invoice, or it is waiting for approval.</li>
+          <li><strong>Payments in transit.</strong> You paid on the 30th; the vendor recorded it on the 2nd.</li>
+          <li><strong>Debit and credit notes.</strong> Rate differences, short supplies or discounts recorded by only one side.</li>
+          <li><strong>Duplicates and reversals.</strong> The same invoice posted twice, or reversed on one side only.</li>
+          <li><strong>The opening balance.</strong> A difference from an earlier period that was never agreed, carried forward every time.</li>
+          <li><strong>The wrong account.</strong> A payment posted to a sister vendor code, or to another entity of the same vendor group.</li>
+        </ol>
+
+        <h2>Why spreadsheets struggle</h2>
+        <p>Statements arrive as PDFs, Tally exports and scanned pages, each laid out differently. One payment often settles five invoices. The vendor's debit is your credit, so signs flip. And a reconciliation done once is rarely saved in a form you can reuse next quarter, so the next one starts from scratch.</p>
+
+        <h2>A routine that works</h2>
+        <ol>
+          <li>Reconcile the largest and most critical vendors monthly and the rest quarterly.</li>
+          <li>Start from the last balance both sides agreed, not from the start of the year.</li>
+          <li>Match exact amounts first, then one payment against several invoices, then the rest.</li>
+          <li>Put every open item into one of the seven differences. Anything that doesn't fit is the one that needs a person.</li>
+          <li>Send the vendor one email listing exactly what you need from them.</li>
+        </ol>
+
+        <div class="callout">Auto Recon reads both ledgers in any format, including PDFs, designs the matching, explains every open item in these terms and drafts the vendor email. The plan is saved per vendor, so next quarter's reconciliation starts where this one ended.</div>
+        <div class="btn-row"><a class="btn btn-primary" href="#auto-recon">Explore Auto Recon →</a><a class="btn btn-ghost" href="#insights">More insights</a></div>
+      </div></div>
+    </section>
+  </article>
+</div>
+
+<!-- ============ PRIVACY ============ -->
+<div data-page="privacy" hidden>
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="crumbs"><a href="#home">Home</a> / Privacy</span>
+      <span class="eyebrow">Privacy notice</span>
+      <h1>How we handle your information.</h1>
+      <p class="meta">Last updated 8 November 2026</p>
+    </div>
+  </div>
+  <section style="padding-top:0">
+    <div class="wrap"><div class="article prose">
+      <p>This notice covers finomenahq.com and the emails we send. Finomena is based in Bengaluru, India. Questions or requests: <a class="link" href="mailto:hello@finomenahq.com?subject=Privacy">hello@finomenahq.com</a>. Customer data in the Finomena platform is covered by our customer agreements, not this notice.</p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>What you send us.</strong> Your name, work email, company and message when you fill in a form or write to us.</li>
+        <li><strong>Visits to this site.</strong> Pages viewed, time of visit, browser and IP address. An analytics service uses the IP address to identify the company network a visit comes from, and may set cookies to do so.</li>
+        <li><strong>Links in our emails.</strong> Links we send may carry a short reference code, so we know which email a visit came from and which pages were opened from it.</li>
+        <li><strong>Business contact details.</strong> We may hold your name, role, company and work email from professional sources, such as public profiles and business contact databases, to send occasional emails relevant to your role.</li>
+      </ul>
+
+      <h2>Why we use it</h2>
+      <p>To reply to your requests, arrange walkthroughs, follow up on business interest and learn which of our content is useful. We do not sell personal data.</p>
+
+      <h2>Who processes it</h2>
+      <p>The service providers we use for email, forms, storage and analytics, acting on our instructions.</p>
+
+      <h2>How long we keep it</h2>
+      <p>As long as it is needed for these purposes; for prospective customers, up to 24 months after our last contact. If you ask us not to email you, we keep a note of that so we don't contact you again.</p>
+
+      <h2>Your choices</h2>
+      <p>Every email we send lets you opt out: reply "unsubscribe" or write to us. You can ask to see, correct or erase the information we hold about you, or withdraw your consent, under India's Digital Personal Data Protection Act, 2023. Email <a class="link" href="mailto:hello@finomenahq.com?subject=Privacy">hello@finomenahq.com</a> with the subject "Privacy" and we will reply within 30 days.</p>
+    </div></div>
+  </section>
+</div>
 </main>
 
 <footer>
@@ -1394,10 +1638,10 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <p>Machines take over the mechanical. People still own the meaningful.</p>
       </div>
       <div><h4>Solutions</h4><ul id="footSolutions"></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#about-us">About us</a></li><li><a href="#case-studies">Case studies</a></li><li><a href="#who-we-are">Who we are</a></li><li><a href="#who-we-are">Careers</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about-us">About us</a></li><li><a href="#case-studies">Case studies</a></li><li><a href="#insights">Insights</a></li><li><a href="#industries">Industries</a></li><li><a href="#who-we-are">Who we are</a></li><li><a href="#who-we-are">Careers</a></li></ul></div>
       <div><h4>Get in touch</h4><ul><li><a href="#contact">Book a walkthrough</a></li><li><a href="mailto:hello@finomenahq.com">hello@finomenahq.com</a></li></ul></div>
     </div>
-    <div class="foot-base"><span>© 2026 Finomena. All rights reserved.</span><span>finomenahq.com</span></div>
+    <div class="foot-base"><span>© 2026 Finomena. All rights reserved.</span><span><a href="#privacy">Privacy</a> · finomenahq.com</span></div>
   </div>
 </footer>
 
@@ -1481,18 +1725,100 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   document.getElementById('allSolutions').innerHTML = live.map(featuredCard).join('') + soon.map(card).join('') + suggest;
   document.getElementById('footSolutions').innerHTML = SOLUTIONS.map(s=>`<li><a href="#${s.page||'solutions'}">${s.area}${s.status==='live'?'':' <span style="color:var(--ink-3);font-size:.8em">· soon</span>'}</a></li>`).join('');
   document.getElementById('solutionsMenu').innerHTML = live.map(x=>`<a href="#${x.page}" data-sub="${x.page}"><b>${x.name}<span class="live-tag">live</span></b><small>${x.area}: ${x.headline.split(': ').slice(1).join(': ') || x.blurb}</small></a>`).join('')
+    + `<a href="#industries" data-sub="industries"><b>By industry</b><small>Coworking, retail, manufacturing and logistics finance teams</small></a>`
     + `<a href="#finance-map" data-sub="finance-map"><b>Finance back-office map</b><small>Your finance function on one map, and where agents fit</small></a>`
     + `<a class="sub-all" href="#solutions" data-sub="solutions"><b>All solutions</b><small>${soon.length} more on the way: ${soon.map(x=>x.area.split(' & ')[0]).join(', ')}</small></a>`;
   const intSel = document.getElementById('f-int');
   intSel.innerHTML = SOLUTIONS.map(s=>`<option>${s.name} · ${s.area}</option>`).join('') + '<option>Finance back-office map workshop</option><option>Suggest a process</option><option>Something else</option>';
 
+  /* ===== INDUSTRIES =====
+     One entry per industry page (#industries/<id>). read: the Insights article it points to. */
+  const INDUSTRIES = [
+    { id:'coworking', name:'Coworking & real estate',
+      title:'Finance for coworking and real estate, across every centre and state.',
+      lede:'Many centres, a GSTIN in every state, and hundreds of facility vendors billing every month.',
+      pains:[['A GSTIN in every state','Supplier invoices reported against the wrong registration, and credit that lands in the wrong state.'],
+             ['Rent and facility vendors','Landlords, housekeeping, security and fit-out contractors, each with its own TDS treatment and its own invoice format.'],
+             ['Many small suppliers','Lots of them are micro or small enterprises, so late payment moves expenses out of the year under section 43B(h).']],
+      fit:[['Auto Invoice','Reads every landlord and vendor invoice, checks GST and TDS, and routes it to the right centre for approval.'],
+           ['Auto Recon','Agrees each vendor\'s ledger with yours, TDS included, and drafts the email for anything still open.'],
+           ['Finomena Tax (early access)','Matches your purchase register to GSTR-2B for every registration.']],
+      read:'gstr-2b-itc-leaks' },
+    { id:'retail', name:'Retail & consumer chains',
+      title:'Finance for retail chains: hundreds of stores, one set of books.',
+      lede:'High invoice volumes from stores and warehouses, brand schemes and credit notes, and suppliers in every state.',
+      pains:[['Volume','Store-level expenses and supplier bills that keep a whole team keying in data.'],
+             ['Goods received vs billed','Three-way matching across purchase orders, warehouse receipts and invoices.'],
+             ['Credit notes and schemes','Discounts and returns recorded by only one side, and vendor balances that never agree.']],
+      fit:[['Auto Invoice','Invoices in by email, WhatsApp or SAP, matched to the PO and receipt, with people only on the exceptions.'],
+           ['Auto Recon','Explains every difference with a supplier, including credit notes and one-to-many payments.'],
+           ['Finomena Tax (early access)','Finds credit missing from GSTR-2B and drafts one reminder per supplier.']],
+      read:'vendor-reconciliation' },
+    { id:'manufacturing', name:'Manufacturing',
+      title:'Finance for manufacturers: plants, POs and MSME suppliers.',
+      lede:'Purchase orders and receipts at every plant, approvals by plant finance, and a long tail of MSME suppliers.',
+      pains:[['Three-way match','Invoices held until someone checks them against the PO and the goods receipt.'],
+             ['MSME suppliers','Payment within 45 days, or the expense moves to the year it is paid.'],
+             ['Vendor balances','Ledgers that drift apart over TDS, debit notes and payments in transit.']],
+      fit:[['Auto Invoice','PO and GRN matching, plant-wise approval rules written in plain English, and MSME payment-delay prediction.'],
+           ['Auto Recon','Vendor ledger against vendor statement in any format, every open item explained.'],
+           ['Finomena Tax (early access)','GSTR-2B matching with the time limit and blocked credits checked.']],
+      read:'msme-43bh' },
+    { id:'logistics', name:'Logistics & distribution',
+      title:'Finance for logistics: many transporters, many small bills.',
+      lede:'Freight bills from fleet owners and transporters, TDS on every payment, and vendors who dispute their balances.',
+      pains:[['Many small vendors','Transporters and fleet owners, many of them MSMEs, sending invoices in every format.'],
+             ['TDS on every payment','Deductions the vendor hasn\'t recorded, so balances never agree.'],
+             ['Disputes','Balance disagreements that hold up payments and strain relationships.']],
+      fit:[['Auto Invoice','Reads freight bills in any format, including photos sent over WhatsApp, and checks GST and TDS.'],
+           ['Auto Recon','TDS-aware reconciliation that tells each vendor exactly what is open and why.'],
+           ['Finomena Tax (early access)','GSTR-2B matching so credit isn\'t lost to suppliers who report late.']],
+      read:'vendor-reconciliation' }
+  ];
+  const indCrumbs=document.getElementById('indCrumbs'), indEyebrow=document.getElementById('indEyebrow'), indTitle=document.getElementById('indTitle'), indLede=document.getElementById('indLede'), indBody=document.getElementById('indBody');
+  function showIndustry(id){
+    const x=INDUSTRIES.find(i=>i.id===id);
+    if(!x){
+      indCrumbs.innerHTML='<a href="#home">Home</a> / <a href="#solutions">Solutions</a> / Industries';
+      indEyebrow.textContent='By industry';
+      indTitle.textContent='Built around how your industry runs finance.';
+      indLede.textContent='The same agents, set up for the documents, rules and volumes your finance team deals with.';
+      indBody.innerHTML=`<div class="sol-grid">${INDUSTRIES.map(i=>`<article class="sol"><div style="display:grid;gap:4px"><span class="tag">Industry</span><h3>${i.name}</h3></div><p>${i.lede}</p><a class="btn btn-ghost" href="#industries/${i.id}">See how →</a></article>`).join('')}</div>`;
+      return 'Industries · Finomena';
+    }
+    const post=document.querySelector(`[data-article="${x.read}"]`);
+    indCrumbs.innerHTML=`<a href="#home">Home</a> / <a href="#industries">Industries</a> / ${x.name}`;
+    indEyebrow.textContent=x.name;
+    indTitle.textContent=x.title;
+    indLede.textContent=x.lede;
+    indBody.innerHTML=`<div class="split">
+        <div style="display:grid;gap:18px"><h2>Where the time goes</h2><div class="ind-fit">${x.pains.map(([h,p])=>`<div><h3>${h}</h3><p>${p}</p></div>`).join('')}</div></div>
+        <div style="display:grid;gap:18px"><h2>What Finomena takes over</h2><div class="ind-fit">${x.fit.map(([h,p])=>`<div><h3>${h}</h3><p>${p}</p></div>`).join('')}</div>
+          ${post?`<p>Worth reading: <a class="link" href="#insights/${x.read}">${post.dataset.title} →</a></p>`:''}
+          <div class="btn-row"><a class="btn btn-primary" href="#contact">Book a walkthrough →</a></div></div>
+      </div>`;
+    return x.name+' · Finomena';
+  }
+
+  /* ===== INSIGHTS ===== */
+  const posts=[...document.querySelectorAll('article.post')], postIndex=document.getElementById('postIndex');
+  document.getElementById('postList').innerHTML=posts.map(p=>`<a class="post-card" href="#insights/${p.dataset.article}"><span class="k">${p.dataset.tag}</span><h3>${p.dataset.title}</h3><p>${p.dataset.summary}</p><span class="meta">${p.dataset.date} · ${p.dataset.read} read</span></a>`).join('');
+  function showInsight(id){
+    const p=posts.find(x=>x.dataset.article===id);
+    posts.forEach(x=>x.hidden=x!==p);
+    postIndex.hidden=!!p;
+    return p?p.dataset.title:'Insights · Finomena';
+  }
+  const subPages={industries:showIndustry, insights:showInsight};
+
   /* ===== ROUTER ===== */
   const pages=[...document.querySelectorAll('[data-page]')];
   const routes=pages.map(p=>p.dataset.page);
   const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
-  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','who-we-are':'about-us'};
+  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','industries':'solutions','who-we-are':'about-us'};
   function route(){
-    let r=location.hash.slice(1);
+    let r=location.hash.slice(1), sub='';
+    const slash=r.indexOf('/'); if(slash>0){ sub=r.slice(slash+1); r=r.slice(0,slash); }  // #insights/<article>, #industries/<id>
     let scrollTarget=null;
     if(!routes.includes(r)){ const el=r&&document.getElementById(r); if(el){ const pg=el.closest('[data-page]'); r=pg?pg.dataset.page:'home'; scrollTarget=el; } else r='home'; }
     pages.forEach(p=>p.hidden=p.dataset.page!==r);
@@ -1500,8 +1826,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n || a.dataset.sub===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
     if(document.activeElement && navLinks.contains(document.activeElement)) document.activeElement.blur();  // close the sub-menu after a choice
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
-    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena'};
-    document.title=titles[r]||'Finomena';
+    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena','privacy':'Privacy · Finomena'};
+    document.title=subPages[r]?subPages[r](sub):(titles[r]||'Finomena');
     if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
   }
   addEventListener('hashchange',route); route();
@@ -1638,6 +1964,32 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     fields.hidden=true;done.hidden=false;
   });
   document.getElementById('copySum').addEventListener('click',e=>copy(sum.textContent,e.currentTarget));
+
+  /* ===== CAMPAIGN LINKS =====
+     Links we send carry ?c=<contact code> (codes live only in our private sheet, never in this repo), ?for=<company name>
+     and utm_* tags. They are remembered for 90 days in this browser and go into the lead form's hidden fields.
+     VISIT_LOG: when true, each page opened by a visitor with a contact code is also posted to the leads Apps Script as
+     type=visit. Turn it on only after the script handles type=visit, or every visit will be filed (and emailed) as a lead. */
+  const VISIT_LOG=false;
+  const TAGS=['c','for','utm_source','utm_medium','utm_campaign','utm_content'];
+  let tags={};
+  try{ const s=JSON.parse(localStorage.getItem('finoTags')||'null'); if(s&&s.until>Date.now()) tags=s.tags||{}; }catch(x){}
+  const q=new URLSearchParams(location.search), fresh={};
+  TAGS.forEach(k=>{ const v=(q.get(k)||'').trim().slice(0,80); if(v) fresh[k]=v; });
+  if(Object.keys(fresh).length){ tags=fresh; try{ localStorage.setItem('finoTags',JSON.stringify({tags,until:Date.now()+90*864e5})); }catch(x){} }
+  form.querySelectorAll('[data-tag]').forEach(i=>i.value=tags[i.dataset.tag]||'');
+  if(tags.for){
+    document.getElementById('forName').textContent=tags.for;
+    document.getElementById('forBar').hidden=false;
+    const co=document.getElementById('f-co'); if(!co.value) co.value=tags.for;
+  }
+  const logged=new Set();
+  function logVisit(){
+    if(!VISIT_LOG||!tags.c) return;
+    const pg=location.hash.slice(1)||'home'; if(logged.has(pg)) return; logged.add(pg);
+    try{ navigator.sendBeacon(form.action,new URLSearchParams({type:'visit',ref:tags.c,for:tags.for||'',page:pg,utm_campaign:tags.utm_campaign||'',utm_content:tags.utm_content||''})); }catch(x){}
+  }
+  addEventListener('hashchange',logVisit); logVisit();
   document.getElementById('editAgain').addEventListener('click',()=>{form.reset();done.hidden=true;fields.hidden=false;});
 })();
 </script>
