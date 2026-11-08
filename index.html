@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Finomena</title>
-<meta name="description" content="Finomena builds AI products that run finance operations: accounts payable today, with compliance, reconciliation, receivables and close on the way.">
+<meta name="description" content="Finomena builds AI products that run finance operations: accounts payable, vendor reconciliation and GSTR-2B reconciliation today, with compliance, receivables and close on the way.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%225%22%20y%3D%223%22%20width%3D%2217%22%20height%3D%2223%22%20rx%3D%223.5%22%20fill%3D%22%230c4a50%22/%3E%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%229%22%20height%3D%222%22%20rx%3D%221%22%20fill%3D%22%23fffafa%22/%3E%3Crect%20x%3D%229%22%20y%3D%2214%22%20width%3D%229%22%20height%3D%222%22%20rx%3D%221%22%20fill%3D%22%23fffafa%22/%3E%3Crect%20x%3D%229%22%20y%3D%2219%22%20width%3D%225%22%20height%3D%222%22%20rx%3D%221%22%20fill%3D%22%23fffafa%22/%3E%3Ccircle%20cx%3D%2222.5%22%20cy%3D%2223.5%22%20r%3D%226.5%22%20fill%3D%22%23c97f1a%22/%3E%3Cpath%20d%3D%22M19.6%2023.6l2%202%203.8-4%22%20stroke%3D%22%232a1700%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
 <link rel="canonical" href="https://finomenahq.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Finomena">
 <meta property="og:title" content="Finomena: AI for finance operations">
-<meta property="og:description" content="Finomena builds AI products that run finance operations: accounts payable today, with compliance, reconciliation, receivables and close on the way.">
+<meta property="og:description" content="Finomena builds AI products that run finance operations: accounts payable, vendor reconciliation and GSTR-2B reconciliation today, with compliance, receivables and close on the way.">
 <meta property="og:url" content="https://finomenahq.com/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Finomena: AI for finance operations">
-<meta name="twitter:description" content="Finomena builds AI products that run finance operations: accounts payable today, with compliance, reconciliation, receivables and close on the way.">
+<meta name="twitter:description" content="Finomena builds AI products that run finance operations: accounts payable, vendor reconciliation and GSTR-2B reconciliation today, with compliance, receivables and close on the way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -512,6 +512,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
 .ind-fit{display:grid;gap:12px}
 .ind-fit div{border-left:3px solid var(--amber);padding-left:14px}
 .ind-fit p{color:var(--ink-2);font-size:.97rem}
+.myth.leak q{text-decoration:none;color:var(--ink)}
 .ind-sec{margin-top:clamp(56px,7vw,88px)}
 .steps.four{grid-template-columns:repeat(4,1fr)}
 .sol-grid.ind-grid{grid-template-columns:repeat(2,1fr)}
@@ -540,17 +541,22 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       Finomena
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="#home" data-nav="home">Home</a>
       <div class="nav-group">
         <a href="#solutions" data-nav="solutions" aria-haspopup="true">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="submenu" id="solutionsMenu" aria-label="Solutions"></div>
       </div>
-      <a href="#case-studies" data-nav="case-studies">Case studies</a>
-      <a href="#insights" data-nav="insights">Insights</a>
+      <div class="nav-group">
+        <a href="#insights" data-nav="resources" aria-haspopup="true">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="submenu" aria-label="Resources">
+          <a href="#case-studies" data-sub="case-studies"><b>Case studies</b><small>How finance teams put Finomena to work</small></a>
+          <a href="#insights" data-sub="insights"><b>Insights</b><small>Practical guides on GST, payables and reconciliation</small></a>
+        </div>
+      </div>
       <div class="nav-group">
         <a href="#about-us" data-nav="about-us" aria-haspopup="true">About us <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="submenu" aria-label="About us">
           <a href="#about-us" data-sub="about-us"><b>Our mission</b><small>Why Finomena exists and how we work with you</small></a>
+          <a href="#finance-map" data-sub="finance-map"><b>Finance back-office map</b><small>Your finance function on one map, and where agents fit</small></a>
           <a href="#who-we-are" data-sub="who-we-are"><b>Who we are</b><small>The team and advisors behind Finomena</small></a>
         </div>
       </div>
@@ -613,7 +619,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><span class="wd-n">04</span></div><h3>Validate &amp; match</h3><p>Checks GSTIN and duplicates, runs 2- and 3-way match, applies your rules.</p></div>
         <div class="wd-step last"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><span class="wd-n">05</span></div><h3>Approve &amp; post</h3><p>Routes approvals, then posts the entry to SAP or your ERP in real time.</p></div>
       </div>
-      <p style="margin-top:24px"><a class="link" href="#auto-invoice">Explore Auto Invoice →</a> &nbsp;·&nbsp; <a class="link" href="#auto-recon">Explore Auto Recon, for vendor reconciliation →</a> &nbsp;·&nbsp; <a class="link" href="#finance-map">See the finance back-office map →</a> &nbsp;·&nbsp; <a class="link" href="#case-studies">See the case studies →</a></p>
+      <p style="margin-top:24px"><a class="link" href="#auto-invoice">Explore Auto Invoice →</a> &nbsp;·&nbsp; <a class="link" href="#auto-recon">Explore Auto Recon, for vendor reconciliation →</a> &nbsp;·&nbsp; <a class="link" href="#auto-gst">Explore Auto GST, for GSTR-2B →</a> &nbsp;·&nbsp; <a class="link" href="#finance-map">See the finance back-office map →</a> &nbsp;·&nbsp; <a class="link" href="#case-studies">See the case studies →</a></p>
     </div>
   </section>
 
@@ -700,22 +706,14 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       <span class="crumbs"><a href="#home">Home</a> / Solutions</span>
       <span class="eyebrow">Solutions</span>
       <h1>AI products for every corner of finance operations.</h1>
-      <p class="lede">Accounts payable and vendor reconciliation are live today. More of the back office is on the way, all on one platform, so the rules and memory you build carry across every solution.</p>
+      <p class="lede">Accounts payable, vendor reconciliation and GSTR-2B reconciliation are live today. More of the back office is on the way, all on one platform, so the rules and memory you build carry across every solution.</p>
     </div>
   </div>
-  <section style="padding-top:0;scroll-margin-top:96px" id="finance-map">
-    <div class="wrap">
-      <span class="eyebrow">The finance back office on one map</span>
-      <h2 style="margin:8px 0 6px">Six flows, one ledger, and where agents fit.</h2>
-      <p class="lede" style="margin:0 0 22px">Six end-to-end flows run through every finance back office, and all of them land in the general ledger the CFO answers for. Follow a flow, or click any stop to see where an agent can take the work off the team.</p>
-      <div data-finance-landscape></div>
-      <p style="margin-top:18px">Want this for your own team, systems and volumes? <a class="link" href="#contact" data-interest="Finance back-office map workshop">Book a mapping session →</a></p>
-    </div>
-  </section>
   <section style="padding-top:0">
     <div class="wrap">
       <span class="eyebrow">Our solutions</span>
       <div class="sol-grid" id="allSolutions" style="margin-top:14px"></div>
+      <p style="margin-top:28px">By industry: <a class="link" href="#industries/coworking">Coworking &amp; real estate</a> &nbsp;·&nbsp; <a class="link" href="#industries/retail">Retail</a> &nbsp;·&nbsp; <a class="link" href="#industries/manufacturing">Manufacturing</a> &nbsp;·&nbsp; <a class="link" href="#industries/logistics">Logistics</a></p>
     </div>
   </section>
   <section class="tint">
@@ -1026,6 +1024,133 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   </div>
 </div>
 
+<!-- ============ GSTR-2B RECONCILIATION (solution detail) ============ -->
+<div data-page="auto-gst" hidden>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="crumbs"><a href="#home">Home</a> / <a href="#solutions">Solutions</a> / Auto GST</span>
+        <span class="eyebrow">Auto GST · GSTR-2B reconciliation</span>
+        <h1>Every invoice paired.<br>Every credit<span class="amber"> explained.</span></h1>
+        <p class="lede">Auto GST pairs your purchase register with GSTR-2B invoice by invoice, for every GSTIN. Every difference is shown side by side, credit at risk is flagged before the deadline, and the suppliers to chase are listed. Your team decides on what needs judgement and signs off.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#contact" data-interest="Auto GST · GSTR-2B reconciliation">Book a walkthrough →</a>
+          <button class="btn btn-ghost" type="button" data-scroll="gdiagnostic">See if it's for you</button>
+        </div>
+        <div class="pills">
+          <span class="pill">Portal 2B · any register layout</span>
+          <span class="pill">Every GSTIN</span>
+          <span class="pill">Sign-off with a full trail</span>
+        </div>
+      </div>
+      <div class="board" aria-label="Sample credit summary for one GSTIN: ₹50.0 L of credit in our books, ₹44.2 L claimable, the rest explained">
+        <div class="board-head"><span>Credit summary · one GSTIN (sample)</span><span class="live-dot">reconciled</span></div>
+        <div>
+          <div class="board-row"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><div><b>Credit in our books</b><small>1,284 invoices in the purchase register</small></div><span class="status soon">₹50.0 L</span></div>
+          <div class="board-row"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><div><b>Claimable</b><small>paired with 2B, nothing differs</small></div><span class="status live">₹44.2 L</span></div>
+          <div class="board-row"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M18 6L6 18"/></svg></span><div><b>To check</b><small>12 pairs · taxable value or date differs</small></div><span class="status soon">₹2.1 L</span></div>
+          <div class="board-row"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><b>Only in our books</b><small>7 suppliers to chase</small></div><span class="status soon">₹2.9 L</span></div>
+          <div class="board-row"><span class="ico mute"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span><div><b>Blocked under s.17(5)</b><small>food, gifts, club fees · confirmed by a person</small></div><span class="status soon">₹0.6 L</span></div>
+          <div class="board-row"><span class="ico mute"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Past the time limit</b><small>section 16(4)</small></div><span class="status soon">₹0.2 L</span></div>
+        </div>
+        <div class="board-foot"><span>claimable now <b>₹44.2 L</b> of ₹50.0 L</span><span>also in 2B, not booked <b>3 invoices</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><span class="n">Every</span><p>invoice paired, including numbers written differently ("INV/123" and "INV-0123")</p></div>
+      <div class="stat"><span class="n">Per GSTIN</span><p>credit claimable, to check, at risk, blocked and past the time limit</p></div>
+      <div class="stat"><span class="n">₹10</span><p>default tolerance per field before a pair needs checking; you set your own</p></div>
+      <div class="stat"><span class="n">Learns</span><p>your decisions become rules for next month, once a manager approves</p></div>
+    </div>
+  </div>
+
+  <section class="tint" id="gdiagnostic" style="margin-top:clamp(60px,8vw,104px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The diagnostic</span>
+        <h2>Does this sound like your GSTR-2B reconciliation?</h2>
+        <p class="lede">Tick every statement that's true today. The more you tick, the more credit is at risk each month, and the more Auto GST takes off your team's plate.</p>
+      </div>
+      <div class="diag-grid">
+        <ul class="checks" id="gchecks"></ul>
+        <aside class="score" aria-live="polite">
+          <span class="eyebrow" style="color:var(--ink-3)">Your pain signal</span>
+          <div class="big"><span id="gsc">0</span><small>/ 9</small></div>
+          <div class="meter"><i id="gmeter"></i></div>
+          <p class="verdict" id="gverdict">Tick the statements on the left to see how much of your GSTR-2B work Finomena could take over.</p>
+          <a class="btn btn-primary" href="#contact" data-interest="Auto GST · GSTR-2B reconciliation">Fix this →</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Where credit leaks</span>
+        <h2>Six places input tax credit quietly leaks, and how Auto GST catches each.</h2>
+        <p class="lede">Credit rarely goes missing as one big number. It leaks a few invoices at a time, in the same six places. <a class="link" href="#insights/gstr-2b-itc-leaks">Read the full guide →</a></p>
+      </div>
+      <div class="myths">
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>Invoices the supplier never reported, or reported against another of your GSTINs.</q><p><b>Caught.</b> Every invoice only in your books is listed by supplier, with the credit at stake and, for the largest, whether they have filed for that month, so you know whom to chase first.</p></article>
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>The 30 November time limit under section 16(4).</q><p><b>Caught.</b> Invoices past the limit are marked time-barred, paired or not, and credit still at risk is shown before the deadline, largest first.</p></article>
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>Blocked credit under section 17(5) taken by default.</q><p><b>Caught.</b> Finomena AI flags likely blocked credit from the supplier, the line text, the ledger account and what your business does. A person confirms; a supplier you clear isn't flagged again.</p></article>
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>The same invoice booked twice, then chased as missing.</q><p><b>Caught.</b> A second copy in your books is called out as booked twice, so the books get fixed and the supplier isn't chased for an invoice they already reported.</p></article>
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>Credit the 2B itself marks as not available.</q><p><b>Caught.</b> Lines GSTR-2B marks as not available are held apart as blocked and kept out of what you can claim.</p></article>
+        <article class="myth leak"><span class="lbl">THE LEAK</span><q>Small differences nobody looks at: tax type, rate, our GSTIN.</q><p><b>Caught.</b> Every field is compared: GSTINs, number, date, taxable value, IGST, CGST, SGST and cess. IGST against CGST + SGST, and a different GSTIN of ours, are always checked.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What Auto GST does</span>
+        <h2>From two files to a signed-off claim.</h2>
+        <p class="lede">Five steps. Code does the pairing and the arithmetic, Finomena AI handles what rules miss, and your team decides.</p>
+      </div>
+      <div class="wd-row">
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><span class="wd-n">01</span></div><h3>Read</h3><p>GSTR-2B as downloaded from the GST portal, and your purchase register in whatever layout your ERP exports. A new layout is learned once.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><span class="wd-n">02</span></div><h3>Pair</h3><p>Same supplier and invoice number, with separators and leading zeros set aside. Finomena AI proposes pairs for what is left; amounts must agree.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M18 6L6 18"/></svg></span><span class="wd-n">03</span></div><h3>Explain</h3><p>Every difference shown with both sides and the amount that differs. Time limit, blocked credit and invoices booked twice are flagged.</p></div>
+        <div class="wd-step"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="wd-n">04</span></div><h3>Decide</h3><p>Claim, hold or ineligible, with a reason, for one pair or a whole group with the same difference. Decisions can be kept for next month.</p></div>
+        <div class="wd-step last"><div class="wd-top"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg></span><span class="wd-n">05</span></div><h3>Sign off</h3><p>A summary per GSTIN, suppliers to chase, changes since last month and a memo for the CFO. Signed off once every pair has a decision.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Built for how 2B really looks</span>
+        <h2>The cases that make GSTR-2B slow, handled.</h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h10M4 16h7"/><circle cx="18" cy="16" r="3"/></svg></span><h3>Numbers written differently</h3><p>"INV/0123" and "123" pair up. When a person confirms one, the same pattern is learned for that supplier.</p></div>
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><h3>Decide by group</h3><p>See the pairs with the same difference together, check them, then decide them in one go.</p></div>
+        <div class="feat"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><h3>Suppliers to chase</h3><p>Credit at risk by supplier, whether the largest have filed, and a reminder email drafted on request.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span><h3>Blocked credit, explained</h3><p>Each flag says why: the supplier, the line and the rule in section 17(5), including its exceptions.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l3-7 4 14 3-7h2"/></svg></span><h3>Nothing you did is lost</h3><p>Re-run with a corrected file and every decision and hand-made pair stays. Anything can be undone.</p></div>
+        <div class="feat"><span class="ico warm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><h3>Ready for the auditor</h3><p>Download in Excel: the summary, suppliers at risk and every line with its decision and reason.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:clamp(60px,8vw,104px)">
+    <div class="cta">
+      <div class="copy">
+        <span class="eyebrow">Ready when you are</span>
+        <h2>See one month of your GSTR-2B run through Auto GST.</h2>
+        <p class="lede">Bring a 2B download and your purchase register for the same month. We'll pair them live and walk through every difference.</p>
+      </div>
+      <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Auto GST · GSTR-2B reconciliation">Book a walkthrough →</a></div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ ABOUT US ============ -->
 <div data-page="about-us" hidden>
   <div class="page-hero">
@@ -1055,18 +1180,13 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </div>
   </section>
 
-  <section>
+  <section style="scroll-margin-top:96px" id="finance-map">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">What we believe</span>
-        <h2>Four principles behind every product.</h2>
-      </div>
-      <div class="principles">
-        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg></span><h3>Touchless by default</h3><p>Automation should cover the whole process, not just one step of it. People step in only for real exceptions.</p></div>
-        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><h3>Finance owns the rules</h3><p>The people who understand the process should be able to change it, in plain English, without a ticket.</p></div>
-        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h4l3-7 4 14 3-7h2"/></svg></span><h3>Trust is earned</h3><p>You choose how much to automate and raise it step by step. Every decision is logged and auditable.</p></div>
-        <div class="principle"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><h3>Built for India first</h3><p>GST, TDS, MSME rules and WhatsApp-first vendors are designed in from day one, not bolted on.</p></div>
-      </div>
+      <span class="eyebrow">The finance back office on one map</span>
+      <h2 style="margin:8px 0 6px">Six flows, one ledger, and where agents fit.</h2>
+      <p class="lede" style="margin:0 0 22px">Six end-to-end flows run through every finance back office, and all of them land in the general ledger the CFO answers for. Follow a flow, or click any stop to see where an agent can take the work off the team.</p>
+      <div data-finance-landscape></div>
+      <p style="margin-top:18px">Want this for your own team, systems and volumes? <a class="link" href="#contact" data-interest="Finance back-office map workshop">Book a mapping session →</a></p>
     </div>
   </section>
 
@@ -1090,7 +1210,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
         <div><span>Founded</span><b>2026</b></div>
         <div><span>Headquarters</span><b>Bengaluru, India</b></div>
         <div><span>Focus</span><b>AI for finance operations</b></div>
-        <div><span>Live solutions</span><b>Auto Invoice · Auto Recon</b></div>
+        <div><span>Live solutions</span><b>Auto Invoice · Auto Recon · Auto GST</b></div>
       </div>
       <p style="margin-top:28px"><a class="link" href="#who-we-are">Meet the people behind Finomena →</a></p>
     </div>
@@ -1504,8 +1624,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
           <li>Record what was decided on each difference and why. Your auditor will ask.</li>
         </ol>
 
-        <div class="callout">Finomena Tax runs this routine every month: it pairs your purchase register with GSTR-2B, explains each difference, and drafts one reminder per supplier. It is in early access.</div>
-        <div class="btn-row"><a class="btn btn-primary" href="#contact" data-interest="Finomena Tax · GST &amp; TDS compliance">Join early access →</a><a class="btn btn-ghost" href="#insights">More insights</a></div>
+        <div class="callout">Auto GST runs this routine every month: it pairs your purchase register with GSTR-2B for every GSTIN, explains each difference, flags blocked and time-barred credit, and lists the suppliers to chase.</div>
+        <div class="btn-row"><a class="btn btn-primary" href="#auto-gst">Explore Auto GST →</a><a class="btn btn-ghost" href="#insights">More insights</a></div>
         <p class="fine">General information, not tax advice. Rules as of November 2026; confirm specifics with your tax adviser.</p>
       </div></div>
     </section>
@@ -1681,9 +1801,15 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       points:['SAP, Tally, Excel and PDF statements','TDS-aware, one-to-many matching','Plan saved per vendor'],
       stats:[['95–97%','agreement with finance teams'],['Any format','incl. PDF and photos'],['₹1','amounts must agree'],['Reused','plan each period']],
       icon:'<path d="M7 7h11l-3-3M17 17H6l3 3"/>' },
-    { id:'tax', name:'Finomena Tax', area:'GST & TDS compliance', status:'soon',
-      blurb:'GSTR-2A/2B reconciliation, TDS deduction checks and returns-ready data, prepared continuously instead of at month-end.',
+    { id:'gst', name:'Auto GST', area:'GSTR-2B reconciliation', status:'live', page:'auto-gst',
+      headline:'Auto GST: every invoice paired with GSTR-2B, every rupee of credit accounted for.',
+      blurb:'Your purchase register against GSTR-2B for every GSTIN. Every difference shown side by side, credit at risk flagged before the deadline, suppliers to chase listed.',
+      points:['Portal 2B and any register layout','Blocked credit and time limit checked','Decide by group, sign off per GSTIN'],
+      stats:[['Every','invoice paired'],['Per GSTIN','claimable and at risk'],['s.16(4)','time limit checked'],['Learns','your decisions']],
       icon:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/>' },
+    { id:'compliance', name:'Finomena Compliance', area:'Statutory compliance', status:'soon',
+      blurb:'MSME payment deadlines, credit to reverse on unpaid invoices, suppliers\' GST status and your own returns, tracked on one page with sign-off.',
+      icon:'<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>' },
     { id:'recon', name:'Finomena Recon', area:'Bank & intercompany reconciliation', status:'soon',
       blurb:'Bank statements and intercompany balances on the same engine as Auto Recon, with every open item explained.',
       icon:'<path d="M7 7h11l-3-3M17 17H6l3 3"/>' },
@@ -1739,10 +1865,8 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     </article>`;
   document.getElementById('allSolutions').innerHTML = live.map(featuredCard).join('') + soon.map(card).join('') + suggest;
   document.getElementById('footSolutions').innerHTML = SOLUTIONS.map(s=>`<li><a href="#${s.page||'solutions'}">${s.area}${s.status==='live'?'':' <span style="color:var(--ink-3);font-size:.8em">· soon</span>'}</a></li>`).join('');
-  document.getElementById('solutionsMenu').innerHTML = live.map(x=>`<a href="#${x.page}" data-sub="${x.page}"><b>${x.name}<span class="live-tag">live</span></b><small>${x.area}: ${x.headline.split(': ').slice(1).join(': ') || x.blurb}</small></a>`).join('')
-    + `<a href="#industries" data-sub="industries"><b>By industry</b><small>Coworking, retail, manufacturing and logistics finance teams</small></a>`
-    + `<a href="#finance-map" data-sub="finance-map"><b>Finance back-office map</b><small>Your finance function on one map, and where agents fit</small></a>`
-    + `<a class="sub-all" href="#solutions" data-sub="solutions"><b>All solutions</b><small>${soon.length} more on the way: ${soon.map(x=>x.area.split(' & ')[0]).join(', ')}</small></a>`;
+  document.getElementById('solutionsMenu').innerHTML = live.map(x=>`<a href="#${x.page}" data-sub="${x.page}"><b>${x.name}<span class="live-tag">live</span></b><small>${x.area}</small></a>`).join('')
+    + `<a class="sub-all" href="#solutions" data-sub="solutions"><b>All solutions</b><small>${soon.length} more on the way, and solutions by industry</small></a>`;
   const intSel = document.getElementById('f-int');
   intSel.innerHTML = SOLUTIONS.map(s=>`<option>${s.name} · ${s.area}</option>`).join('') + '<option>Finance back-office map workshop</option><option>Suggest a process</option><option>Something else</option>';
 
@@ -1770,7 +1894,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       checks:["Supplier billed the GSTIN of the centre's state","TDS section and rate: rent, contracts, professional fees","Reverse charge on unregistered landlords","Blocked credit on construction and fit-outs","Same invoice booked at two centres","Rent and charges against the lease or PO","MSME status and payment due date"],
       fit:[["Auto Invoice","Reads every landlord and vendor invoice, checks GST and TDS, and routes it to the right centre for approval."],
            ["Auto Recon","Agrees each landlord's and vendor's ledger with yours, TDS included, and drafts the email for anything still open."],
-           ["Finomena Tax (early access)","Matches your purchase register to GSTR-2B for every registration."]],
+           ["Auto GST","Matches your purchase register to GSTR-2B for every registration."]],
       faqs:[["We have centres in many states. Is each GSTIN handled separately?","Yes. Every invoice is checked against the registration of the centre it belongs to, and the GSTR-2B match runs registration by registration."],
             ["Our landlords and vendors all send different formats.","Finomena reads invoices in any format, including scans and photos, with no templates to set up."],
             ["Do we have to change our SAP setup?","No. Finomena posts with your existing vendor, GL and cost-centre masters, set up by configuration."]],
@@ -1794,7 +1918,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       checks:["Price and quantity against the PO","Quantity against the goods receipt","Same invoice booked by two stores","Supplier GSTIN and state","GST amounts on the invoice","Credit notes against the scheme or return","MSME status and payment due date"],
       fit:[["Auto Invoice","Invoices in by email, WhatsApp or SAP, matched to the PO and receipt, with people only on the exceptions."],
            ["Auto Recon","Explains every difference with a supplier, including credit notes and one-to-many payments."],
-           ["Finomena Tax (early access)","Finds credit missing from GSTR-2B and drafts one reminder per supplier."]],
+           ["Auto GST","Finds credit missing from GSTR-2B and drafts one reminder per supplier."]],
       faqs:[["Can each store or region have its own approvers and limits?","Yes. Approval rules are written in plain English by store, region, amount or category, and finance can change them without IT."],
             ["What happens when the goods receipt isn't in yet?","The invoice is held as an exception with the reason, so nothing is paid for goods that haven't arrived."],
             ["Our big brands send statements as PDFs.","Auto Recon reads statements in any format, including PDFs and Excel exports."]],
@@ -1818,7 +1942,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       checks:["Price and quantity against the PO","Quantity against the goods receipt","Reverse charge on freight","TDS on contracts and services","Supplier GSTIN and GST amounts","Same invoice booked twice","MSME status and payment due date"],
       fit:[["Auto Invoice","PO and GRN matching, plant-wise approval rules written in plain English, and MSME payment-delay prediction."],
            ["Auto Recon","Vendor ledger against vendor statement in any format, every open item explained."],
-           ["Finomena Tax (early access)","GSTR-2B matching with the time limit and blocked credits checked."]],
+           ["Auto GST","GSTR-2B matching with the time limit and blocked credits checked."]],
       faqs:[["Can each plant keep its own approval rules?","Yes. Rules are written per plant, amount, vendor type or category, in plain English."],
             ["How are partial deliveries handled?","Each invoice is matched against what has been received on that PO so far; anything billed but not received is flagged."],
             ["Does it work with SAP?","Yes. Invoices can come in from SAP and are posted back to SAP with your existing masters."]],
@@ -1842,7 +1966,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       checks:["TDS section, rate and declarations","PAN present for every transporter","Lorry receipt not billed before","Extra charges against your rules","GSTIN and GST amounts","No GST credit on fuel","MSME status and payment due date"],
       fit:[["Auto Invoice","Reads freight bills in any format, including photos sent over WhatsApp, and checks GST and TDS."],
            ["Auto Recon","TDS-aware reconciliation that tells each vendor exactly what is open and why."],
-           ["Finomena Tax (early access)","GSTR-2B matching so credit isn't lost to suppliers who report late."]],
+           ["Auto GST","GSTR-2B matching so credit isn't lost to suppliers who report late."]],
       faqs:[["Can it read photos of bills sent on WhatsApp?","Yes. Photos and scans are read like any other invoice."],
             ["Many of our transporters aren't GST-registered.","Finomena recognises unregistered vendors and applies your rules for them, such as no GST credit and the right TDS treatment."],
             ["Can rates be checked against our contracts?","Yes. Write the lane rates or the rule in plain English and every bill is checked against it."]],
@@ -1906,7 +2030,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   const pages=[...document.querySelectorAll('[data-page]')];
   const routes=pages.map(p=>p.dataset.page);
   const navLinks=document.getElementById('navLinks'), menuBtn=document.getElementById('menuBtn');
-  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','industries':'solutions','who-we-are':'about-us'};
+  const navFor={'auto-invoice':'solutions','auto-recon':'solutions','auto-gst':'solutions','industries':'solutions','case-studies':'resources','insights':'resources','who-we-are':'about-us'};
   function route(){
     let r=location.hash.slice(1), sub='';
     const slash=r.indexOf('/'); if(slash>0){ sub=r.slice(slash+1); r=r.slice(0,slash); }  // #insights/<article>, #industries/<id>
@@ -1917,7 +2041,7 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
     navLinks.querySelectorAll('a').forEach(a=>{ if(a.dataset.nav===n || a.dataset.sub===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
     if(document.activeElement && navLinks.contains(document.activeElement)) document.activeElement.blur();  // close the sub-menu after a choice
     navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
-    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena','privacy':'Privacy · Finomena'};
+    const titles={home:'Finomena','solutions':'Solutions · Finomena','auto-invoice':'Auto Invoice · Accounts payable','auto-recon':'Auto Recon · Vendor reconciliation','auto-gst':'Auto GST · GSTR-2B reconciliation','about-us':'About us · Finomena','who-we-are':'Who we are · Finomena','case-studies':'Case studies · Finomena','contact':'Contact · Finomena','privacy':'Privacy · Finomena'};
     document.title=subPages[r]?subPages[r](sub):(titles[r]||'Finomena');
     if(scrollTarget) scrollTarget.scrollIntoView(); else window.scrollTo(0,0);
   }
@@ -1984,6 +2108,21 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
       "<b>Early signs.</b> A few manual steps are costing you time each month. Auto Recon removes them without changing how your team signs off.",
       "<b>Strong fit.</b> Much of your reconciliation effort is matching and rebuilding spreadsheets. Auto Recon takes that over and leaves your team the open items.",
       "<b>Textbook case for agentic reconciliation.</b> Most of this moves to Auto Recon. Your team reviews the open items and signs off."]);
+
+  diagnostic({list:'gchecks', prefix:'gc', score:'gsc', meter:'gmeter', verdict:'gverdict'}, [
+    "We match the purchase register to GSTR-2B in Excel every month.",
+    "We have more than one GSTIN to reconcile.",
+    "Invoice numbers written differently are paired by eye.",
+    "We find out a supplier hasn't filed only when the credit is missing.",
+    "Blocked credit is caught at audit, not when it is claimed.",
+    "Credit past the 30 November time limit has been lost before.",
+    "Duplicate invoices in our books have been chased as missing.",
+    "Supplier reminders go out one email at a time, by hand.",
+    "We can't show the auditor who decided each difference, and why."
+  ], ["Tick the statements on the left to see how much of your GSTR-2B work Finomena could take over.",
+      "<b>Early signs.</b> A few manual steps are costing you time and some credit. Auto GST removes them without changing how your team signs off.",
+      "<b>Strong fit.</b> Much of your 2B effort is pairing and chasing. Auto GST takes that over and leaves your team the decisions.",
+      "<b>Textbook case.</b> Most of this moves to Auto GST. Your team decides on the differences that need judgement and signs off."]);
 
   const items=[
     "We have an accounts payable team of more than 2 people.",
