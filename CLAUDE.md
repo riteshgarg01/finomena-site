@@ -21,8 +21,8 @@ claim, naming, navigation decisions, voice and the list of things never to say. 
 - `finance-landscape.js` draws the finance back-office map (mounted on About us at `#finance-map`).
 - Colours and fonts are tokens on `:root`; reuse existing classes (`.sol`, `.steps`, `.feat-grid`, `.myth`,
   `.cta`, `.board`) before adding new ones.
-- Campaign links: `?c=`, `?for=`, `utm_*` go into the lead form's hidden fields. `VISIT_LOG` stays false until
-  the lead-form Apps Script handles `type=visit`.
+- Campaign links: `?c=`, `?for=`, `utm_*` go into the lead form's hidden fields. With `VISIT_LOG` on, pages
+  opened by a visitor with a contact code are also logged to the leads sheet's Visits tab.
 
 ## Checking a change
 `python3 tools/build_pages.py`, then `python3 -m http.server 8765` and open http://localhost:8765/. Check every route you touched on desktop and at

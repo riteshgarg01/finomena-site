@@ -2253,9 +2253,9 @@ footer{border-top:1px solid var(--line);padding-block:48px 32px;margin-top:clamp
   /* ===== CAMPAIGN LINKS =====
      Links we send carry ?c=<contact code> (codes live only in our private sheet, never in this repo), ?for=<company name>
      and utm_* tags. They are remembered for 90 days in this browser and go into the lead form's hidden fields.
-     VISIT_LOG: when true, each page opened by a visitor with a contact code is also posted to the leads Apps Script as
-     type=visit. Turn it on only after the script handles type=visit, or every visit will be filed (and emailed) as a lead. */
-  const VISIT_LOG=false;
+     VISIT_LOG: each page opened by a visitor with a contact code is also posted to the leads Apps Script as type=visit
+     (Visits tab). On since 9 Nov 2026, after the script was updated and answered "ok" to a test visit. */
+  const VISIT_LOG=true;
   const TAGS=['c','for','utm_source','utm_medium','utm_campaign','utm_content'];
   let tags={};
   try{ const s=JSON.parse(localStorage.getItem('finoTags')||'null'); if(s&&s.until>Date.now()) tags=s.tags||{}; }catch(x){}
