@@ -38,6 +38,8 @@ def page_html(key, title, desc, noindex=False):
     h = sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{u}">', h)
     h = sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{t}">', h)
     h = sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{d}">', h)
+    if key != 'home':  # site-name structured data belongs on the home page only
+        h = re.sub(r'<!-- Home page only.*?-->\n<script type="application/ld\+json" id="siteSchema">.*?</script>\n', '', h, count=1, flags=re.S)
     if noindex:
         h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
     # show this page in the HTML itself, for crawlers and link previews that don't run scripts
@@ -69,7 +71,7 @@ for key, (title, desc) in meta.items():
     out.write_text(page_html(key, title, desc))
     written.append(key)
 
-(ROOT / '404.html').write_text(page_html('home', 'Page not found · Finomena', meta['home'][1], noindex=True))
+(ROOT / '404.html').write_text(page_html('home', 'Page not found | Finomena AI', meta['home'][1], noindex=True))
 today = datetime.date.today().isoformat()
 (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                  + ''.join(f'  <url><loc>{url(k)}</loc><lastmod>{today}</lastmod></url>\n' for k in meta)
